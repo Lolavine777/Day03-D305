@@ -1,5 +1,72 @@
 # 🏫 BÀI LAB 3: CHATBOT VS REACT AGENT - TỪ Ý TƯỞNG ĐẾN THỰC THI
 
+## 🏠 RentMate — Trợ lý tìm và đặt lịch xem nhà
+
+Phiên bản của nhóm triển khai đề tài số 10 với dữ liệu mẫu tại Hà Nội và
+TP.HCM. Ứng dụng có đủ bốn cấp độ AI, ReAct loop thật, FastAPI, React
+TypeScript, SQLite và trace `Thought -> Action -> Observation`.
+
+### Chạy nhanh
+
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+Copy-Item .env.example .env
+python src/app.py
+```
+
+Chạy web ở hai terminal:
+
+```powershell
+uvicorn src.web_api:app --reload
+```
+
+```powershell
+cd frontend
+npm install
+npm run dev
+```
+
+Mở `http://localhost:5173`. Chế độ mặc định là `mock`, không cần API key.
+Để dùng model thật, đổi `LLM_PROVIDER` và API key tương ứng trong `.env`.
+
+### Kiểm thử và build
+
+```powershell
+python -m pytest -q
+cd frontend
+npm test -- --run
+npm run build
+```
+
+Sau `npm run build`, FastAPI phục vụ bản React đã build tại
+`http://localhost:8000`.
+
+### Phân công nhóm
+
+| Thành viên | Role | Phạm vi sở hữu |
+| :--- | :--- | :--- |
+| Nguyễn Đăng Long | Role 1 + Role 5, Frontend | Test cases, React UI, trace, flowchart và đánh giá |
+| Lương Minh Quân | Role 2 | Rental tools, SQLite, fixture và data validation |
+| Lê Đăng Tấn | Role 3 | Prompts, providers và demo bốn cấp độ AI |
+| Đào Minh Chiến | Role 4 | AgentEngine, ReAct loop, FastAPI và tích hợp |
+
+### Tool của Agent
+
+- `search_properties`: tìm căn theo khu vực, ngân sách, diện tích và tiện ích.
+- `get_property_details`: lấy thông tin xác thực của một căn.
+- `compare_properties`: so sánh tối đa ba căn.
+- `get_available_viewing_slots`: kiểm tra lịch xem còn trống.
+- `book_viewing`: đặt lịch sau khi người dùng xác nhận trên giao diện.
+
+Booking được lưu trong `data/rentmate.db`; database, file `.env` và dữ liệu
+export không được commit. Mỗi slot do API trả về có một confirmation token
+ngắn hạn, gắn đúng session/căn/khung giờ và chỉ dùng một lần sau khi booking
+thành công. Tên và số điện thoại được executor đưa thẳng vào tool từ context
+đã xác nhận, không gửi qua LLM; JSON export, memory và trace đều che số điện
+thoại. Level 4 chỉ lập kế hoạch/tìm/so sánh/tra lịch và luôn dừng trước booking.
+
 ---
 
 ### 💡 1. LỜI NÓI ĐẦU & NỀN TẢNG LÝ THUYẾT (4 CẤP ĐỘ AI HỘI THOẠI)
@@ -21,24 +88,25 @@ Bài Lab giúp bạn hiểu rõ sự tiến hóa qua 4 cấp độ của hệ th
 ### 📂 2. CẤU TRÚC THƯ MỤC DỰ ÁN
 
 ```text
-📁 Day-3-Lab-Chatbot-vs-react-agent-E402/
-├── 📄 README.md                 <-- 📘 Tổng quan bài Lab & Thang điểm
-├── 📄 .env.example              <-- 🔑 File mẫu API Key
-├── 📄 requirements.txt          <-- 📦 Thư viện cần cài đặt
-│
-├── 📁 config/                   <-- 🛠️ CẤU HÌNH & DỮ LIỆU
-│   └── 📄 test_cases.json       <-- 🟢 [Role 1] Bộ đề 5 Test Cases thử thách AI
-│
-├── 📁 src/                      <-- 💻 MÃ NGUỒN PYTHON (BOILERPLATE)
-│   ├── 📄 tools.py              <-- 🛠️ [Role 2] Khai báo các công cụ (Tools)
-│   ├── 📄 prompts.py            <-- 🧠 [Role 3] ReAct System Prompt & Guardrails
-│   └── 📄 app.py                <-- 🚀 [Role 4] Core App ghép nối & chạy ReAct Loop
-│
-└── 📁 docs/                     <-- 📚 TÀI LIỆU HƯỚNG DẪN & BÁO CÁO
-    ├── 📄 CODELAB.md            <-- 🎓 [LMS Format] Hướng dẫn thực hành từng bước Codelab
-    ├── 📄 PHAN_CONG_CONG_VIEC.md <-- 📋 [BẮT ĐẦU TẠI ĐÂY] Sổ tay thực hành & Checklist 5 Roles
-    ├── 📄 DANH_SACH_DE_TAI.md    <-- 💡 Danh sách 10 chủ đề gợi ý
-    └── 📄 trace_eval.md          <-- 📊 [Role 5] Báo cáo Log Trace & Đánh giá Agentic Fit
+📁 Day03-D305/
+├── 📁 config/
+│   ├── 📄 rental_inventory.json  <-- 14 căn mẫu Hà Nội/TP.HCM
+│   └── 📄 test_cases.json        <-- 5 test cases theo rubric
+├── 📁 src/
+│   ├── 📁 ai_levels/             <-- Demo bốn cấp độ AI
+│   ├── 📄 app.py                 <-- AgentEngine, parser, executor, CLI
+│   ├── 📄 artifacts.py           <-- Project tool output thành UI artifacts
+│   ├── 📄 privacy.py             <-- Chính sách che số điện thoại dùng chung
+│   ├── 📄 prompts.py             <-- Baseline/ReAct/Autonomous prompts
+│   ├── 📄 providers.py           <-- Mock + các LLM provider tùy chọn
+│   ├── 📄 storage.py             <-- SQLite inventory, slots và booking
+│   ├── 📄 tools.py               <-- 5 rental tools và registry
+│   └── 📄 web_api.py             <-- FastAPI adapter
+├── 📁 frontend/                  <-- Vite + React + TypeScript
+├── 📁 tests/                     <-- Backend integration tests
+└── 📁 docs/
+    ├── 📄 trace_eval.md          <-- Trace, RCA và kết quả định lượng
+    └── 📄 hybrid_flowchart.mermaid
 ```
 
 ---
@@ -70,4 +138,4 @@ timeline
 ---
 
 > 🚀 **BẮT ĐẦU LÀM BÀI**:
-> Vui lòng mở sổ tay thực hành 👉 **[PHAN_CONG_CONG_VIEC.md](file:///c:/Users/Admin/Documents/VinUni/LabCoachVin/LabKeyCoach/Day-3-Lab-Chatbot-vs-react-agent-E402/docs/PHAN_CONG_CONG_VIEC.md)** để xem phân vai và checklist công việc cụ thể cho từng thành viên!
+> Vui lòng mở sổ tay thực hành 👉 **[PHAN_CONG_CONG_VIEC.md](docs/PHAN_CONG_CONG_VIEC.md)** để xem phân vai và checklist công việc cụ thể cho từng thành viên!

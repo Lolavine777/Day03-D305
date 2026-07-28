@@ -8,13 +8,14 @@
 
 | Vai trò (Role)                               | File đảm nhận           | Nhiệm vụ chính                                                                                          | Người đảm nhận  |
 | :-------------------------------------------- | :------------------------- | :--------------------------------------------------------------------------------------------------------- | :------------------- |
-| **Role 1: Product Architect**           | `config/test_cases.json` | Định hướng bài toán & soạn bộ câu test case                                                       | `________________` |
-| **Role 2: Tool Engineer**               | `src/tools.py`           | Định nghĩa các công cụ (Tools) cho Agent                                                             | `________________` |
-| **Role 3: Prompt Engineer**             | `src/prompts.py`         | Viết ReAct System Prompt & phanh Guardrails                                                               | `________________` |
-| **Role 4: Core Developer / Integrator** | `src/app.py`             | **Đầu mối kéo code/file của nhóm (`git pull`), Vibe Code lắp ráp thành App hoàn chỉnh** | `________________` |
-| **Role 5: Observability**               | `docs/trace_eval.md`     | Lập bảng Scoring Matrix & Soi nhật ký Trace Log                                                        | `________________` |
+| **Role 1: Product Architect**           | `config/test_cases.json`, `frontend/` | Test design, React UI và luồng xác nhận | **Nguyễn Đăng Long** |
+| **Role 2: Tool Engineer**               | `src/tools.py`, `src/storage.py` | Rental tools, SQLite, fixture và validation | **Lương Minh Quân** |
+| **Role 3: Prompt Engineer**             | `src/prompts.py`, `src/providers.py`, `src/ai_levels/` | Prompts, providers và bốn cấp độ AI | **Lê Đăng Tấn** |
+| **Role 4: Core Developer / Integrator** | `src/app.py`, `src/web_api.py` | ReAct loop, FastAPI và tích hợp toàn hệ thống | **Đào Minh Chiến** |
+| **Role 5: Observability**               | `docs/trace_eval.md`, `docs/hybrid_flowchart.mermaid` | Scoring Matrix, trace, RCA và cross-audit | **Nguyễn Đăng Long** |
 
-*Note: Nếu nhóm 6 người, Role 5 tách thành 5A (Trace Analyst) và 5B (Flowchart Architect).*
+*Nhóm có 4 thành viên nên Nguyễn Đăng Long gộp Role 1 + Role 5. Mỗi người chỉ
+chỉnh sửa vùng file mình sở hữu; Đào Minh Chiến là đầu mối tích hợp.*
 
 > 🌟 **VAI TRÒ NÒNG NỐT CỦA ROLE 4 (ĐẦU MỐI LẮP RÁP APP HOÀN CHỈNH)**:
 >
@@ -29,7 +30,7 @@
 
 *Mục tiêu: Chứng minh bài toán này CẦN dùng Agent chứ không chỉ Chatbot.*
 
-- [ ] **Role 1 & Cả nhóm**: **Tự do lựa chọn 1 chủ đề bài toán thực tế** mà nhóm hào hứng nhất (Xem 10 đề tài gợi ý tại: [DANH_SACH_DE_TAI.md](file:///c:/Users/Admin/Documents/VinUni/LabCoachVin/LabKeyCoach/Day-3-Lab-Chatbot-vs-react-agent-E402/docs/DANH_SACH_DE_TAI.md)).
+- [ ] **Role 1 & Cả nhóm**: **Tự do lựa chọn 1 chủ đề bài toán thực tế** mà nhóm hào hứng nhất (Xem 10 đề tài gợi ý tại: [DANH_SACH_DE_TAI.md](DANH_SACH_DE_TAI.md)).
 - [ ] **Role 5**: Điền bảng **Scoring Matrix** (chấm 1–5 điểm cho 4 tiêu chí) vào `docs/trace_eval.md`.
 - [ ] **Role 2**: Liệt kê tên các công cụ sẽ tạo trong `src/tools.py` phù hợp với chủ đề nhóm đã chọn.
 - [ ] **Role 3**: Xác định các trường hợp tool có thể bị lỗi (Failure Modes).

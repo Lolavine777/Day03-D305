@@ -1,0 +1,58 @@
+flowchart TD
+    U["Người dùng gửi yêu cầu"] --> M{"Chọn mode thủ công?"}
+    M -->|"Level 1"| L1["Rule-based<br/>minh họa lịch sử"]
+    M -->|"Level 2"| L2["LLM Chatbot<br/>không gọi tool"]
+    M -->|"Level 3"| L3["ReAct Agent"]
+    M -->|"Level 4"| L4["Planning + Memory"]
+    M -->|"Auto"| R{"Phân loại ý định"}
+
+    R -->|"FAQ / kiến thức thuê nhà"| L2
+    R -->|"Tìm, so sánh, tra lịch"| L3
+    R -->|"Mục tiêu dài, nhiều lượt"| L4
+
+    L1 --> A["Câu trả lời"]
+    L2 --> A
+    L3 --> T["Thought"]
+    L4 --> P["Lập kế hoạch"] --> T
+
+    T --> D{"Cần dữ liệu / hành động?"}
+    D -->|"Không"| F["Final Answer có căn cứ"]
+    D -->|"Có"| X["Action: chọn tool + JSON args"]
+    X --> V{"Tool và args hợp lệ?"}
+    V -->|"Không"| G["Guardrail / recovery"]
+    V -->|"Có"| B{"Action là book_viewing?"}
+
+    B -->|"Không"| E["Tool Executor"]
+    B -->|"Có"| A4{"Đang ở Level 4?"}
+    A4 -->|"Có"| AB["Autonomy boundary:<br/>dừng trước side effect"]
+    AB --> Q
+    A4 -->|"Không"| C{"Server token còn hạn và khớp<br/>session + căn + slot?"}
+    C -->|"Không"| Q["Yêu cầu tra lịch/chọn lại<br/>và xác nhận trên modal"]
+    Q --> A
+    C -->|"Có"| TC["Gắn tên + điện thoại từ<br/>trusted context, không qua LLM"]
+    TC --> E
+
+    E --> O["Observation thật"]
+    O --> S{"Đủ bằng chứng?"}
+    S -->|"Chưa"| T
+    S -->|"Đủ"| F
+
+    G --> I{"Còn iteration<br/>và chưa lặp Action?"}
+    I -->|"Có"| T
+    I -->|"Không"| SF["Safe fallback"]
+
+    F --> A
+    SF --> A
+    A --> Z["Sanitize PII + lưu structured trace"]
+
+    classDef user fill:#17253f,color:#fff,stroke:#17253f;
+    classDef route fill:#dbe8ff,color:#17253f,stroke:#315ee8;
+    classDef agent fill:#e4f5ed,color:#17372a,stroke:#2d7b5a;
+    classDef guard fill:#fff0d6,color:#5b3a00,stroke:#d28b18;
+    classDef output fill:#f5f7fa,color:#17253f,stroke:#8090a6;
+
+    class U user;
+    class M,R,D,S route;
+    class L3,L4,P,T,X,E,O,F agent;
+    class V,B,A4,AB,C,G,I,Q,SF guard;
+    class L1,L2,A,Z output;
