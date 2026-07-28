@@ -75,7 +75,7 @@ chỉnh sửa vùng file mình sở hữu; Đào Minh Chiến là đầu mối t
 > * 🎲 **Hình thức 1 (Gọi ngẫu nhiên)**: Giảng viên gọi ngẫu nhiên một thành viên đại diện trong bất kỳ nhóm nào lên trình chiếu App, phản biện và trả lời câu hỏi bẫy từ các nhóm khác.
 > * 🔄 **Hình thức 2 (Chấm chéo nhóm)**: Giảng viên chỉ định 1 bạn đại diện (VD: Role 1 hoặc Role 5) đi sang nhóm khác để "tấn công" (dùng câu bẫy thử nghiệm Agent nhóm bạn) và chấm điểm chéo.
 
-*Nhóm làm việc online nên thực hiện tương đương theo hình thức bất đồng bộ: Role 5 chuẩn bị attack set, Independent Audit Agent chạy trực tiếp trên RentMate và trả biên bản evidence.*
+*Nhóm thực hiện chấm chéo online theo hình thức bất đồng bộ: trao đổi attack set với các nhóm đối tác, chạy test trên Agent của nhau và lưu biên bản vào `docs/trace_eval.md`.*
 
 - [x] ⚔️ **Đội Tấn Công (Đại diện/Học viên được gọi)**: Mang các câu test case của nhóm mình sang "xả" vào Agent của Nhóm bạn để kiểm thử khả năng chịu lỗi.
 - [x] 🛡️ **Đội Phòng Thủ**: Quan sát Agent nhóm mình phản ứng trước câu hỏi của nhóm bạn. Kiểm tra xem Guardrail bảo vệ an toàn không.
