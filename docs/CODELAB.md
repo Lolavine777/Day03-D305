@@ -23,7 +23,7 @@ requiresSubmission: true
 
 **AI Agent · Day 3 · ~240 phút****VinUni AI Codelab × GDGoC · Cập nhật 2026-07-27**
 
-> **240 phút · Day 3 · intermediate.** Bạn sẽ xây một chatbot baseline, thiết kế tool contract, lắp [ReAct Agent](#glossary "Reasoning + Acting — kiến trúc agent luân phiên suy nghĩ (Thought), hành động (Action) và nhận kết quả (Observation) cho đến khi đủ bằng chứng trả lời.") và so sánh hai hệ thống trên cùng bộ test case thực tế tại phòng E402. Phần lớn bài chạy [deterministic](#glossary "Cùng input + cùng data luôn ra cùng output — không phụ thuộc model hay mạng.") — chưa cần API key phức tạp ngay từ đầu.
+> **240 phút · Day 3 · intermediate.** Bạn sẽ xây một chatbot baseline, thiết kế tool contract, lắp [ReAct Agent](#glossary "Reasoning + Acting — kiến trúc agent luân phiên suy nghĩ (Thought), hành động (Action) và nhận kết quả (Observation) cho đến khi đủ bằng chứng trả lời.") và so sánh hai hệ thống trên cùng bộ test case thực tế tại phòng E402. Unit test vẫn chạy deterministic, còn runtime bắt buộc dùng provider LLM thật và API key được chọn trong `.env`.
 
 Câu hỏi trọng tâm xuyên suốt Lab:
 
@@ -61,7 +61,11 @@ python -m pip install -r requirements.txt
 cp .env.example .env
 ```
 
-Smoke test:
+Mở `.env`, chọn một provider trong `gemini | openai | anthropic |
+openrouter`, rồi thay API key placeholder bằng key thật. Runtime không chấp
+nhận `mock` và không fallback sang mock khi cấu hình sai.
+
+Smoke test dưới đây gọi provider thật và có thể phát sinh chi phí API:
 
 ```bash
 python src/app.py
@@ -94,7 +98,7 @@ flowchart LR
 | **Observability**    | Ghi log trace để debug và làm báo cáo so sánh                 | `docs/trace_eval.md` (Role 5)      |
 
 :::checkpoint{title="Hoàn thành khi"}
-[ ] Terminal hiển thị `(.venv)`, gõ `python src/app.py` chạy thành công không báo lỗi.
+[ ] `.env` có `LLM_PROVIDER` và API key hợp lệ; `python src/app.py` hiển thị đúng provider thật và không báo `PROVIDER_ERROR`.
 [ ] Bạn giải thích được vai trò Provider, Agent, Tool, Observation và Telemetry.
 [ ] Cả nhóm đã thống nhất phân vai 5-6 thành viên theo file `docs/PHAN_CONG_CONG_VIEC.md`.
 :::

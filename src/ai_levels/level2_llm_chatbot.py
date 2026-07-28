@@ -5,19 +5,21 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 try:
-    from prompts import CHATBOT_BASELINE_PROMPT
-except ImportError:  # Supports running this file directly from the repo root.
+    from ..prompts import CHATBOT_BASELINE_PROMPT
+    from ..providers import ProviderRequestError
+except ImportError:  # Supports top-level and direct-script execution.
     import sys
     from pathlib import Path
 
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
     from prompts import CHATBOT_BASELINE_PROMPT
+    from providers import ProviderRequestError
 
 if TYPE_CHECKING:
     try:
-        from providers import BaseLLMProvider
+        from ..providers import BaseLLMProvider
     except ImportError:
-        from src.providers import BaseLLMProvider
+        from providers import BaseLLMProvider
 
 
 def llm_chatbot(
@@ -28,7 +30,7 @@ def llm_chatbot(
 
     if provider is None:
         try:
-            from providers import get_llm_provider
+            from ..providers import get_llm_provider
         except ImportError:
             import sys
             from pathlib import Path
@@ -38,10 +40,13 @@ def llm_chatbot(
 
         provider = get_llm_provider()
 
-    return provider.generate(
-        user_input,
-        system_prompt=CHATBOT_BASELINE_PROMPT,
-    )
+    try:
+        return provider.generate(
+            user_input,
+            system_prompt=CHATBOT_BASELINE_PROMPT,
+        )
+    except ProviderRequestError as exc:
+        return str(exc)
 
 
 if __name__ == "__main__":

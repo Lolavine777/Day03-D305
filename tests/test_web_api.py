@@ -34,6 +34,25 @@ class FakeStore:
         return self.list_bookings(session_id)
 
 
+def test_health_returns_503_for_invalid_llm_configuration(monkeypatch):
+    import src.web_api as web_api
+    from src.providers import ProviderConfigurationError
+
+    def fail_to_build_runtime():
+        raise ProviderConfigurationError("Thiếu OPENAI_API_KEY hợp lệ.")
+
+    monkeypatch.setattr(web_api, "build_default_runtime", fail_to_build_runtime)
+    client = TestClient(web_api.create_app(), raise_server_exceptions=False)
+
+    response = client.get("/api/health")
+
+    assert response.status_code == 503
+    assert response.json() == {
+        "code": "PROVIDER_CONFIGURATION_ERROR",
+        "detail": "Thiếu OPENAI_API_KEY hợp lệ.",
+    }
+
+
 def test_confirmation_registry_reserves_atomically_releases_and_expires():
     now = [100.0]
     registry = ConfirmationTokenRegistry(

@@ -36,7 +36,16 @@ from prompts import (
     REACT_SYSTEM_PROMPT,
     TIMEOUT_SECONDS,
 )
-from providers import get_llm_provider
+try:
+    from .providers import (
+        ProviderRequestError,
+        get_llm_provider,
+    )
+except ImportError:  # Supports ``python src/app.py``.
+    from providers import (
+        ProviderRequestError,
+        get_llm_provider,
+    )
 from artifacts import project_tool_artifacts
 from ai_levels.level4_autonomous_agent import AutonomousGoalAgent
 from privacy import mask_phone_number, redact_pii
@@ -480,6 +489,13 @@ class AgentEngine:
                 prompt,
                 system_prompt=CHATBOT_BASELINE_PROMPT,
             )
+        except ProviderRequestError as exc:
+            return AgentResult(
+                answer=str(redact_pii(str(exc))),
+                mode_used="level2",
+                status="error",
+                stop_reason="provider_error",
+            )
         except Exception:
             return AgentResult(
                 answer=(
@@ -705,6 +721,19 @@ class AgentEngine:
                 raw_output = self.provider.generate(
                     prompt,
                     system_prompt=system_prompt,
+                )
+            except ProviderRequestError as exc:
+                return AgentResult(
+                    answer=str(redact_pii(str(exc))),
+                    mode_used=mode_used,
+                    status="error",
+                    stop_reason="provider_error",
+                    trace=trace,
+                    tool_calls=tool_calls,
+                    properties=properties,
+                    slots=slots,
+                    booking=booking,
+                    requires_confirmation=requires_confirmation,
                 )
             except Exception:
                 return AgentResult(
@@ -1199,6 +1228,7 @@ def build_default_runtime() -> tuple[AgentEngine, Any]:
     from storage import RentalStore
     from tools import create_tool_registry
 
+    provider = get_llm_provider()
     root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     database_path = os.getenv(
         "DB_PATH",
@@ -1206,9 +1236,13 @@ def build_default_runtime() -> tuple[AgentEngine, Any]:
     )
     inventory_path = os.path.join(root_dir, "config", "rental_inventory.json")
     store = RentalStore(database_path, inventory_path=inventory_path)
-    store.initialize()
-    registry = create_tool_registry(store)
-    return AgentEngine(get_llm_provider(), registry), store
+    try:
+        store.initialize()
+        registry = create_tool_registry(store)
+    except Exception:
+        store.close()
+        raise
+    return AgentEngine(provider, registry), store
 
 
 def run_batch_demo(engine: AgentEngine) -> list[dict[str, Any]]:

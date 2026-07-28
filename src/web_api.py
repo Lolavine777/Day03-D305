@@ -23,9 +23,15 @@ try:
         build_default_runtime,
     )
     from .privacy import redact_pii
+    from .providers import ProviderConfigurationError
 except ImportError:  # Supports `uvicorn web_api:app` from src/.
-    from app import AgentEngine, ConfirmationContext, build_default_runtime
+    from app import (
+        AgentEngine,
+        ConfirmationContext,
+        build_default_runtime,
+    )
     from privacy import redact_pii
+    from providers import ProviderConfigurationError
 
 
 class ConfirmationPayload(BaseModel):
@@ -218,6 +224,19 @@ def create_app(
         allow_methods=["GET", "POST"],
         allow_headers=["Content-Type"],
     )
+
+    @application.exception_handler(ProviderConfigurationError)
+    async def provider_configuration_error_handler(
+        _request,
+        exc: ProviderConfigurationError,
+    ) -> JSONResponse:
+        return JSONResponse(
+            status_code=503,
+            content={
+                "code": "PROVIDER_CONFIGURATION_ERROR",
+                "detail": str(exc),
+            },
+        )
 
     @application.get("/api/health")
     def health() -> dict[str, str]:
