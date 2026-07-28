@@ -1,0 +1,5673 @@
+{
+  "meta": {
+    "dataset": "rental-listings-vn",
+    "version": "1.0.0",
+    "generated_for": "Day03-D305 · Trợ lý Tìm & Đặt lịch xem nhà trọ / căn hộ cho thuê",
+    "generated_at": "2026-07-28",
+    "currency": "VND",
+    "total_listings": 50,
+    "cities": [
+      "Hà Nội",
+      "TP.HCM",
+      "Đà Nẵng"
+    ],
+    "districts_by_city": {
+      "Hà Nội": [
+        "Cầu Giấy",
+        "Hai Bà Trưng",
+        "Hà Đông",
+        "Nam Từ Liêm",
+        "Thanh Xuân",
+        "Đống Đa"
+      ],
+      "TP.HCM": [
+        "Bình Thạnh",
+        "Gò Vấp",
+        "Quận 1",
+        "Quận 3",
+        "Quận 7",
+        "Thủ Đức"
+      ],
+      "Đà Nẵng": [
+        "Hải Châu",
+        "Liên Chiểu",
+        "Ngũ Hành Sơn",
+        "Sơn Trà"
+      ]
+    },
+    "property_types": {
+      "phong_tro": "Phòng trọ",
+      "chung_cu_mini": "Chung cư mini",
+      "studio": "Căn hộ studio",
+      "can_ho_dich_vu": "Căn hộ dịch vụ",
+      "can_ho_chung_cu": "Căn hộ chung cư",
+      "nha_nguyen_can": "Nhà nguyên căn"
+    },
+    "amenity_vocabulary": {
+      "dieu_hoa": "Điều hòa",
+      "nong_lanh": "Bình nóng lạnh",
+      "may_giat": "Máy giặt",
+      "tu_lanh": "Tủ lạnh",
+      "tu_quan_ao": "Tủ quần áo",
+      "giuong": "Giường",
+      "ban_cong": "Ban công",
+      "gac_xep": "Gác xép",
+      "thang_may": "Thang máy",
+      "bep_rieng": "Bếp riêng",
+      "wifi": "Wifi",
+      "bao_ve_24_7": "Bảo vệ 24/7",
+      "camera_an_ninh": "Camera an ninh"
+    },
+    "status_vocabulary": {
+      "available": "Còn trống, nhận khách xem",
+      "pending": "Đang giữ chỗ / chờ cọc",
+      "rented": "Đã cho thuê"
+    },
+    "slot_status_vocabulary": {
+      "available": "Còn trống",
+      "booked": "Đã có người đặt"
+    },
+    "price_range_vnd_month": {
+      "min": 1700000,
+      "max": 26000000
+    },
+    "notes": "Dữ liệu giả lập phục vụ bài lab, không phải tin đăng thật. Mọi số điện thoại là số ngẫu nhiên."
+  },
+  "listings": [
+    {
+      "id": "SG-TD-001",
+      "title": "Căn hộ studio 33m² đầy đủ nội thất - Thủ Đức, TP.HCM",
+      "property_type": "studio",
+      "property_type_label": "Căn hộ studio",
+      "status": "available",
+      "price_vnd_month": 3400000,
+      "deposit_months": 1,
+      "min_lease_months": 6,
+      "area_m2": 33,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 1,
+      "total_floors": 3,
+      "max_occupants": 2,
+      "furnishing": "full",
+      "amenities": [
+        "bep_rieng",
+        "camera_an_ninh",
+        "gac_xep",
+        "nong_lanh"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 3800,
+        "water_vnd_per_m3": 25000,
+        "water_charge_mode": "per_person_month",
+        "internet_vnd_month": 120000,
+        "service_fee_vnd_month": 200000,
+        "motorbike_parking_vnd_month": 0
+      },
+      "rules": {
+        "pets_allowed": true,
+        "cooking_allowed": false,
+        "shared_with_owner": false,
+        "curfew": "23:00",
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "TP.HCM",
+        "district": "Thủ Đức",
+        "ward": "Hiệp Bình Chánh",
+        "street": "Phạm Văn Đồng",
+        "address_line": "Số 44, ngõ 236, đường Phạm Văn Đồng",
+        "full_address": "Số 44, ngõ 236, đường Phạm Văn Đồng, phường Hiệp Bình Chánh, Thủ Đức, TP.HCM",
+        "lat": 10.84952,
+        "lng": 106.7581,
+        "distance_to_city_center_km": 14.7
+      },
+      "nearby_places": [
+        {
+          "name": "ĐH Sư phạm Kỹ thuật",
+          "type": "university",
+          "distance_km": 0.9
+        },
+        {
+          "name": "Vincom Thủ Đức",
+          "type": "mall",
+          "distance_km": 1.1
+        },
+        {
+          "name": "ĐH Quốc Gia TP.HCM",
+          "type": "university",
+          "distance_km": 1.9
+        }
+      ],
+      "landlord": {
+        "id": "LL-02",
+        "name": "Cô Bùi Hải Hà",
+        "phone": "0949902706",
+        "verified": false,
+        "response_rate": 0.65,
+        "avg_response_minutes": 10
+      },
+      "rating": 4.5,
+      "review_count": 22,
+      "images": [
+        "/static/img/sg-td-001-1.jpg",
+        "/static/img/sg-td-001-2.jpg",
+        "/static/img/sg-td-001-3.jpg"
+      ],
+      "description": "Căn hộ studio 33m² tại Thủ Đức, TP.HCM. Gần chợ và siêu thị, tiện đi lại bằng xe máy. Phòng thoáng, có cửa sổ và ban công phơi đồ.",
+      "available_from": "2026-08-02",
+      "posted_at": "2026-07-21",
+      "updated_at": "2026-07-24",
+      "viewing_slots": [
+        {
+          "slot_id": "SG-TD-001-S4",
+          "date": "2026-07-31",
+          "time": "19:00",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-3803"
+        },
+        {
+          "slot_id": "SG-TD-001-S1",
+          "date": "2026-07-31",
+          "time": "20:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "SG-TD-001-S3",
+          "date": "2026-08-02",
+          "time": "17:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "SG-TD-001-S2",
+          "date": "2026-08-07",
+          "time": "17:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "DN-HC-001",
+      "title": "Chung cư mini 43m² khu dân cư yên tĩnh - Hải Châu, Đà Nẵng",
+      "property_type": "chung_cu_mini",
+      "property_type_label": "Chung cư mini",
+      "status": "available",
+      "price_vnd_month": 4100000,
+      "deposit_months": 3,
+      "min_lease_months": 3,
+      "area_m2": 43,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 3,
+      "total_floors": 3,
+      "max_occupants": 3,
+      "furnishing": "full",
+      "amenities": [
+        "bao_ve_24_7",
+        "camera_an_ninh",
+        "nong_lanh",
+        "tu_lanh",
+        "wifi"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 3500,
+        "water_vnd_per_m3": 120000,
+        "water_charge_mode": "per_m3",
+        "internet_vnd_month": 80000,
+        "service_fee_vnd_month": 200000,
+        "motorbike_parking_vnd_month": 100000
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": null,
+        "students_welcome": false
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "Đà Nẵng",
+        "district": "Hải Châu",
+        "ward": "Thanh Bình",
+        "street": "Trưng Nữ Vương",
+        "address_line": "Số 100, ngõ 167, đường Trưng Nữ Vương",
+        "full_address": "Số 100, ngõ 167, đường Trưng Nữ Vương, phường Thanh Bình, Hải Châu, Đà Nẵng",
+        "lat": 16.07032,
+        "lng": 108.2151,
+        "distance_to_city_center_km": 1.1
+      },
+      "nearby_places": [
+        {
+          "name": "Chợ Hàn",
+          "type": "market",
+          "distance_km": 0.8
+        },
+        {
+          "name": "Cầu Rồng",
+          "type": "landmark",
+          "distance_km": 1.1
+        },
+        {
+          "name": "BV Đà Nẵng",
+          "type": "hospital",
+          "distance_km": 1.5
+        }
+      ],
+      "landlord": {
+        "id": "LL-03",
+        "name": "Chú Ngô Xuân Dũng",
+        "phone": "0969511319",
+        "verified": true,
+        "response_rate": 0.77,
+        "avg_response_minutes": 5
+      },
+      "rating": 3.6,
+      "review_count": 9,
+      "images": [
+        "/static/img/dn-hc-001-1.jpg",
+        "/static/img/dn-hc-001-2.jpg",
+        "/static/img/dn-hc-001-3.jpg",
+        "/static/img/dn-hc-001-4.jpg"
+      ],
+      "description": "Chung cư mini 43m² tại Hải Châu, Đà Nẵng. Khu vực an ninh, có bảo vệ trông xe ban đêm. Giờ giấc tự do, không chung chủ.",
+      "available_from": "2026-08-02",
+      "posted_at": "2026-06-19",
+      "updated_at": "2026-07-22",
+      "viewing_slots": [
+        {
+          "slot_id": "DN-HC-001-S2",
+          "date": "2026-08-02",
+          "time": "20:00",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-3383"
+        },
+        {
+          "slot_id": "DN-HC-001-S1",
+          "date": "2026-08-05",
+          "time": "10:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "HN-TX-001",
+      "title": "Căn hộ chung cư 79m² ban công thoáng - Thanh Xuân, Hà Nội",
+      "property_type": "can_ho_chung_cu",
+      "property_type_label": "Căn hộ chung cư",
+      "status": "available",
+      "price_vnd_month": 5700000,
+      "deposit_months": 1,
+      "min_lease_months": 12,
+      "area_m2": 79,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "floor": 3,
+      "total_floors": 6,
+      "max_occupants": 5,
+      "furnishing": "empty",
+      "amenities": [
+        "bao_ve_24_7",
+        "bep_rieng",
+        "dieu_hoa",
+        "thang_may",
+        "wifi"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 4200,
+        "water_vnd_per_m3": 25000,
+        "water_charge_mode": "per_person_month",
+        "internet_vnd_month": 100000,
+        "service_fee_vnd_month": 0,
+        "motorbike_parking_vnd_month": 150000
+      },
+      "rules": {
+        "pets_allowed": true,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": null,
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "Hà Nội",
+        "district": "Thanh Xuân",
+        "ward": "Thanh Xuân Bắc",
+        "street": "Lê Văn Lương",
+        "address_line": "Số 69, đường Lê Văn Lương",
+        "full_address": "Số 69, đường Lê Văn Lương, phường Thanh Xuân Bắc, Thanh Xuân, Hà Nội",
+        "lat": 20.99572,
+        "lng": 105.80057,
+        "distance_to_city_center_km": 8.5
+      },
+      "nearby_places": [
+        {
+          "name": "Chợ Nhân Chính",
+          "type": "market",
+          "distance_km": 0.5
+        },
+        {
+          "name": "ĐH Khoa học Tự nhiên",
+          "type": "university",
+          "distance_km": 1.3
+        },
+        {
+          "name": "Royal City",
+          "type": "mall",
+          "distance_km": 1.6
+        }
+      ],
+      "landlord": {
+        "id": "LL-04",
+        "name": "Anh Lê Quang Dũng",
+        "phone": "0982794730",
+        "verified": true,
+        "response_rate": 0.79,
+        "avg_response_minutes": 5
+      },
+      "rating": 3.9,
+      "review_count": 39,
+      "images": [
+        "/static/img/hn-tx-001-1.jpg"
+      ],
+      "description": "Căn hộ chung cư 79m² tại Thanh Xuân, Hà Nội. Thích hợp cho sinh viên hoặc người đi làm. Gần chợ và siêu thị, tiện đi lại bằng xe máy.",
+      "available_from": "2026-08-27",
+      "posted_at": "2026-06-30",
+      "updated_at": "2026-07-27",
+      "viewing_slots": [
+        {
+          "slot_id": "HN-TX-001-S2",
+          "date": "2026-07-31",
+          "time": "20:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-TX-001-S1",
+          "date": "2026-08-03",
+          "time": "20:00",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-8907"
+        },
+        {
+          "slot_id": "HN-TX-001-S3",
+          "date": "2026-08-04",
+          "time": "19:00",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-9572"
+        }
+      ]
+    },
+    {
+      "id": "SG-TD-002",
+      "title": "Căn hộ chung cư 56m² khu dân cư yên tĩnh - Thủ Đức, TP.HCM",
+      "property_type": "phong_tro",
+      "property_type_label": "Phòng trọ",
+      "status": "available",
+      "price_vnd_month": 1800000,
+      "deposit_months": 1,
+      "min_lease_months": 12,
+      "area_m2": 56,
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "floor": 5,
+      "total_floors": 9,
+      "max_occupants": 4,
+      "furnishing": "empty",
+      "amenities": [
+        "bao_ve_24_7",
+        "dieu_hoa",
+        "gac_xep",
+        "thang_may",
+        "wifi"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 2800,
+        "water_vnd_per_m3": 25000,
+        "water_charge_mode": "per_person_month",
+        "internet_vnd_month": 0,
+        "service_fee_vnd_month": 0,
+        "motorbike_parking_vnd_month": 0
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": "00:00",
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "TP.HCM",
+        "district": "Thủ Đức",
+        "ward": "Hiệp Bình Chánh",
+        "street": "Kha Vạn Cân",
+        "address_line": "Số 202, ngõ 331, đường Kha Vạn Cân",
+        "full_address": "Số 202, ngõ 331, đường Kha Vạn Cân, phường Hiệp Bình Chánh, Thủ Đức, TP.HCM",
+        "lat": 10.85658,
+        "lng": 106.76325,
+        "distance_to_city_center_km": 12.7
+      },
+      "nearby_places": [
+        {
+          "name": "ĐH Sư phạm Kỹ thuật",
+          "type": "university",
+          "distance_km": 0.8
+        },
+        {
+          "name": "Vincom Thủ Đức",
+          "type": "mall",
+          "distance_km": 1.7
+        },
+        {
+          "name": "ĐH Quốc Gia TP.HCM",
+          "type": "university",
+          "distance_km": 1.9
+        }
+      ],
+      "landlord": {
+        "id": "LL-05",
+        "name": "Chị Hoàng Ngọc Dũng",
+        "phone": "0975395651",
+        "verified": false,
+        "response_rate": 0.78,
+        "avg_response_minutes": 30
+      },
+      "rating": 4.6,
+      "review_count": 14,
+      "images": [
+        "/static/img/sg-td-002-1.jpg",
+        "/static/img/sg-td-002-2.jpg",
+        "/static/img/sg-td-002-3.jpg",
+        "/static/img/sg-td-002-4.jpg"
+      ],
+      "description": "Căn hộ chung cư 56m² tại Thủ Đức, TP.HCM. Nhà mới sơn sửa, wifi tốc độ cao đã lắp sẵn. Giờ giấc tự do, không chung chủ.",
+      "available_from": "2026-07-31",
+      "posted_at": "2026-07-24",
+      "updated_at": "2026-07-22",
+      "viewing_slots": [
+        {
+          "slot_id": "SG-TD-002-S1",
+          "date": "2026-07-30",
+          "time": "09:00",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-5705"
+        },
+        {
+          "slot_id": "SG-TD-002-S2",
+          "date": "2026-08-03",
+          "time": "16:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "SG-GV-001",
+      "title": "Chung cư mini 46m² view thành phố - Gò Vấp, TP.HCM",
+      "property_type": "chung_cu_mini",
+      "property_type_label": "Chung cư mini",
+      "status": "available",
+      "price_vnd_month": 3400000,
+      "deposit_months": 1,
+      "min_lease_months": 6,
+      "area_m2": 46,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 2,
+      "total_floors": 9,
+      "max_occupants": 3,
+      "furnishing": "full",
+      "amenities": [
+        "ban_cong",
+        "bao_ve_24_7",
+        "thang_may",
+        "wifi"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 4200,
+        "water_vnd_per_m3": 30000,
+        "water_charge_mode": "per_m3",
+        "internet_vnd_month": 0,
+        "service_fee_vnd_month": 100000,
+        "motorbike_parking_vnd_month": 0
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": true,
+        "shared_with_owner": true,
+        "curfew": null,
+        "students_welcome": false
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "TP.HCM",
+        "district": "Gò Vấp",
+        "ward": "Phường 14",
+        "street": "Lê Đức Thọ",
+        "address_line": "Số 131, hẻm 270, đường Lê Đức Thọ",
+        "full_address": "Số 131, hẻm 270, đường Lê Đức Thọ, phường Phường 14, Gò Vấp, TP.HCM",
+        "lat": 10.82617,
+        "lng": 106.66108,
+        "distance_to_city_center_km": 8.5
+      },
+      "nearby_places": [
+        {
+          "name": "Emart Gò Vấp",
+          "type": "supermarket",
+          "distance_km": 0.9
+        },
+        {
+          "name": "Chợ Hạnh Thông Tây",
+          "type": "market",
+          "distance_km": 0.9
+        },
+        {
+          "name": "ĐH Công nghiệp TP.HCM",
+          "type": "university",
+          "distance_km": 1.4
+        }
+      ],
+      "landlord": {
+        "id": "LL-06",
+        "name": "Anh Hoàng Thu Linh",
+        "phone": "0949343291",
+        "verified": true,
+        "response_rate": 0.68,
+        "avg_response_minutes": 5
+      },
+      "rating": 4.7,
+      "review_count": 47,
+      "images": [
+        "/static/img/sg-gv-001-1.jpg",
+        "/static/img/sg-gv-001-2.jpg"
+      ],
+      "description": "Chung cư mini 46m² tại Gò Vấp, TP.HCM. Nhà mới sơn sửa, wifi tốc độ cao đã lắp sẵn. Chủ nhà thân thiện, hỗ trợ đăng ký tạm trú.",
+      "available_from": "2026-08-02",
+      "posted_at": "2026-07-01",
+      "updated_at": "2026-07-22",
+      "viewing_slots": [
+        {
+          "slot_id": "SG-GV-001-S1",
+          "date": "2026-07-30",
+          "time": "19:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "SG-GV-001-S2",
+          "date": "2026-08-01",
+          "time": "10:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "SG-GV-001-S3",
+          "date": "2026-08-07",
+          "time": "14:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "HN-DD-001",
+      "title": "Căn hộ chung cư 79m² đầy đủ nội thất - Đống Đa, Hà Nội",
+      "property_type": "can_ho_chung_cu",
+      "property_type_label": "Căn hộ chung cư",
+      "status": "available",
+      "price_vnd_month": 7500000,
+      "deposit_months": 1,
+      "min_lease_months": 3,
+      "area_m2": 79,
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "floor": 2,
+      "total_floors": 2,
+      "max_occupants": 5,
+      "furnishing": "basic",
+      "amenities": [
+        "bao_ve_24_7",
+        "dieu_hoa",
+        "may_giat",
+        "thang_may",
+        "tu_lanh"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 3500,
+        "water_vnd_per_m3": 25000,
+        "water_charge_mode": "per_m3",
+        "internet_vnd_month": 120000,
+        "service_fee_vnd_month": 0,
+        "motorbike_parking_vnd_month": 100000
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": true,
+        "shared_with_owner": true,
+        "curfew": null,
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "Hà Nội",
+        "district": "Đống Đa",
+        "ward": "Láng Hạ",
+        "street": "Thái Hà",
+        "address_line": "Số 49, hẻm 397, đường Thái Hà",
+        "full_address": "Số 49, hẻm 397, đường Thái Hà, phường Láng Hạ, Đống Đa, Hà Nội",
+        "lat": 21.00205,
+        "lng": 105.82317,
+        "distance_to_city_center_km": 3.9
+      },
+      "nearby_places": [
+        {
+          "name": "Chợ Kim Liên",
+          "type": "market",
+          "distance_km": 0.6
+        },
+        {
+          "name": "Vincom Phạm Ngọc Thạch",
+          "type": "mall",
+          "distance_km": 1.2
+        },
+        {
+          "name": "BV Bạch Mai",
+          "type": "hospital",
+          "distance_km": 2.4
+        }
+      ],
+      "landlord": {
+        "id": "LL-07",
+        "name": "Chị Lê Quang Sơn",
+        "phone": "0939365093",
+        "verified": false,
+        "response_rate": 0.83,
+        "avg_response_minutes": 10
+      },
+      "rating": 3.8,
+      "review_count": 9,
+      "images": [
+        "/static/img/hn-dd-001-1.jpg"
+      ],
+      "description": "Căn hộ chung cư 79m² tại Đống Đa, Hà Nội. Giờ giấc tự do, không chung chủ. Giờ giấc tự do, không chung chủ.",
+      "available_from": "2026-08-27",
+      "posted_at": "2026-07-19",
+      "updated_at": "2026-07-28",
+      "viewing_slots": [
+        {
+          "slot_id": "HN-DD-001-S3",
+          "date": "2026-07-29",
+          "time": "10:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-DD-001-S2",
+          "date": "2026-07-30",
+          "time": "09:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-DD-001-S1",
+          "date": "2026-08-07",
+          "time": "10:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "HN-CG-001",
+      "title": "Căn hộ dịch vụ 56m² ban công thoáng - Cầu Giấy, Hà Nội",
+      "property_type": "can_ho_dich_vu",
+      "property_type_label": "Căn hộ dịch vụ",
+      "status": "available",
+      "price_vnd_month": 5700000,
+      "deposit_months": 3,
+      "min_lease_months": 6,
+      "area_m2": 56,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 1,
+      "total_floors": 3,
+      "max_occupants": 3,
+      "furnishing": "full",
+      "amenities": [
+        "dieu_hoa",
+        "gac_xep",
+        "giuong",
+        "nong_lanh",
+        "tu_lanh"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 3800,
+        "water_vnd_per_m3": 25000,
+        "water_charge_mode": "per_person_month",
+        "internet_vnd_month": 120000,
+        "service_fee_vnd_month": 0,
+        "motorbike_parking_vnd_month": 100000
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": null,
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "Hà Nội",
+        "district": "Cầu Giấy",
+        "ward": "Quan Hoa",
+        "street": "Hoàng Quốc Việt",
+        "address_line": "Số 237, ngõ 59, đường Hoàng Quốc Việt",
+        "full_address": "Số 237, ngõ 59, đường Hoàng Quốc Việt, phường Quan Hoa, Cầu Giấy, Hà Nội",
+        "lat": 21.04169,
+        "lng": 105.78197,
+        "distance_to_city_center_km": 6.6
+      },
+      "nearby_places": [
+        {
+          "name": "ĐH Quốc Gia Hà Nội",
+          "type": "university",
+          "distance_km": 0.9
+        },
+        {
+          "name": "Big C Thăng Long",
+          "type": "supermarket",
+          "distance_km": 1.4
+        },
+        {
+          "name": "BV Giao thông Vận tải",
+          "type": "hospital",
+          "distance_km": 1.7
+        }
+      ],
+      "landlord": {
+        "id": "LL-08",
+        "name": "Chú Đặng Thị Trang",
+        "phone": "0974606492",
+        "verified": true,
+        "response_rate": 0.82,
+        "avg_response_minutes": 30
+      },
+      "rating": 4.0,
+      "review_count": 75,
+      "images": [
+        "/static/img/hn-cg-001-1.jpg"
+      ],
+      "description": "Căn hộ dịch vụ 56m² tại Cầu Giấy, Hà Nội. Chủ nhà thân thiện, hỗ trợ đăng ký tạm trú. Phòng thoáng, có cửa sổ và ban công phơi đồ.",
+      "available_from": "2026-08-02",
+      "posted_at": "2026-06-28",
+      "updated_at": "2026-07-26",
+      "viewing_slots": [
+        {
+          "slot_id": "HN-CG-001-S3",
+          "date": "2026-08-01",
+          "time": "14:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-CG-001-S1",
+          "date": "2026-08-02",
+          "time": "16:00",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-8264"
+        },
+        {
+          "slot_id": "HN-CG-001-S2",
+          "date": "2026-08-05",
+          "time": "14:00",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-7094"
+        }
+      ]
+    },
+    {
+      "id": "SG-Q7-001",
+      "title": "Căn hộ studio 38m² view thành phố - Quận 7, TP.HCM",
+      "property_type": "studio",
+      "property_type_label": "Căn hộ studio",
+      "status": "available",
+      "price_vnd_month": 5700000,
+      "deposit_months": 1,
+      "min_lease_months": 3,
+      "area_m2": 38,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 5,
+      "total_floors": 7,
+      "max_occupants": 2,
+      "furnishing": "basic",
+      "amenities": [
+        "bep_rieng",
+        "gac_xep",
+        "giuong",
+        "nong_lanh",
+        "thang_may"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 3500,
+        "water_vnd_per_m3": 30000,
+        "water_charge_mode": "per_m3",
+        "internet_vnd_month": 100000,
+        "service_fee_vnd_month": 150000,
+        "motorbike_parking_vnd_month": 150000
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": false,
+        "shared_with_owner": false,
+        "curfew": "00:00",
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "TP.HCM",
+        "district": "Quận 7",
+        "ward": "Tân Phong",
+        "street": "Huỳnh Tấn Phát",
+        "address_line": "Số 64, đường Huỳnh Tấn Phát",
+        "full_address": "Số 64, đường Huỳnh Tấn Phát, phường Tân Phong, Quận 7, TP.HCM",
+        "lat": 10.73407,
+        "lng": 106.72458,
+        "distance_to_city_center_km": 7.4
+      },
+      "nearby_places": [
+        {
+          "name": "ĐH RMIT",
+          "type": "university",
+          "distance_km": 1.5
+        },
+        {
+          "name": "Crescent Mall",
+          "type": "mall",
+          "distance_km": 1.5
+        },
+        {
+          "name": "BV FV",
+          "type": "hospital",
+          "distance_km": 2.4
+        }
+      ],
+      "landlord": {
+        "id": "LL-09",
+        "name": "Chú Lê Thu Hương",
+        "phone": "0947885003",
+        "verified": false,
+        "response_rate": 0.8,
+        "avg_response_minutes": 45
+      },
+      "rating": 4.6,
+      "review_count": 73,
+      "images": [
+        "/static/img/sg-q7-001-1.jpg",
+        "/static/img/sg-q7-001-2.jpg"
+      ],
+      "description": "Căn hộ studio 38m² tại Quận 7, TP.HCM. Phòng thoáng, có cửa sổ và ban công phơi đồ. Khu vực an ninh, có bảo vệ trông xe ban đêm.",
+      "available_from": "2026-08-02",
+      "posted_at": "2026-06-15",
+      "updated_at": "2026-07-24",
+      "viewing_slots": []
+    },
+    {
+      "id": "HN-TX-002",
+      "title": "Căn hộ chung cư 67m² an ninh 24/7 - Thanh Xuân, Hà Nội",
+      "property_type": "can_ho_chung_cu",
+      "property_type_label": "Căn hộ chung cư",
+      "status": "available",
+      "price_vnd_month": 6400000,
+      "deposit_months": 1,
+      "min_lease_months": 6,
+      "area_m2": 67,
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "floor": 1,
+      "total_floors": 7,
+      "max_occupants": 5,
+      "furnishing": "empty",
+      "amenities": [
+        "gac_xep",
+        "thang_may",
+        "wifi"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 3500,
+        "water_vnd_per_m3": 30000,
+        "water_charge_mode": "per_m3",
+        "internet_vnd_month": 100000,
+        "service_fee_vnd_month": 100000,
+        "motorbike_parking_vnd_month": 150000
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": null,
+        "students_welcome": false
+      },
+      "parking": {
+        "motorbike": true,
+        "car": true
+      },
+      "location": {
+        "city": "Hà Nội",
+        "district": "Thanh Xuân",
+        "ward": "Khương Trung",
+        "street": "Nguyễn Huy Tưởng",
+        "address_line": "Số 27, đường Nguyễn Huy Tưởng",
+        "full_address": "Số 27, đường Nguyễn Huy Tưởng, phường Khương Trung, Thanh Xuân, Hà Nội",
+        "lat": 20.99498,
+        "lng": 105.81443,
+        "distance_to_city_center_km": 7.2
+      },
+      "nearby_places": [
+        {
+          "name": "Chợ Nhân Chính",
+          "type": "market",
+          "distance_km": 0.6
+        },
+        {
+          "name": "ĐH Khoa học Tự nhiên",
+          "type": "university",
+          "distance_km": 1.3
+        },
+        {
+          "name": "Royal City",
+          "type": "mall",
+          "distance_km": 2.3
+        }
+      ],
+      "landlord": {
+        "id": "LL-10",
+        "name": "Chú Hoàng Văn Linh",
+        "phone": "0957655214",
+        "verified": false,
+        "response_rate": 0.76,
+        "avg_response_minutes": 30
+      },
+      "rating": 4.3,
+      "review_count": 56,
+      "images": [
+        "/static/img/hn-tx-002-1.jpg",
+        "/static/img/hn-tx-002-2.jpg",
+        "/static/img/hn-tx-002-3.jpg",
+        "/static/img/hn-tx-002-4.jpg"
+      ],
+      "description": "Căn hộ chung cư 67m² tại Thanh Xuân, Hà Nội. Khu vực an ninh, có bảo vệ trông xe ban đêm. Đường trước nhà ô tô đỗ cửa, ngập không lo.",
+      "available_from": "2026-08-11",
+      "posted_at": "2026-07-04",
+      "updated_at": "2026-07-27",
+      "viewing_slots": [
+        {
+          "slot_id": "HN-TX-002-S4",
+          "date": "2026-08-02",
+          "time": "19:00",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-4638"
+        },
+        {
+          "slot_id": "HN-TX-002-S2",
+          "date": "2026-08-02",
+          "time": "20:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-TX-002-S3",
+          "date": "2026-08-04",
+          "time": "14:00",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-3904"
+        },
+        {
+          "slot_id": "HN-TX-002-S1",
+          "date": "2026-08-06",
+          "time": "20:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "HN-HB-001",
+      "title": "Căn hộ chung cư 83m² bếp riêng rộng rãi - Hai Bà Trưng, Hà Nội",
+      "property_type": "can_ho_chung_cu",
+      "property_type_label": "Căn hộ chung cư",
+      "status": "available",
+      "price_vnd_month": 7200000,
+      "deposit_months": 2,
+      "min_lease_months": 3,
+      "area_m2": 83,
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "floor": 1,
+      "total_floors": 6,
+      "max_occupants": 4,
+      "furnishing": "basic",
+      "amenities": [
+        "ban_cong",
+        "may_giat",
+        "thang_may",
+        "wifi"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 3800,
+        "water_vnd_per_m3": 30000,
+        "water_charge_mode": "per_m3",
+        "internet_vnd_month": 80000,
+        "service_fee_vnd_month": 0,
+        "motorbike_parking_vnd_month": 0
+      },
+      "rules": {
+        "pets_allowed": true,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": "23:00",
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": true
+      },
+      "location": {
+        "city": "Hà Nội",
+        "district": "Hai Bà Trưng",
+        "ward": "Vĩnh Tuy",
+        "street": "Bạch Mai",
+        "address_line": "Số 224, hẻm 339, đường Bạch Mai",
+        "full_address": "Số 224, hẻm 339, đường Bạch Mai, phường Vĩnh Tuy, Hai Bà Trưng, Hà Nội",
+        "lat": 20.99492,
+        "lng": 105.8538,
+        "distance_to_city_center_km": 3.2
+      },
+      "nearby_places": [
+        {
+          "name": "ĐH Bách Khoa Hà Nội",
+          "type": "university",
+          "distance_km": 0.4
+        },
+        {
+          "name": "BV Bạch Mai",
+          "type": "hospital",
+          "distance_km": 1.3
+        },
+        {
+          "name": "Times City",
+          "type": "mall",
+          "distance_km": 1.8
+        }
+      ],
+      "landlord": {
+        "id": "LL-11",
+        "name": "Chị Nguyễn Quang Sơn",
+        "phone": "0932505797",
+        "verified": true,
+        "response_rate": 0.81,
+        "avg_response_minutes": 5
+      },
+      "rating": 4.1,
+      "review_count": 32,
+      "images": [
+        "/static/img/hn-hb-001-1.jpg",
+        "/static/img/hn-hb-001-2.jpg"
+      ],
+      "description": "Căn hộ chung cư 83m² tại Hai Bà Trưng, Hà Nội. Thích hợp cho sinh viên hoặc người đi làm. Khu vực an ninh, có bảo vệ trông xe ban đêm.",
+      "available_from": "2026-07-29",
+      "posted_at": "2026-06-14",
+      "updated_at": "2026-07-25",
+      "viewing_slots": [
+        {
+          "slot_id": "HN-HB-001-S1",
+          "date": "2026-07-29",
+          "time": "10:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-HB-001-S2",
+          "date": "2026-08-02",
+          "time": "10:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-HB-001-S3",
+          "date": "2026-08-02",
+          "time": "14:00",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-6936"
+        }
+      ]
+    },
+    {
+      "id": "HN-CG-002",
+      "title": "Phòng trọ 24m² view thành phố - Cầu Giấy, Hà Nội",
+      "property_type": "phong_tro",
+      "property_type_label": "Phòng trọ",
+      "status": "available",
+      "price_vnd_month": 1700000,
+      "deposit_months": 1,
+      "min_lease_months": 6,
+      "area_m2": 24,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 1,
+      "total_floors": 6,
+      "max_occupants": 2,
+      "furnishing": "full",
+      "amenities": [
+        "bep_rieng",
+        "camera_an_ninh",
+        "gac_xep",
+        "may_giat",
+        "thang_may",
+        "wifi"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 2800,
+        "water_vnd_per_m3": 25000,
+        "water_charge_mode": "per_person_month",
+        "internet_vnd_month": 100000,
+        "service_fee_vnd_month": 200000,
+        "motorbike_parking_vnd_month": 80000
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": false,
+        "shared_with_owner": false,
+        "curfew": null,
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "Hà Nội",
+        "district": "Cầu Giấy",
+        "ward": "Yên Hòa",
+        "street": "Trần Quốc Hoàn",
+        "address_line": "Số 94, ngõ 245, đường Trần Quốc Hoàn",
+        "full_address": "Số 94, ngõ 245, đường Trần Quốc Hoàn, phường Yên Hòa, Cầu Giấy, Hà Nội",
+        "lat": 21.02399,
+        "lng": 105.78143,
+        "distance_to_city_center_km": 7.1
+      },
+      "nearby_places": [
+        {
+          "name": "ĐH Quốc Gia Hà Nội",
+          "type": "university",
+          "distance_km": 0.9
+        },
+        {
+          "name": "Công viên Cầu Giấy",
+          "type": "park",
+          "distance_km": 1.2
+        },
+        {
+          "name": "BV Giao thông Vận tải",
+          "type": "hospital",
+          "distance_km": 1.7
+        }
+      ],
+      "landlord": {
+        "id": "LL-12",
+        "name": "Anh Lê Hải Vy",
+        "phone": "0934100296",
+        "verified": true,
+        "response_rate": 0.69,
+        "avg_response_minutes": 120
+      },
+      "rating": 4.1,
+      "review_count": 55,
+      "images": [
+        "/static/img/hn-cg-002-1.jpg",
+        "/static/img/hn-cg-002-2.jpg"
+      ],
+      "description": "Phòng trọ 24m² tại Cầu Giấy, Hà Nội. Khu vực an ninh, có bảo vệ trông xe ban đêm. Khu vực an ninh, có bảo vệ trông xe ban đêm.",
+      "available_from": "2026-08-27",
+      "posted_at": "2026-06-14",
+      "updated_at": "2026-07-24",
+      "viewing_slots": [
+        {
+          "slot_id": "HN-CG-002-S2",
+          "date": "2026-07-29",
+          "time": "17:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-CG-002-S1",
+          "date": "2026-08-05",
+          "time": "16:00",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-5558"
+        }
+      ]
+    },
+    {
+      "id": "SG-BT-001",
+      "title": "Căn hộ studio 35m² gần trường đại học - Bình Thạnh, TP.HCM",
+      "property_type": "studio",
+      "property_type_label": "Căn hộ studio",
+      "status": "available",
+      "price_vnd_month": 26000000,
+      "deposit_months": 1,
+      "min_lease_months": 6,
+      "area_m2": 35,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 6,
+      "total_floors": 9,
+      "max_occupants": 2,
+      "furnishing": "full",
+      "amenities": [
+        "ban_cong",
+        "bao_ve_24_7",
+        "bep_rieng",
+        "camera_an_ninh",
+        "gac_xep",
+        "giuong",
+        "thang_may",
+        "tu_lanh"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 4000,
+        "water_vnd_per_m3": 30000,
+        "water_charge_mode": "per_person_month",
+        "internet_vnd_month": 0,
+        "service_fee_vnd_month": 0,
+        "motorbike_parking_vnd_month": 80000
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": "00:00",
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "TP.HCM",
+        "district": "Bình Thạnh",
+        "ward": "Phường 13",
+        "street": "Ung Văn Khiêm",
+        "address_line": "Số 145, ngõ 237, đường Ung Văn Khiêm",
+        "full_address": "Số 145, ngõ 237, đường Ung Văn Khiêm, phường Phường 13, Bình Thạnh, TP.HCM",
+        "lat": 10.80419,
+        "lng": 106.71334,
+        "distance_to_city_center_km": 3.6
+      },
+      "nearby_places": [
+        {
+          "name": "ĐH Hutech",
+          "type": "university",
+          "distance_km": 1.0
+        },
+        {
+          "name": "Vincom Landmark",
+          "type": "mall",
+          "distance_km": 1.1
+        },
+        {
+          "name": "Landmark 81",
+          "type": "landmark",
+          "distance_km": 1.3
+        }
+      ],
+      "landlord": {
+        "id": "LL-13",
+        "name": "Chú Ngô Quang Phúc",
+        "phone": "0913466695",
+        "verified": true,
+        "response_rate": 0.75,
+        "avg_response_minutes": 10
+      },
+      "rating": 3.6,
+      "review_count": 0,
+      "images": [
+        "/static/img/sg-bt-001-1.jpg"
+      ],
+      "description": "Căn hộ studio 35m² tại Bình Thạnh, TP.HCM. Nhà mới sơn sửa, wifi tốc độ cao đã lắp sẵn. Gần chợ và siêu thị, tiện đi lại bằng xe máy.",
+      "available_from": "2026-08-07",
+      "posted_at": "2026-06-25",
+      "updated_at": "2026-07-25",
+      "viewing_slots": [
+        {
+          "slot_id": "SG-BT-001-S1",
+          "date": "2026-08-02",
+          "time": "10:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "SG-BT-001-S2",
+          "date": "2026-08-03",
+          "time": "09:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "DN-HC-002",
+      "title": "Chung cư mini 44m² khu dân cư yên tĩnh - Hải Châu, Đà Nẵng",
+      "property_type": "chung_cu_mini",
+      "property_type_label": "Chung cư mini",
+      "status": "available",
+      "price_vnd_month": 4000000,
+      "deposit_months": 1,
+      "min_lease_months": 6,
+      "area_m2": 44,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 3,
+      "total_floors": 5,
+      "max_occupants": 3,
+      "furnishing": "full",
+      "amenities": [
+        "bep_rieng",
+        "dieu_hoa",
+        "wifi"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 3500,
+        "water_vnd_per_m3": 25000,
+        "water_charge_mode": "per_m3",
+        "internet_vnd_month": 0,
+        "service_fee_vnd_month": 0,
+        "motorbike_parking_vnd_month": 80000
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": "00:00",
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "Đà Nẵng",
+        "district": "Hải Châu",
+        "ward": "Thanh Bình",
+        "street": "Lê Duẩn",
+        "address_line": "Số 205, ngõ 198, đường Lê Duẩn",
+        "full_address": "Số 205, ngõ 198, đường Lê Duẩn, phường Thanh Bình, Hải Châu, Đà Nẵng",
+        "lat": 16.05765,
+        "lng": 108.20532,
+        "distance_to_city_center_km": 0.9
+      },
+      "nearby_places": [
+        {
+          "name": "Chợ Hàn",
+          "type": "market",
+          "distance_km": 0.8
+        },
+        {
+          "name": "Cầu Rồng",
+          "type": "landmark",
+          "distance_km": 1.1
+        },
+        {
+          "name": "BV Đà Nẵng",
+          "type": "hospital",
+          "distance_km": 1.3
+        }
+      ],
+      "landlord": {
+        "id": "LL-14",
+        "name": "Cô Lý Thu Linh",
+        "phone": "0926152629",
+        "verified": true,
+        "response_rate": 0.84,
+        "avg_response_minutes": 15
+      },
+      "rating": 4.6,
+      "review_count": 68,
+      "images": [
+        "/static/img/dn-hc-002-1.jpg",
+        "/static/img/dn-hc-002-2.jpg",
+        "/static/img/dn-hc-002-3.jpg",
+        "/static/img/dn-hc-002-4.jpg"
+      ],
+      "description": "Chung cư mini 44m² tại Hải Châu, Đà Nẵng. Nhà mới sơn sửa, wifi tốc độ cao đã lắp sẵn. Khu vực an ninh, có bảo vệ trông xe ban đêm.",
+      "available_from": "2026-08-02",
+      "posted_at": "2026-06-29",
+      "updated_at": "2026-07-26",
+      "viewing_slots": [
+        {
+          "slot_id": "DN-HC-002-S1",
+          "date": "2026-07-29",
+          "time": "19:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "DN-HC-002-S2",
+          "date": "2026-08-01",
+          "time": "10:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "DN-HC-002-S3",
+          "date": "2026-08-01",
+          "time": "19:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "SG-TD-003",
+      "title": "Phòng trọ 25m² bếp riêng rộng rãi - Thủ Đức, TP.HCM",
+      "property_type": "phong_tro",
+      "property_type_label": "Phòng trọ",
+      "status": "available",
+      "price_vnd_month": 1900000,
+      "deposit_months": 1,
+      "min_lease_months": 6,
+      "area_m2": 25,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 3,
+      "total_floors": 3,
+      "max_occupants": 1,
+      "furnishing": "basic",
+      "amenities": [
+        "ban_cong",
+        "camera_an_ninh",
+        "dieu_hoa",
+        "gac_xep",
+        "nong_lanh",
+        "tu_lanh",
+        "wifi"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 4200,
+        "water_vnd_per_m3": 120000,
+        "water_charge_mode": "per_m3",
+        "internet_vnd_month": 80000,
+        "service_fee_vnd_month": 0,
+        "motorbike_parking_vnd_month": 100000
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": null,
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "TP.HCM",
+        "district": "Thủ Đức",
+        "ward": "Hiệp Bình Chánh",
+        "street": "Kha Vạn Cân",
+        "address_line": "Số 92, đường Kha Vạn Cân",
+        "full_address": "Số 92, đường Kha Vạn Cân, phường Hiệp Bình Chánh, Thủ Đức, TP.HCM",
+        "lat": 10.84195,
+        "lng": 106.74386,
+        "distance_to_city_center_km": 15.0
+      },
+      "nearby_places": [
+        {
+          "name": "ĐH Sư phạm Kỹ thuật",
+          "type": "university",
+          "distance_km": 0.7
+        },
+        {
+          "name": "Vincom Thủ Đức",
+          "type": "mall",
+          "distance_km": 1.6
+        },
+        {
+          "name": "ĐH Quốc Gia TP.HCM",
+          "type": "university",
+          "distance_km": 1.8
+        }
+      ],
+      "landlord": {
+        "id": "LL-15",
+        "name": "Cô Lý Hải Nam",
+        "phone": "0964446699",
+        "verified": true,
+        "response_rate": 0.96,
+        "avg_response_minutes": 5
+      },
+      "rating": 4.7,
+      "review_count": 36,
+      "images": [
+        "/static/img/sg-td-003-1.jpg",
+        "/static/img/sg-td-003-2.jpg"
+      ],
+      "description": "Phòng trọ 25m² tại Thủ Đức, TP.HCM. Gần chợ và siêu thị, tiện đi lại bằng xe máy. Giờ giấc tự do, không chung chủ.",
+      "available_from": "2026-07-31",
+      "posted_at": "2026-06-19",
+      "updated_at": "2026-07-22",
+      "viewing_slots": [
+        {
+          "slot_id": "SG-TD-003-S1",
+          "date": "2026-07-31",
+          "time": "17:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "SG-TD-003-S2",
+          "date": "2026-08-03",
+          "time": "17:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "SG-TD-003-S3",
+          "date": "2026-08-04",
+          "time": "19:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "HN-NT-001",
+      "title": "Căn hộ chung cư 64m² khu dân cư yên tĩnh - Nam Từ Liêm, Hà Nội",
+      "property_type": "can_ho_chung_cu",
+      "property_type_label": "Căn hộ chung cư",
+      "status": "available",
+      "price_vnd_month": 8200000,
+      "deposit_months": 2,
+      "min_lease_months": 12,
+      "area_m2": 64,
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "floor": 2,
+      "total_floors": 3,
+      "max_occupants": 3,
+      "furnishing": "empty",
+      "amenities": [
+        "ban_cong",
+        "bep_rieng",
+        "gac_xep",
+        "nong_lanh",
+        "thang_may"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 3500,
+        "water_vnd_per_m3": 120000,
+        "water_charge_mode": "per_person_month",
+        "internet_vnd_month": 100000,
+        "service_fee_vnd_month": 150000,
+        "motorbike_parking_vnd_month": 80000
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": true,
+        "shared_with_owner": true,
+        "curfew": "00:00",
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "Hà Nội",
+        "district": "Nam Từ Liêm",
+        "ward": "Mễ Trì",
+        "street": "Lê Đức Thọ",
+        "address_line": "Số 84, hẻm 110, đường Lê Đức Thọ",
+        "full_address": "Số 84, hẻm 110, đường Lê Đức Thọ, phường Mễ Trì, Nam Từ Liêm, Hà Nội",
+        "lat": 21.01382,
+        "lng": 105.76427,
+        "distance_to_city_center_km": 8.1
+      },
+      "nearby_places": [
+        {
+          "name": "Keangnam Landmark 72",
+          "type": "landmark",
+          "distance_km": 1.0
+        },
+        {
+          "name": "Vincom Skylake",
+          "type": "mall",
+          "distance_km": 1.0
+        },
+        {
+          "name": "SVĐ Mỹ Đình",
+          "type": "landmark",
+          "distance_km": 1.6
+        }
+      ],
+      "landlord": {
+        "id": "LL-16",
+        "name": "Chú Đặng Thị Linh",
+        "phone": "0967678681",
+        "verified": true,
+        "response_rate": 0.67,
+        "avg_response_minutes": 15
+      },
+      "rating": 4.9,
+      "review_count": 67,
+      "images": [
+        "/static/img/hn-nt-001-1.jpg"
+      ],
+      "description": "Căn hộ chung cư 64m² tại Nam Từ Liêm, Hà Nội. Đường trước nhà ô tô đỗ cửa, ngập không lo. Đường trước nhà ô tô đỗ cửa, ngập không lo.",
+      "available_from": "2026-08-18",
+      "posted_at": "2026-07-07",
+      "updated_at": "2026-07-25",
+      "viewing_slots": [
+        {
+          "slot_id": "HN-NT-001-S2",
+          "date": "2026-08-01",
+          "time": "10:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-NT-001-S3",
+          "date": "2026-08-01",
+          "time": "20:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-NT-001-S1",
+          "date": "2026-08-05",
+          "time": "19:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "SG-GV-002",
+      "title": "Phòng trọ 26m² cửa sổ lớn đón nắng - Gò Vấp, TP.HCM",
+      "property_type": "phong_tro",
+      "property_type_label": "Phòng trọ",
+      "status": "available",
+      "price_vnd_month": 1800000,
+      "deposit_months": 2,
+      "min_lease_months": 12,
+      "area_m2": 26,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 2,
+      "total_floors": 4,
+      "max_occupants": 1,
+      "furnishing": "full",
+      "amenities": [
+        "camera_an_ninh",
+        "dieu_hoa",
+        "giuong",
+        "may_giat"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 3500,
+        "water_vnd_per_m3": 120000,
+        "water_charge_mode": "per_m3",
+        "internet_vnd_month": 80000,
+        "service_fee_vnd_month": 150000,
+        "motorbike_parking_vnd_month": 150000
+      },
+      "rules": {
+        "pets_allowed": true,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": null,
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "TP.HCM",
+        "district": "Gò Vấp",
+        "ward": "Phường 6",
+        "street": "Phan Văn Trị",
+        "address_line": "Số 240, hẻm 473, đường Phan Văn Trị",
+        "full_address": "Số 240, hẻm 473, đường Phan Văn Trị, phường Phường 6, Gò Vấp, TP.HCM",
+        "lat": 10.82703,
+        "lng": 106.67098,
+        "distance_to_city_center_km": 9.7
+      },
+      "nearby_places": [
+        {
+          "name": "Chợ Hạnh Thông Tây",
+          "type": "market",
+          "distance_km": 0.9
+        },
+        {
+          "name": "Emart Gò Vấp",
+          "type": "supermarket",
+          "distance_km": 0.9
+        },
+        {
+          "name": "ĐH Công nghiệp TP.HCM",
+          "type": "university",
+          "distance_km": 1.8
+        }
+      ],
+      "landlord": {
+        "id": "LL-17",
+        "name": "Cô Lê Thanh Anh",
+        "phone": "0931641968",
+        "verified": true,
+        "response_rate": 0.92,
+        "avg_response_minutes": 45
+      },
+      "rating": 3.8,
+      "review_count": 67,
+      "images": [
+        "/static/img/sg-gv-002-1.jpg",
+        "/static/img/sg-gv-002-2.jpg",
+        "/static/img/sg-gv-002-3.jpg",
+        "/static/img/sg-gv-002-4.jpg"
+      ],
+      "description": "Phòng trọ 26m² tại Gò Vấp, TP.HCM. Đường trước nhà ô tô đỗ cửa, ngập không lo. Chủ nhà thân thiện, hỗ trợ đăng ký tạm trú.",
+      "available_from": "2026-08-27",
+      "posted_at": "2026-06-23",
+      "updated_at": "2026-07-26",
+      "viewing_slots": []
+    },
+    {
+      "id": "SG-TD-004",
+      "title": "Phòng trọ 26m² gần trường đại học - Thủ Đức, TP.HCM",
+      "property_type": "phong_tro",
+      "property_type_label": "Phòng trọ",
+      "status": "available",
+      "price_vnd_month": 2100000,
+      "deposit_months": 3,
+      "min_lease_months": 3,
+      "area_m2": 26,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 4,
+      "total_floors": 5,
+      "max_occupants": 2,
+      "furnishing": "empty",
+      "amenities": [
+        "ban_cong",
+        "camera_an_ninh",
+        "dieu_hoa",
+        "gac_xep"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 3500,
+        "water_vnd_per_m3": 100000,
+        "water_charge_mode": "per_person_month",
+        "internet_vnd_month": 80000,
+        "service_fee_vnd_month": 0,
+        "motorbike_parking_vnd_month": 0
+      },
+      "rules": {
+        "pets_allowed": true,
+        "cooking_allowed": false,
+        "shared_with_owner": false,
+        "curfew": "23:00",
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "TP.HCM",
+        "district": "Thủ Đức",
+        "ward": "Linh Đông",
+        "street": "Đặng Văn Bi",
+        "address_line": "Số 110, ngõ 225, đường Đặng Văn Bi",
+        "full_address": "Số 110, ngõ 225, đường Đặng Văn Bi, phường Linh Đông, Thủ Đức, TP.HCM",
+        "lat": 10.84689,
+        "lng": 106.76526,
+        "distance_to_city_center_km": 15.3
+      },
+      "nearby_places": [
+        {
+          "name": "ĐH Sư phạm Kỹ thuật",
+          "type": "university",
+          "distance_km": 0.9
+        },
+        {
+          "name": "Vincom Thủ Đức",
+          "type": "mall",
+          "distance_km": 1.3
+        },
+        {
+          "name": "ĐH Quốc Gia TP.HCM",
+          "type": "university",
+          "distance_km": 2.1
+        }
+      ],
+      "landlord": {
+        "id": "LL-18",
+        "name": "Chú Lý Đức Phúc",
+        "phone": "0967837274",
+        "verified": true,
+        "response_rate": 0.69,
+        "avg_response_minutes": 45
+      },
+      "rating": 3.7,
+      "review_count": 60,
+      "images": [
+        "/static/img/sg-td-004-1.jpg"
+      ],
+      "description": "Phòng trọ 26m² tại Thủ Đức, TP.HCM. Chủ nhà thân thiện, hỗ trợ đăng ký tạm trú. Phòng thoáng, có cửa sổ và ban công phơi đồ.",
+      "available_from": "2026-07-31",
+      "posted_at": "2026-07-11",
+      "updated_at": "2026-07-26",
+      "viewing_slots": [
+        {
+          "slot_id": "SG-TD-004-S2",
+          "date": "2026-07-30",
+          "time": "20:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "SG-TD-004-S3",
+          "date": "2026-08-01",
+          "time": "14:00",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-7513"
+        },
+        {
+          "slot_id": "SG-TD-004-S1",
+          "date": "2026-08-07",
+          "time": "10:30",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-5479"
+        }
+      ]
+    },
+    {
+      "id": "DN-NH-001",
+      "title": "Phòng trọ 25m² khu dân cư yên tĩnh - Ngũ Hành Sơn, Đà Nẵng",
+      "property_type": "phong_tro",
+      "property_type_label": "Phòng trọ",
+      "status": "available",
+      "price_vnd_month": 2200000,
+      "deposit_months": 2,
+      "min_lease_months": 6,
+      "area_m2": 25,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 8,
+      "total_floors": 8,
+      "max_occupants": 1,
+      "furnishing": "empty",
+      "amenities": [
+        "ban_cong",
+        "bep_rieng",
+        "camera_an_ninh",
+        "gac_xep",
+        "thang_may"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 4000,
+        "water_vnd_per_m3": 30000,
+        "water_charge_mode": "per_person_month",
+        "internet_vnd_month": 100000,
+        "service_fee_vnd_month": 0,
+        "motorbike_parking_vnd_month": 100000
+      },
+      "rules": {
+        "pets_allowed": true,
+        "cooking_allowed": true,
+        "shared_with_owner": true,
+        "curfew": null,
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "Đà Nẵng",
+        "district": "Ngũ Hành Sơn",
+        "ward": "Khuê Mỹ",
+        "street": "Nguyễn Văn Thoại",
+        "address_line": "Số 232, hẻm 88, đường Nguyễn Văn Thoại",
+        "full_address": "Số 232, hẻm 88, đường Nguyễn Văn Thoại, phường Khuê Mỹ, Ngũ Hành Sơn, Đà Nẵng",
+        "lat": 16.02351,
+        "lng": 108.24435,
+        "distance_to_city_center_km": 5.5
+      },
+      "nearby_places": [
+        {
+          "name": "Biển Mỹ Khê",
+          "type": "beach",
+          "distance_km": 0.9
+        },
+        {
+          "name": "ĐH FPT Đà Nẵng",
+          "type": "university",
+          "distance_km": 2.6
+        },
+        {
+          "name": "Lotte Mart",
+          "type": "mall",
+          "distance_km": 2.8
+        }
+      ],
+      "landlord": {
+        "id": "LL-19",
+        "name": "Anh Ngô Ngọc Hà",
+        "phone": "0971413042",
+        "verified": true,
+        "response_rate": 0.79,
+        "avg_response_minutes": 10
+      },
+      "rating": 3.4,
+      "review_count": 0,
+      "images": [
+        "/static/img/dn-nh-001-1.jpg",
+        "/static/img/dn-nh-001-2.jpg"
+      ],
+      "description": "Phòng trọ 25m² tại Ngũ Hành Sơn, Đà Nẵng. Giờ giấc tự do, không chung chủ. Khu vực an ninh, có bảo vệ trông xe ban đêm.",
+      "available_from": "2026-08-07",
+      "posted_at": "2026-07-11",
+      "updated_at": "2026-07-22",
+      "viewing_slots": [
+        {
+          "slot_id": "DN-NH-001-S1",
+          "date": "2026-07-31",
+          "time": "17:30",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-3476"
+        },
+        {
+          "slot_id": "DN-NH-001-S2",
+          "date": "2026-08-05",
+          "time": "14:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "DN-NH-001-S3",
+          "date": "2026-08-05",
+          "time": "19:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "HN-HB-002",
+      "title": "Phòng trọ 24m² khu dân cư yên tĩnh - Hai Bà Trưng, Hà Nội",
+      "property_type": "phong_tro",
+      "property_type_label": "Phòng trọ",
+      "status": "available",
+      "price_vnd_month": 2300000,
+      "deposit_months": 3,
+      "min_lease_months": 6,
+      "area_m2": 24,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 3,
+      "total_floors": 9,
+      "max_occupants": 1,
+      "furnishing": "basic",
+      "amenities": [
+        "bep_rieng",
+        "camera_an_ninh",
+        "dieu_hoa",
+        "giuong",
+        "nong_lanh",
+        "thang_may",
+        "tu_lanh",
+        "wifi"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 3800,
+        "water_vnd_per_m3": 120000,
+        "water_charge_mode": "per_m3",
+        "internet_vnd_month": 100000,
+        "service_fee_vnd_month": 100000,
+        "motorbike_parking_vnd_month": 80000
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": null,
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "Hà Nội",
+        "district": "Hai Bà Trưng",
+        "ward": "Bách Khoa",
+        "street": "Lê Thanh Nghị",
+        "address_line": "Số 166, ngõ 181, đường Lê Thanh Nghị",
+        "full_address": "Số 166, ngõ 181, đường Lê Thanh Nghị, phường Bách Khoa, Hai Bà Trưng, Hà Nội",
+        "lat": 21.00996,
+        "lng": 105.85955,
+        "distance_to_city_center_km": 2.8
+      },
+      "nearby_places": [
+        {
+          "name": "ĐH Bách Khoa Hà Nội",
+          "type": "university",
+          "distance_km": 0.4
+        },
+        {
+          "name": "BV Bạch Mai",
+          "type": "hospital",
+          "distance_km": 1.2
+        },
+        {
+          "name": "Times City",
+          "type": "mall",
+          "distance_km": 1.9
+        }
+      ],
+      "landlord": {
+        "id": "LL-20",
+        "name": "Cô Lê Đức Trang",
+        "phone": "0951478468",
+        "verified": true,
+        "response_rate": 0.8,
+        "avg_response_minutes": 45
+      },
+      "rating": 4.4,
+      "review_count": 21,
+      "images": [
+        "/static/img/hn-hb-002-1.jpg"
+      ],
+      "description": "Phòng trọ 24m² tại Hai Bà Trưng, Hà Nội. Khu vực an ninh, có bảo vệ trông xe ban đêm. Phòng thoáng, có cửa sổ và ban công phơi đồ.",
+      "available_from": "2026-08-18",
+      "posted_at": "2026-06-28",
+      "updated_at": "2026-07-21",
+      "viewing_slots": [
+        {
+          "slot_id": "HN-HB-002-S2",
+          "date": "2026-07-29",
+          "time": "10:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-HB-002-S1",
+          "date": "2026-07-29",
+          "time": "17:30",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-1625"
+        },
+        {
+          "slot_id": "HN-HB-002-S3",
+          "date": "2026-07-31",
+          "time": "09:00",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-5243"
+        }
+      ]
+    },
+    {
+      "id": "HN-DD-002",
+      "title": "Căn hộ dịch vụ 52m² gần trường đại học - Đống Đa, Hà Nội",
+      "property_type": "can_ho_dich_vu",
+      "property_type_label": "Căn hộ dịch vụ",
+      "status": "available",
+      "price_vnd_month": 6500000,
+      "deposit_months": 3,
+      "min_lease_months": 6,
+      "area_m2": 52,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 4,
+      "total_floors": 6,
+      "max_occupants": 3,
+      "furnishing": "full",
+      "amenities": [
+        "gac_xep",
+        "giuong",
+        "nong_lanh",
+        "thang_may"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 4200,
+        "water_vnd_per_m3": 25000,
+        "water_charge_mode": "per_m3",
+        "internet_vnd_month": 0,
+        "service_fee_vnd_month": 0,
+        "motorbike_parking_vnd_month": 100000
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": true,
+        "shared_with_owner": true,
+        "curfew": "00:00",
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": true
+      },
+      "location": {
+        "city": "Hà Nội",
+        "district": "Đống Đa",
+        "ward": "Trung Liệt",
+        "street": "Láng Hạ",
+        "address_line": "Số 211, đường Láng Hạ",
+        "full_address": "Số 211, đường Láng Hạ, phường Trung Liệt, Đống Đa, Hà Nội",
+        "lat": 21.0076,
+        "lng": 105.83767,
+        "distance_to_city_center_km": 3.9
+      },
+      "nearby_places": [
+        {
+          "name": "Chợ Kim Liên",
+          "type": "market",
+          "distance_km": 0.9
+        },
+        {
+          "name": "Vincom Phạm Ngọc Thạch",
+          "type": "mall",
+          "distance_km": 1.2
+        },
+        {
+          "name": "BV Bạch Mai",
+          "type": "hospital",
+          "distance_km": 2.2
+        }
+      ],
+      "landlord": {
+        "id": "LL-21",
+        "name": "Chú Vũ Thu Hương",
+        "phone": "0945551322",
+        "verified": false,
+        "response_rate": 0.73,
+        "avg_response_minutes": 60
+      },
+      "rating": 4.5,
+      "review_count": 21,
+      "images": [
+        "/static/img/hn-dd-002-1.jpg",
+        "/static/img/hn-dd-002-2.jpg",
+        "/static/img/hn-dd-002-3.jpg",
+        "/static/img/hn-dd-002-4.jpg"
+      ],
+      "description": "Căn hộ dịch vụ 52m² tại Đống Đa, Hà Nội. Thích hợp cho sinh viên hoặc người đi làm. Khu vực an ninh, có bảo vệ trông xe ban đêm.",
+      "available_from": "2026-08-27",
+      "posted_at": "2026-07-01",
+      "updated_at": "2026-07-24",
+      "viewing_slots": [
+        {
+          "slot_id": "HN-DD-002-S2",
+          "date": "2026-08-04",
+          "time": "17:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-DD-002-S1",
+          "date": "2026-08-06",
+          "time": "20:00",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-8117"
+        }
+      ]
+    },
+    {
+      "id": "DN-LC-001",
+      "title": "Chung cư mini 29m² khu dân cư yên tĩnh - Liên Chiểu, Đà Nẵng",
+      "property_type": "chung_cu_mini",
+      "property_type_label": "Chung cư mini",
+      "status": "available",
+      "price_vnd_month": 2300000,
+      "deposit_months": 1,
+      "min_lease_months": 6,
+      "area_m2": 29,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 3,
+      "total_floors": 6,
+      "max_occupants": 3,
+      "furnishing": "basic",
+      "amenities": [
+        "ban_cong",
+        "dieu_hoa",
+        "gac_xep",
+        "thang_may",
+        "tu_lanh",
+        "tu_quan_ao"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 4000,
+        "water_vnd_per_m3": 30000,
+        "water_charge_mode": "per_m3",
+        "internet_vnd_month": 120000,
+        "service_fee_vnd_month": 100000,
+        "motorbike_parking_vnd_month": 0
+      },
+      "rules": {
+        "pets_allowed": true,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": "23:00",
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "Đà Nẵng",
+        "district": "Liên Chiểu",
+        "ward": "Hòa Khánh Bắc",
+        "street": "Âu Cơ",
+        "address_line": "Số 36, đường Âu Cơ",
+        "full_address": "Số 36, đường Âu Cơ, phường Hòa Khánh Bắc, Liên Chiểu, Đà Nẵng",
+        "lat": 16.07362,
+        "lng": 108.15275,
+        "distance_to_city_center_km": 11.1
+      },
+      "nearby_places": [
+        {
+          "name": "ĐH Bách Khoa Đà Nẵng",
+          "type": "university",
+          "distance_km": 0.5
+        },
+        {
+          "name": "Chợ Hòa Khánh",
+          "type": "market",
+          "distance_km": 0.8
+        },
+        {
+          "name": "KCN Hòa Khánh",
+          "type": "landmark",
+          "distance_km": 1.8
+        }
+      ],
+      "landlord": {
+        "id": "LL-22",
+        "name": "Anh Đỗ Thanh Nam",
+        "phone": "0963621481",
+        "verified": true,
+        "response_rate": 0.95,
+        "avg_response_minutes": 15
+      },
+      "rating": 3.3,
+      "review_count": 81,
+      "images": [
+        "/static/img/dn-lc-001-1.jpg",
+        "/static/img/dn-lc-001-2.jpg"
+      ],
+      "description": "Chung cư mini 29m² tại Liên Chiểu, Đà Nẵng. Khu vực an ninh, có bảo vệ trông xe ban đêm. Khu vực an ninh, có bảo vệ trông xe ban đêm.",
+      "available_from": "2026-08-27",
+      "posted_at": "2026-07-22",
+      "updated_at": "2026-07-23",
+      "viewing_slots": [
+        {
+          "slot_id": "DN-LC-001-S3",
+          "date": "2026-07-31",
+          "time": "17:30",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-9335"
+        },
+        {
+          "slot_id": "DN-LC-001-S2",
+          "date": "2026-08-06",
+          "time": "19:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "DN-LC-001-S1",
+          "date": "2026-08-07",
+          "time": "16:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "SG-Q3-001",
+      "title": "Chung cư mini 41m² ban công thoáng - Quận 3, TP.HCM",
+      "property_type": "chung_cu_mini",
+      "property_type_label": "Chung cư mini",
+      "status": "available",
+      "price_vnd_month": 5300000,
+      "deposit_months": 2,
+      "min_lease_months": 3,
+      "area_m2": 41,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 5,
+      "total_floors": 5,
+      "max_occupants": 3,
+      "furnishing": "full",
+      "amenities": [
+        "bep_rieng",
+        "gac_xep",
+        "tu_lanh",
+        "tu_quan_ao"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 3800,
+        "water_vnd_per_m3": 100000,
+        "water_charge_mode": "per_person_month",
+        "internet_vnd_month": 0,
+        "service_fee_vnd_month": 0,
+        "motorbike_parking_vnd_month": 0
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": true,
+        "shared_with_owner": true,
+        "curfew": null,
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "TP.HCM",
+        "district": "Quận 3",
+        "ward": "Phường 12",
+        "street": "Lý Chính Thắng",
+        "address_line": "Số 18, hẻm 142, đường Lý Chính Thắng",
+        "full_address": "Số 18, hẻm 142, đường Lý Chính Thắng, phường Phường 12, Quận 3, TP.HCM",
+        "lat": 10.79186,
+        "lng": 106.67998,
+        "distance_to_city_center_km": 2.3
+      },
+      "nearby_places": [
+        {
+          "name": "Hồ Con Rùa",
+          "type": "landmark",
+          "distance_km": 1.1
+        },
+        {
+          "name": "ĐH Kiến trúc TP.HCM",
+          "type": "university",
+          "distance_km": 1.4
+        },
+        {
+          "name": "BV Từ Dũ",
+          "type": "hospital",
+          "distance_km": 1.6
+        }
+      ],
+      "landlord": {
+        "id": "LL-23",
+        "name": "Chú Nguyễn Xuân Trang",
+        "phone": "0946700736",
+        "verified": false,
+        "response_rate": 0.84,
+        "avg_response_minutes": 5
+      },
+      "rating": 4.3,
+      "review_count": 62,
+      "images": [
+        "/static/img/sg-q3-001-1.jpg",
+        "/static/img/sg-q3-001-2.jpg"
+      ],
+      "description": "Chung cư mini 41m² tại Quận 3, TP.HCM. Nhà mới sơn sửa, wifi tốc độ cao đã lắp sẵn. Khu vực an ninh, có bảo vệ trông xe ban đêm.",
+      "available_from": "2026-08-07",
+      "posted_at": "2026-07-25",
+      "updated_at": "2026-07-26",
+      "viewing_slots": [
+        {
+          "slot_id": "SG-Q3-001-S2",
+          "date": "2026-08-02",
+          "time": "20:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "SG-Q3-001-S1",
+          "date": "2026-08-05",
+          "time": "14:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "SG-Q3-001-S3",
+          "date": "2026-08-07",
+          "time": "19:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "HN-HB-003",
+      "title": "Chung cư mini 44m² mới xây, sạch sẽ - Hai Bà Trưng, Hà Nội",
+      "property_type": "chung_cu_mini",
+      "property_type_label": "Chung cư mini",
+      "status": "rented",
+      "price_vnd_month": 3200000,
+      "deposit_months": 1,
+      "min_lease_months": 6,
+      "area_m2": 44,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 6,
+      "total_floors": 6,
+      "max_occupants": 3,
+      "furnishing": "full",
+      "amenities": [
+        "dieu_hoa",
+        "giuong",
+        "may_giat",
+        "thang_may",
+        "tu_lanh",
+        "tu_quan_ao",
+        "wifi"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 4000,
+        "water_vnd_per_m3": 30000,
+        "water_charge_mode": "per_person_month",
+        "internet_vnd_month": 80000,
+        "service_fee_vnd_month": 100000,
+        "motorbike_parking_vnd_month": 0
+      },
+      "rules": {
+        "pets_allowed": true,
+        "cooking_allowed": false,
+        "shared_with_owner": true,
+        "curfew": null,
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "Hà Nội",
+        "district": "Hai Bà Trưng",
+        "ward": "Bách Khoa",
+        "street": "Tạ Quang Bửu",
+        "address_line": "Số 150, đường Tạ Quang Bửu",
+        "full_address": "Số 150, đường Tạ Quang Bửu, phường Bách Khoa, Hai Bà Trưng, Hà Nội",
+        "lat": 20.99403,
+        "lng": 105.84409,
+        "distance_to_city_center_km": 3.6
+      },
+      "nearby_places": [
+        {
+          "name": "ĐH Bách Khoa Hà Nội",
+          "type": "university",
+          "distance_km": 0.4
+        },
+        {
+          "name": "BV Bạch Mai",
+          "type": "hospital",
+          "distance_km": 1.2
+        },
+        {
+          "name": "Times City",
+          "type": "mall",
+          "distance_km": 2.8
+        }
+      ],
+      "landlord": {
+        "id": "LL-01",
+        "name": "Chị Vũ Quang Hà",
+        "phone": "0979143351",
+        "verified": true,
+        "response_rate": 0.79,
+        "avg_response_minutes": 45
+      },
+      "rating": 4.9,
+      "review_count": 49,
+      "images": [
+        "/static/img/hn-hb-003-1.jpg"
+      ],
+      "description": "Chung cư mini 44m² tại Hai Bà Trưng, Hà Nội. Khu vực an ninh, có bảo vệ trông xe ban đêm. Đường trước nhà ô tô đỗ cửa, ngập không lo.",
+      "available_from": "2026-08-02",
+      "posted_at": "2026-07-09",
+      "updated_at": "2026-07-24",
+      "viewing_slots": []
+    },
+    {
+      "id": "HN-CG-003",
+      "title": "Chung cư mini 29m² mới xây, sạch sẽ - Cầu Giấy, Hà Nội",
+      "property_type": "chung_cu_mini",
+      "property_type_label": "Chung cư mini",
+      "status": "pending",
+      "price_vnd_month": 3300000,
+      "deposit_months": 1,
+      "min_lease_months": 6,
+      "area_m2": 29,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 2,
+      "total_floors": 8,
+      "max_occupants": 2,
+      "furnishing": "full",
+      "amenities": [
+        "ban_cong",
+        "bep_rieng",
+        "giuong",
+        "may_giat",
+        "nong_lanh",
+        "thang_may",
+        "tu_lanh",
+        "tu_quan_ao"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 4200,
+        "water_vnd_per_m3": 25000,
+        "water_charge_mode": "per_person_month",
+        "internet_vnd_month": 0,
+        "service_fee_vnd_month": 0,
+        "motorbike_parking_vnd_month": 0
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": null,
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "Hà Nội",
+        "district": "Cầu Giấy",
+        "ward": "Dịch Vọng Hậu",
+        "street": "Nguyễn Phong Sắc",
+        "address_line": "Số 186, ngõ 12, đường Nguyễn Phong Sắc",
+        "full_address": "Số 186, ngõ 12, đường Nguyễn Phong Sắc, phường Dịch Vọng Hậu, Cầu Giấy, Hà Nội",
+        "lat": 21.0374,
+        "lng": 105.78644,
+        "distance_to_city_center_km": 5.9
+      },
+      "nearby_places": [
+        {
+          "name": "ĐH Quốc Gia Hà Nội",
+          "type": "university",
+          "distance_km": 0.7
+        },
+        {
+          "name": "Công viên Cầu Giấy",
+          "type": "park",
+          "distance_km": 1.0
+        },
+        {
+          "name": "BV Giao thông Vận tải",
+          "type": "hospital",
+          "distance_km": 1.7
+        }
+      ],
+      "landlord": {
+        "id": "LL-02",
+        "name": "Cô Ngô Xuân Khánh",
+        "phone": "0987774079",
+        "verified": true,
+        "response_rate": 0.75,
+        "avg_response_minutes": 10
+      },
+      "rating": 3.5,
+      "review_count": 35,
+      "images": [
+        "/static/img/hn-cg-003-1.jpg",
+        "/static/img/hn-cg-003-2.jpg"
+      ],
+      "description": "Chung cư mini 29m² tại Cầu Giấy, Hà Nội. Nhà mới sơn sửa, wifi tốc độ cao đã lắp sẵn. Nhà mới sơn sửa, wifi tốc độ cao đã lắp sẵn.",
+      "available_from": "2026-07-29",
+      "posted_at": "2026-06-21",
+      "updated_at": "2026-07-21",
+      "viewing_slots": [
+        {
+          "slot_id": "HN-CG-003-S4",
+          "date": "2026-07-31",
+          "time": "17:30",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-2438"
+        },
+        {
+          "slot_id": "HN-CG-003-S1",
+          "date": "2026-07-31",
+          "time": "20:00",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-4964"
+        },
+        {
+          "slot_id": "HN-CG-003-S2",
+          "date": "2026-08-07",
+          "time": "09:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-CG-003-S3",
+          "date": "2026-08-07",
+          "time": "17:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "SG-BT-002",
+      "title": "Chung cư mini 29m² giờ giấc tự do - Bình Thạnh, TP.HCM",
+      "property_type": "chung_cu_mini",
+      "property_type_label": "Chung cư mini",
+      "status": "available",
+      "price_vnd_month": 5700000,
+      "deposit_months": 2,
+      "min_lease_months": 6,
+      "area_m2": 29,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 6,
+      "total_floors": 8,
+      "max_occupants": 3,
+      "furnishing": "full",
+      "amenities": [
+        "ban_cong",
+        "bep_rieng",
+        "dieu_hoa",
+        "giuong",
+        "thang_may",
+        "wifi"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 2800,
+        "water_vnd_per_m3": 30000,
+        "water_charge_mode": "per_person_month",
+        "internet_vnd_month": 80000,
+        "service_fee_vnd_month": 150000,
+        "motorbike_parking_vnd_month": 100000
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": "00:00",
+        "students_welcome": false
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "TP.HCM",
+        "district": "Bình Thạnh",
+        "ward": "Phường 26",
+        "street": "Ung Văn Khiêm",
+        "address_line": "Số 35, hẻm 470, đường Ung Văn Khiêm",
+        "full_address": "Số 35, hẻm 470, đường Ung Văn Khiêm, phường Phường 26, Bình Thạnh, TP.HCM",
+        "lat": 10.81087,
+        "lng": 106.70422,
+        "distance_to_city_center_km": 4.2
+      },
+      "nearby_places": [
+        {
+          "name": "ĐH Hutech",
+          "type": "university",
+          "distance_km": 0.8
+        },
+        {
+          "name": "Landmark 81",
+          "type": "landmark",
+          "distance_km": 0.9
+        },
+        {
+          "name": "Vincom Landmark",
+          "type": "mall",
+          "distance_km": 1.4
+        }
+      ],
+      "landlord": {
+        "id": "LL-03",
+        "name": "Chị Đặng Thị Trang",
+        "phone": "0948773151",
+        "verified": true,
+        "response_rate": 0.71,
+        "avg_response_minutes": 10
+      },
+      "rating": 4.2,
+      "review_count": 40,
+      "images": [
+        "/static/img/sg-bt-002-1.jpg",
+        "/static/img/sg-bt-002-2.jpg",
+        "/static/img/sg-bt-002-3.jpg",
+        "/static/img/sg-bt-002-4.jpg"
+      ],
+      "description": "Chung cư mini 29m² tại Bình Thạnh, TP.HCM. Thích hợp cho sinh viên hoặc người đi làm. Gần chợ và siêu thị, tiện đi lại bằng xe máy.",
+      "available_from": "2026-08-11",
+      "posted_at": "2026-07-16",
+      "updated_at": "2026-07-24",
+      "viewing_slots": [
+        {
+          "slot_id": "SG-BT-002-S2",
+          "date": "2026-07-29",
+          "time": "10:30",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-1944"
+        },
+        {
+          "slot_id": "SG-BT-002-S3",
+          "date": "2026-07-30",
+          "time": "19:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "SG-BT-002-S1",
+          "date": "2026-08-05",
+          "time": "14:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "SG-Q1-001",
+      "title": "Nhà nguyên căn 63m² có gác lửng - Quận 1, TP.HCM",
+      "property_type": "nha_nguyen_can",
+      "property_type_label": "Nhà nguyên căn",
+      "status": "available",
+      "price_vnd_month": 16100000,
+      "deposit_months": 1,
+      "min_lease_months": 12,
+      "area_m2": 63,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "floor": 2,
+      "total_floors": 2,
+      "max_occupants": 5,
+      "furnishing": "basic",
+      "amenities": [
+        "bao_ve_24_7",
+        "bep_rieng",
+        "camera_an_ninh",
+        "dieu_hoa",
+        "may_giat",
+        "nong_lanh",
+        "tu_quan_ao"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 4200,
+        "water_vnd_per_m3": 30000,
+        "water_charge_mode": "per_m3",
+        "internet_vnd_month": 120000,
+        "service_fee_vnd_month": 200000,
+        "motorbike_parking_vnd_month": 150000
+      },
+      "rules": {
+        "pets_allowed": true,
+        "cooking_allowed": false,
+        "shared_with_owner": false,
+        "curfew": null,
+        "students_welcome": false
+      },
+      "parking": {
+        "motorbike": true,
+        "car": true
+      },
+      "location": {
+        "city": "TP.HCM",
+        "district": "Quận 1",
+        "ward": "Nguyễn Cư Trinh",
+        "street": "Nguyễn Trãi",
+        "address_line": "Số 176, hẻm 30, đường Nguyễn Trãi",
+        "full_address": "Số 176, hẻm 30, đường Nguyễn Trãi, phường Nguyễn Cư Trinh, Quận 1, TP.HCM",
+        "lat": 10.77184,
+        "lng": 106.68999,
+        "distance_to_city_center_km": 0.7
+      },
+      "nearby_places": [
+        {
+          "name": "Chợ Bến Thành",
+          "type": "market",
+          "distance_km": 1.1
+        },
+        {
+          "name": "ĐH Kinh tế TP.HCM",
+          "type": "university",
+          "distance_km": 1.3
+        },
+        {
+          "name": "Phố đi bộ Nguyễn Huệ",
+          "type": "landmark",
+          "distance_km": 1.4
+        }
+      ],
+      "landlord": {
+        "id": "LL-04",
+        "name": "Cô Vũ Minh Dũng",
+        "phone": "0923288661",
+        "verified": false,
+        "response_rate": 0.67,
+        "avg_response_minutes": 15
+      },
+      "rating": 4.1,
+      "review_count": 82,
+      "images": [
+        "/static/img/sg-q1-001-1.jpg",
+        "/static/img/sg-q1-001-2.jpg"
+      ],
+      "description": "Nhà nguyên căn 63m² tại Quận 1, TP.HCM. Chủ nhà thân thiện, hỗ trợ đăng ký tạm trú. Chủ nhà thân thiện, hỗ trợ đăng ký tạm trú.",
+      "available_from": "2026-08-02",
+      "posted_at": "2026-06-25",
+      "updated_at": "2026-07-21",
+      "viewing_slots": [
+        {
+          "slot_id": "SG-Q1-001-S3",
+          "date": "2026-08-02",
+          "time": "16:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "SG-Q1-001-S1",
+          "date": "2026-08-03",
+          "time": "09:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "SG-Q1-001-S2",
+          "date": "2026-08-07",
+          "time": "16:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "SG-Q7-002",
+      "title": "Căn hộ chung cư 73m² view thành phố - Quận 7, TP.HCM",
+      "property_type": "can_ho_chung_cu",
+      "property_type_label": "Căn hộ chung cư",
+      "status": "available",
+      "price_vnd_month": 9700000,
+      "deposit_months": 2,
+      "min_lease_months": 6,
+      "area_m2": 73,
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "floor": 1,
+      "total_floors": 4,
+      "max_occupants": 5,
+      "furnishing": "full",
+      "amenities": [
+        "camera_an_ninh",
+        "dieu_hoa",
+        "gac_xep",
+        "nong_lanh",
+        "thang_may",
+        "tu_quan_ao",
+        "wifi"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 4200,
+        "water_vnd_per_m3": 25000,
+        "water_charge_mode": "per_m3",
+        "internet_vnd_month": 80000,
+        "service_fee_vnd_month": 200000,
+        "motorbike_parking_vnd_month": 150000
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": false,
+        "shared_with_owner": false,
+        "curfew": null,
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "TP.HCM",
+        "district": "Quận 7",
+        "ward": "Tân Phú",
+        "street": "Nguyễn Thị Thập",
+        "address_line": "Số 163, đường Nguyễn Thị Thập",
+        "full_address": "Số 163, đường Nguyễn Thị Thập, phường Tân Phú, Quận 7, TP.HCM",
+        "lat": 10.73263,
+        "lng": 106.73094,
+        "distance_to_city_center_km": 8.0
+      },
+      "nearby_places": [
+        {
+          "name": "ĐH RMIT",
+          "type": "university",
+          "distance_km": 1.2
+        },
+        {
+          "name": "Crescent Mall",
+          "type": "mall",
+          "distance_km": 1.5
+        },
+        {
+          "name": "BV FV",
+          "type": "hospital",
+          "distance_km": 2.5
+        }
+      ],
+      "landlord": {
+        "id": "LL-05",
+        "name": "Cô Vũ Đức Anh",
+        "phone": "0935784040",
+        "verified": false,
+        "response_rate": 0.69,
+        "avg_response_minutes": 15
+      },
+      "rating": 3.9,
+      "review_count": 77,
+      "images": [
+        "/static/img/sg-q7-002-1.jpg",
+        "/static/img/sg-q7-002-2.jpg",
+        "/static/img/sg-q7-002-3.jpg"
+      ],
+      "description": "Căn hộ chung cư 73m² tại Quận 7, TP.HCM. Nhà mới sơn sửa, wifi tốc độ cao đã lắp sẵn. Nhà mới sơn sửa, wifi tốc độ cao đã lắp sẵn.",
+      "available_from": "2026-07-31",
+      "posted_at": "2026-07-01",
+      "updated_at": "2026-07-26",
+      "viewing_slots": [
+        {
+          "slot_id": "SG-Q7-002-S2",
+          "date": "2026-07-30",
+          "time": "16:00",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-3636"
+        },
+        {
+          "slot_id": "SG-Q7-002-S1",
+          "date": "2026-08-01",
+          "time": "09:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "SG-Q7-002-S3",
+          "date": "2026-08-02",
+          "time": "09:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "HN-DD-003",
+      "title": "Phòng trọ 20m² thang máy, hầm để xe - Đống Đa, Hà Nội",
+      "property_type": "phong_tro",
+      "property_type_label": "Phòng trọ",
+      "status": "available",
+      "price_vnd_month": 2000000,
+      "deposit_months": 1,
+      "min_lease_months": 6,
+      "area_m2": 20,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 3,
+      "total_floors": 7,
+      "max_occupants": 1,
+      "furnishing": "full",
+      "amenities": [
+        "bep_rieng",
+        "camera_an_ninh",
+        "dieu_hoa",
+        "may_giat",
+        "thang_may",
+        "tu_quan_ao",
+        "wifi"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 3500,
+        "water_vnd_per_m3": 30000,
+        "water_charge_mode": "per_person_month",
+        "internet_vnd_month": 120000,
+        "service_fee_vnd_month": 0,
+        "motorbike_parking_vnd_month": 150000
+      },
+      "rules": {
+        "pets_allowed": true,
+        "cooking_allowed": true,
+        "shared_with_owner": true,
+        "curfew": null,
+        "students_welcome": false
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "Hà Nội",
+        "district": "Đống Đa",
+        "ward": "Trung Liệt",
+        "street": "Xã Đàn",
+        "address_line": "Số 52, đường Xã Đàn",
+        "full_address": "Số 52, đường Xã Đàn, phường Trung Liệt, Đống Đa, Hà Nội",
+        "lat": 21.0227,
+        "lng": 105.83531,
+        "distance_to_city_center_km": 3.1
+      },
+      "nearby_places": [
+        {
+          "name": "Vincom Phạm Ngọc Thạch",
+          "type": "mall",
+          "distance_km": 1.3
+        },
+        {
+          "name": "BV Bạch Mai",
+          "type": "hospital",
+          "distance_km": 1.6
+        },
+        {
+          "name": "ĐH Bách Khoa Hà Nội",
+          "type": "university",
+          "distance_km": 2.1
+        }
+      ],
+      "landlord": {
+        "id": "LL-06",
+        "name": "Anh Nguyễn Đức Nam",
+        "phone": "0981264375",
+        "verified": true,
+        "response_rate": 0.76,
+        "avg_response_minutes": 15
+      },
+      "rating": 3.9,
+      "review_count": 3,
+      "images": [
+        "/static/img/hn-dd-003-1.jpg"
+      ],
+      "description": "Phòng trọ 20m² tại Đống Đa, Hà Nội. Thích hợp cho sinh viên hoặc người đi làm. Đường trước nhà ô tô đỗ cửa, ngập không lo.",
+      "available_from": "2026-08-07",
+      "posted_at": "2026-06-13",
+      "updated_at": "2026-07-26",
+      "viewing_slots": [
+        {
+          "slot_id": "HN-DD-003-S2",
+          "date": "2026-08-01",
+          "time": "10:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-DD-003-S3",
+          "date": "2026-08-01",
+          "time": "19:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-DD-003-S1",
+          "date": "2026-08-04",
+          "time": "16:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "HN-CG-004",
+      "title": "Chung cư mini 42m² mới xây, sạch sẽ - Cầu Giấy, Hà Nội",
+      "property_type": "chung_cu_mini",
+      "property_type_label": "Chung cư mini",
+      "status": "available",
+      "price_vnd_month": 3900000,
+      "deposit_months": 2,
+      "min_lease_months": 3,
+      "area_m2": 42,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 1,
+      "total_floors": 7,
+      "max_occupants": 2,
+      "furnishing": "full",
+      "amenities": [
+        "bao_ve_24_7",
+        "bep_rieng",
+        "camera_an_ninh",
+        "dieu_hoa",
+        "thang_may",
+        "tu_lanh",
+        "wifi"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 4200,
+        "water_vnd_per_m3": 30000,
+        "water_charge_mode": "per_person_month",
+        "internet_vnd_month": 0,
+        "service_fee_vnd_month": 0,
+        "motorbike_parking_vnd_month": 150000
+      },
+      "rules": {
+        "pets_allowed": true,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": null,
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "Hà Nội",
+        "district": "Cầu Giấy",
+        "ward": "Dịch Vọng",
+        "street": "Trần Thái Tông",
+        "address_line": "Số 204, đường Trần Thái Tông",
+        "full_address": "Số 204, đường Trần Thái Tông, phường Dịch Vọng, Cầu Giấy, Hà Nội",
+        "lat": 21.04193,
+        "lng": 105.78473,
+        "distance_to_city_center_km": 5.9
+      },
+      "nearby_places": [
+        {
+          "name": "ĐH Quốc Gia Hà Nội",
+          "type": "university",
+          "distance_km": 0.9
+        },
+        {
+          "name": "Công viên Cầu Giấy",
+          "type": "park",
+          "distance_km": 1.0
+        },
+        {
+          "name": "Big C Thăng Long",
+          "type": "supermarket",
+          "distance_km": 1.1
+        }
+      ],
+      "landlord": {
+        "id": "LL-07",
+        "name": "Chị Trần Thanh Hà",
+        "phone": "0960536748",
+        "verified": false,
+        "response_rate": 0.98,
+        "avg_response_minutes": 5
+      },
+      "rating": 4.4,
+      "review_count": 81,
+      "images": [
+        "/static/img/hn-cg-004-1.jpg"
+      ],
+      "description": "Chung cư mini 42m² tại Cầu Giấy, Hà Nội. Giờ giấc tự do, không chung chủ. Gần chợ và siêu thị, tiện đi lại bằng xe máy.",
+      "available_from": "2026-07-31",
+      "posted_at": "2026-07-26",
+      "updated_at": "2026-07-23",
+      "viewing_slots": [
+        {
+          "slot_id": "HN-CG-004-S1",
+          "date": "2026-07-31",
+          "time": "16:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-CG-004-S2",
+          "date": "2026-08-05",
+          "time": "16:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-CG-004-S4",
+          "date": "2026-08-06",
+          "time": "14:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-CG-004-S3",
+          "date": "2026-08-07",
+          "time": "19:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "HN-CG-005",
+      "title": "Phòng trọ 24m² thang máy, hầm để xe - Cầu Giấy, Hà Nội",
+      "property_type": "phong_tro",
+      "property_type_label": "Phòng trọ",
+      "status": "available",
+      "price_vnd_month": 2200000,
+      "deposit_months": 1,
+      "min_lease_months": 3,
+      "area_m2": 24,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 1,
+      "total_floors": 3,
+      "max_occupants": 1,
+      "furnishing": "full",
+      "amenities": [
+        "dieu_hoa",
+        "nong_lanh",
+        "wifi"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 3500,
+        "water_vnd_per_m3": 25000,
+        "water_charge_mode": "per_m3",
+        "internet_vnd_month": 80000,
+        "service_fee_vnd_month": 0,
+        "motorbike_parking_vnd_month": 0
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": null,
+        "students_welcome": false
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "Hà Nội",
+        "district": "Cầu Giấy",
+        "ward": "Quan Hoa",
+        "street": "Trần Thái Tông",
+        "address_line": "Số 108, đường Trần Thái Tông",
+        "full_address": "Số 108, đường Trần Thái Tông, phường Quan Hoa, Cầu Giấy, Hà Nội",
+        "lat": 21.04444,
+        "lng": 105.78684,
+        "distance_to_city_center_km": 7.0
+      },
+      "nearby_places": [
+        {
+          "name": "ĐH Quốc Gia Hà Nội",
+          "type": "university",
+          "distance_km": 0.8
+        },
+        {
+          "name": "Công viên Cầu Giấy",
+          "type": "park",
+          "distance_km": 1.0
+        },
+        {
+          "name": "Big C Thăng Long",
+          "type": "supermarket",
+          "distance_km": 1.2
+        }
+      ],
+      "landlord": {
+        "id": "LL-08",
+        "name": "Cô Nguyễn Thu Tuấn",
+        "phone": "0912532927",
+        "verified": true,
+        "response_rate": 0.64,
+        "avg_response_minutes": 60
+      },
+      "rating": 4.4,
+      "review_count": 51,
+      "images": [
+        "/static/img/hn-cg-005-1.jpg",
+        "/static/img/hn-cg-005-2.jpg",
+        "/static/img/hn-cg-005-3.jpg",
+        "/static/img/hn-cg-005-4.jpg"
+      ],
+      "description": "Phòng trọ 24m² tại Cầu Giấy, Hà Nội. Thích hợp cho sinh viên hoặc người đi làm. Khu vực an ninh, có bảo vệ trông xe ban đêm.",
+      "available_from": "2026-08-18",
+      "posted_at": "2026-07-26",
+      "updated_at": "2026-07-28",
+      "viewing_slots": [
+        {
+          "slot_id": "HN-CG-005-S4",
+          "date": "2026-07-31",
+          "time": "09:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-CG-005-S1",
+          "date": "2026-08-02",
+          "time": "14:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-CG-005-S2",
+          "date": "2026-08-02",
+          "time": "19:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-CG-005-S3",
+          "date": "2026-08-06",
+          "time": "17:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "SG-BT-003",
+      "title": "Căn hộ chung cư 91m² an ninh 24/7 - Bình Thạnh, TP.HCM",
+      "property_type": "can_ho_chung_cu",
+      "property_type_label": "Căn hộ chung cư",
+      "status": "available",
+      "price_vnd_month": 10500000,
+      "deposit_months": 1,
+      "min_lease_months": 3,
+      "area_m2": 91,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "floor": 3,
+      "total_floors": 6,
+      "max_occupants": 5,
+      "furnishing": "empty",
+      "amenities": [
+        "ban_cong",
+        "bao_ve_24_7",
+        "camera_an_ninh",
+        "nong_lanh",
+        "thang_may"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 4000,
+        "water_vnd_per_m3": 25000,
+        "water_charge_mode": "per_person_month",
+        "internet_vnd_month": 0,
+        "service_fee_vnd_month": 0,
+        "motorbike_parking_vnd_month": 150000
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": null,
+        "students_welcome": false
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "TP.HCM",
+        "district": "Bình Thạnh",
+        "ward": "Phường 13",
+        "street": "Ung Văn Khiêm",
+        "address_line": "Số 207, ngõ 131, đường Ung Văn Khiêm",
+        "full_address": "Số 207, ngõ 131, đường Ung Văn Khiêm, phường Phường 13, Bình Thạnh, TP.HCM",
+        "lat": 10.81276,
+        "lng": 106.69865,
+        "distance_to_city_center_km": 3.7
+      },
+      "nearby_places": [
+        {
+          "name": "Landmark 81",
+          "type": "landmark",
+          "distance_km": 1.0
+        },
+        {
+          "name": "ĐH Hutech",
+          "type": "university",
+          "distance_km": 1.2
+        },
+        {
+          "name": "Vincom Landmark",
+          "type": "mall",
+          "distance_km": 1.2
+        }
+      ],
+      "landlord": {
+        "id": "LL-09",
+        "name": "Chị Vũ Minh Nam",
+        "phone": "0924809188",
+        "verified": true,
+        "response_rate": 0.89,
+        "avg_response_minutes": 15
+      },
+      "rating": 4.5,
+      "review_count": 7,
+      "images": [
+        "/static/img/sg-bt-003-1.jpg",
+        "/static/img/sg-bt-003-2.jpg"
+      ],
+      "description": "Căn hộ chung cư 91m² tại Bình Thạnh, TP.HCM. Giờ giấc tự do, không chung chủ. Phòng thoáng, có cửa sổ và ban công phơi đồ.",
+      "available_from": "2026-07-31",
+      "posted_at": "2026-07-26",
+      "updated_at": "2026-07-21",
+      "viewing_slots": [
+        {
+          "slot_id": "SG-BT-003-S1",
+          "date": "2026-07-31",
+          "time": "20:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "SG-BT-003-S2",
+          "date": "2026-08-07",
+          "time": "20:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "SG-Q3-002",
+      "title": "Căn hộ chung cư 77m² mới xây, sạch sẽ - Quận 3, TP.HCM",
+      "property_type": "can_ho_chung_cu",
+      "property_type_label": "Căn hộ chung cư",
+      "status": "available",
+      "price_vnd_month": 11900000,
+      "deposit_months": 1,
+      "min_lease_months": 3,
+      "area_m2": 77,
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "floor": 1,
+      "total_floors": 5,
+      "max_occupants": 5,
+      "furnishing": "basic",
+      "amenities": [
+        "ban_cong",
+        "bep_rieng",
+        "camera_an_ninh",
+        "dieu_hoa",
+        "giuong",
+        "may_giat",
+        "thang_may",
+        "wifi"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 3800,
+        "water_vnd_per_m3": 100000,
+        "water_charge_mode": "per_m3",
+        "internet_vnd_month": 120000,
+        "service_fee_vnd_month": 0,
+        "motorbike_parking_vnd_month": 150000
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": false,
+        "shared_with_owner": false,
+        "curfew": "00:00",
+        "students_welcome": false
+      },
+      "parking": {
+        "motorbike": true,
+        "car": true
+      },
+      "location": {
+        "city": "TP.HCM",
+        "district": "Quận 3",
+        "ward": "Võ Thị Sáu",
+        "street": "Lý Chính Thắng",
+        "address_line": "Số 130, đường Lý Chính Thắng",
+        "full_address": "Số 130, đường Lý Chính Thắng, phường Võ Thị Sáu, Quận 3, TP.HCM",
+        "lat": 10.79,
+        "lng": 106.67807,
+        "distance_to_city_center_km": 2.1
+      },
+      "nearby_places": [
+        {
+          "name": "Hồ Con Rùa",
+          "type": "landmark",
+          "distance_km": 1.0
+        },
+        {
+          "name": "BV Từ Dũ",
+          "type": "hospital",
+          "distance_km": 1.4
+        },
+        {
+          "name": "ĐH Kiến trúc TP.HCM",
+          "type": "university",
+          "distance_km": 1.7
+        }
+      ],
+      "landlord": {
+        "id": "LL-10",
+        "name": "Chị Ngô Minh Linh",
+        "phone": "0923981420",
+        "verified": true,
+        "response_rate": 0.83,
+        "avg_response_minutes": 5
+      },
+      "rating": 3.6,
+      "review_count": 21,
+      "images": [
+        "/static/img/sg-q3-002-1.jpg",
+        "/static/img/sg-q3-002-2.jpg",
+        "/static/img/sg-q3-002-3.jpg",
+        "/static/img/sg-q3-002-4.jpg"
+      ],
+      "description": "Căn hộ chung cư 77m² tại Quận 3, TP.HCM. Nhà mới sơn sửa, wifi tốc độ cao đã lắp sẵn. Gần chợ và siêu thị, tiện đi lại bằng xe máy.",
+      "available_from": "2026-08-04",
+      "posted_at": "2026-06-27",
+      "updated_at": "2026-07-25",
+      "viewing_slots": [
+        {
+          "slot_id": "SG-Q3-002-S2",
+          "date": "2026-07-31",
+          "time": "17:30",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-5294"
+        },
+        {
+          "slot_id": "SG-Q3-002-S1",
+          "date": "2026-08-01",
+          "time": "17:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "SG-Q3-002-S4",
+          "date": "2026-08-03",
+          "time": "10:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "SG-Q3-002-S3",
+          "date": "2026-08-04",
+          "time": "14:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "HN-CG-006",
+      "title": "Phòng trọ 21m² mới xây, sạch sẽ - Cầu Giấy, Hà Nội",
+      "property_type": "phong_tro",
+      "property_type_label": "Phòng trọ",
+      "status": "available",
+      "price_vnd_month": 1700000,
+      "deposit_months": 1,
+      "min_lease_months": 12,
+      "area_m2": 21,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 4,
+      "total_floors": 4,
+      "max_occupants": 2,
+      "furnishing": "full",
+      "amenities": [
+        "bep_rieng",
+        "giuong",
+        "nong_lanh"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 4200,
+        "water_vnd_per_m3": 30000,
+        "water_charge_mode": "per_person_month",
+        "internet_vnd_month": 120000,
+        "service_fee_vnd_month": 100000,
+        "motorbike_parking_vnd_month": 80000
+      },
+      "rules": {
+        "pets_allowed": true,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": "23:00",
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "Hà Nội",
+        "district": "Cầu Giấy",
+        "ward": "Dịch Vọng",
+        "street": "Trần Thái Tông",
+        "address_line": "Số 42, ngõ 21, đường Trần Thái Tông",
+        "full_address": "Số 42, ngõ 21, đường Trần Thái Tông, phường Dịch Vọng, Cầu Giấy, Hà Nội",
+        "lat": 21.03671,
+        "lng": 105.80049,
+        "distance_to_city_center_km": 7.0
+      },
+      "nearby_places": [
+        {
+          "name": "ĐH Quốc Gia Hà Nội",
+          "type": "university",
+          "distance_km": 0.7
+        },
+        {
+          "name": "Big C Thăng Long",
+          "type": "supermarket",
+          "distance_km": 1.6
+        },
+        {
+          "name": "BV Giao thông Vận tải",
+          "type": "hospital",
+          "distance_km": 2.0
+        }
+      ],
+      "landlord": {
+        "id": "LL-11",
+        "name": "Chị Dương Xuân Tuấn",
+        "phone": "0975485954",
+        "verified": true,
+        "response_rate": 0.95,
+        "avg_response_minutes": 5
+      },
+      "rating": 3.5,
+      "review_count": 70,
+      "images": [
+        "/static/img/hn-cg-006-1.jpg",
+        "/static/img/hn-cg-006-2.jpg",
+        "/static/img/hn-cg-006-3.jpg",
+        "/static/img/hn-cg-006-4.jpg"
+      ],
+      "description": "Phòng trọ 21m² tại Cầu Giấy, Hà Nội. Thích hợp cho sinh viên hoặc người đi làm. Khu vực an ninh, có bảo vệ trông xe ban đêm.",
+      "available_from": "2026-08-04",
+      "posted_at": "2026-07-09",
+      "updated_at": "2026-07-24",
+      "viewing_slots": []
+    },
+    {
+      "id": "SG-Q7-003",
+      "title": "Chung cư mini 35m² gần trường đại học - Quận 7, TP.HCM",
+      "property_type": "chung_cu_mini",
+      "property_type_label": "Chung cư mini",
+      "status": "pending",
+      "price_vnd_month": 4900000,
+      "deposit_months": 1,
+      "min_lease_months": 6,
+      "area_m2": 35,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 4,
+      "total_floors": 7,
+      "max_occupants": 2,
+      "furnishing": "basic",
+      "amenities": [
+        "ban_cong",
+        "bep_rieng",
+        "camera_an_ninh",
+        "dieu_hoa",
+        "giuong",
+        "may_giat",
+        "thang_may"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 3800,
+        "water_vnd_per_m3": 120000,
+        "water_charge_mode": "per_person_month",
+        "internet_vnd_month": 80000,
+        "service_fee_vnd_month": 200000,
+        "motorbike_parking_vnd_month": 0
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": null,
+        "students_welcome": false
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "TP.HCM",
+        "district": "Quận 7",
+        "ward": "Tân Phong",
+        "street": "Nguyễn Lương Bằng",
+        "address_line": "Số 161, đường Nguyễn Lương Bằng",
+        "full_address": "Số 161, đường Nguyễn Lương Bằng, phường Tân Phong, Quận 7, TP.HCM",
+        "lat": 10.72871,
+        "lng": 106.72029,
+        "distance_to_city_center_km": 8.1
+      },
+      "nearby_places": [
+        {
+          "name": "Crescent Mall",
+          "type": "mall",
+          "distance_km": 1.2
+        },
+        {
+          "name": "ĐH RMIT",
+          "type": "university",
+          "distance_km": 1.5
+        },
+        {
+          "name": "BV FV",
+          "type": "hospital",
+          "distance_km": 2.0
+        }
+      ],
+      "landlord": {
+        "id": "LL-12",
+        "name": "Chú Lê Thanh Hà",
+        "phone": "0948110902",
+        "verified": true,
+        "response_rate": 0.8,
+        "avg_response_minutes": 120
+      },
+      "rating": 3.3,
+      "review_count": 37,
+      "images": [
+        "/static/img/sg-q7-003-1.jpg"
+      ],
+      "description": "Chung cư mini 35m² tại Quận 7, TP.HCM. Nhà mới sơn sửa, wifi tốc độ cao đã lắp sẵn. Nhà mới sơn sửa, wifi tốc độ cao đã lắp sẵn.",
+      "available_from": "2026-08-02",
+      "posted_at": "2026-06-22",
+      "updated_at": "2026-07-28",
+      "viewing_slots": []
+    },
+    {
+      "id": "HN-NT-002",
+      "title": "Căn hộ studio 32m² thang máy, hầm để xe - Nam Từ Liêm, Hà Nội",
+      "property_type": "studio",
+      "property_type_label": "Căn hộ studio",
+      "status": "available",
+      "price_vnd_month": 4100000,
+      "deposit_months": 1,
+      "min_lease_months": 6,
+      "area_m2": 32,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 2,
+      "total_floors": 2,
+      "max_occupants": 2,
+      "furnishing": "full",
+      "amenities": [
+        "ban_cong",
+        "bao_ve_24_7",
+        "bep_rieng",
+        "camera_an_ninh",
+        "gac_xep",
+        "tu_lanh",
+        "tu_quan_ao"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 3500,
+        "water_vnd_per_m3": 100000,
+        "water_charge_mode": "per_person_month",
+        "internet_vnd_month": 100000,
+        "service_fee_vnd_month": 100000,
+        "motorbike_parking_vnd_month": 80000
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": true,
+        "shared_with_owner": true,
+        "curfew": "23:00",
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "Hà Nội",
+        "district": "Nam Từ Liêm",
+        "ward": "Mễ Trì",
+        "street": "Lê Đức Thọ",
+        "address_line": "Số 123, đường Lê Đức Thọ",
+        "full_address": "Số 123, đường Lê Đức Thọ, phường Mễ Trì, Nam Từ Liêm, Hà Nội",
+        "lat": 21.02886,
+        "lng": 105.781,
+        "distance_to_city_center_km": 9.2
+      },
+      "nearby_places": [
+        {
+          "name": "Keangnam Landmark 72",
+          "type": "landmark",
+          "distance_km": 0.9
+        },
+        {
+          "name": "Vincom Skylake",
+          "type": "mall",
+          "distance_km": 1.1
+        },
+        {
+          "name": "SVĐ Mỹ Đình",
+          "type": "landmark",
+          "distance_km": 1.5
+        }
+      ],
+      "landlord": {
+        "id": "LL-13",
+        "name": "Cô Lý Đức Anh",
+        "phone": "0958101181",
+        "verified": true,
+        "response_rate": 0.89,
+        "avg_response_minutes": 120
+      },
+      "rating": 4.8,
+      "review_count": 28,
+      "images": [
+        "/static/img/hn-nt-002-1.jpg"
+      ],
+      "description": "Căn hộ studio 32m² tại Nam Từ Liêm, Hà Nội. Nhà mới sơn sửa, wifi tốc độ cao đã lắp sẵn. Khu vực an ninh, có bảo vệ trông xe ban đêm.",
+      "available_from": "2026-08-27",
+      "posted_at": "2026-07-10",
+      "updated_at": "2026-07-23",
+      "viewing_slots": [
+        {
+          "slot_id": "HN-NT-002-S2",
+          "date": "2026-08-02",
+          "time": "20:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-NT-002-S1",
+          "date": "2026-08-05",
+          "time": "14:00",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-1711"
+        },
+        {
+          "slot_id": "HN-NT-002-S3",
+          "date": "2026-08-07",
+          "time": "10:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "HN-CG-007",
+      "title": "Phòng trọ 22m² giờ giấc tự do - Cầu Giấy, Hà Nội",
+      "property_type": "phong_tro",
+      "property_type_label": "Phòng trọ",
+      "status": "available",
+      "price_vnd_month": 1900000,
+      "deposit_months": 2,
+      "min_lease_months": 6,
+      "area_m2": 22,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 1,
+      "total_floors": 3,
+      "max_occupants": 1,
+      "furnishing": "basic",
+      "amenities": [
+        "ban_cong",
+        "gac_xep",
+        "may_giat",
+        "tu_lanh",
+        "tu_quan_ao"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 2800,
+        "water_vnd_per_m3": 100000,
+        "water_charge_mode": "per_m3",
+        "internet_vnd_month": 0,
+        "service_fee_vnd_month": 0,
+        "motorbike_parking_vnd_month": 100000
+      },
+      "rules": {
+        "pets_allowed": true,
+        "cooking_allowed": true,
+        "shared_with_owner": true,
+        "curfew": null,
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "Hà Nội",
+        "district": "Cầu Giấy",
+        "ward": "Quan Hoa",
+        "street": "Xuân Thủy",
+        "address_line": "Số 29, đường Xuân Thủy",
+        "full_address": "Số 29, đường Xuân Thủy, phường Quan Hoa, Cầu Giấy, Hà Nội",
+        "lat": 21.03715,
+        "lng": 105.79471,
+        "distance_to_city_center_km": 6.3
+      },
+      "nearby_places": [
+        {
+          "name": "ĐH Quốc Gia Hà Nội",
+          "type": "university",
+          "distance_km": 0.8
+        },
+        {
+          "name": "Công viên Cầu Giấy",
+          "type": "park",
+          "distance_km": 1.1
+        },
+        {
+          "name": "BV Giao thông Vận tải",
+          "type": "hospital",
+          "distance_km": 1.7
+        }
+      ],
+      "landlord": {
+        "id": "LL-14",
+        "name": "Chú Phạm Thanh Lan",
+        "phone": "0983276001",
+        "verified": true,
+        "response_rate": 0.94,
+        "avg_response_minutes": 5
+      },
+      "rating": 3.5,
+      "review_count": 23,
+      "images": [
+        "/static/img/hn-cg-007-1.jpg",
+        "/static/img/hn-cg-007-2.jpg",
+        "/static/img/hn-cg-007-3.jpg",
+        "/static/img/hn-cg-007-4.jpg"
+      ],
+      "description": "Phòng trọ 22m² tại Cầu Giấy, Hà Nội. Gần chợ và siêu thị, tiện đi lại bằng xe máy. Khu vực an ninh, có bảo vệ trông xe ban đêm.",
+      "available_from": "2026-08-04",
+      "posted_at": "2026-07-08",
+      "updated_at": "2026-07-28",
+      "viewing_slots": [
+        {
+          "slot_id": "HN-CG-007-S3",
+          "date": "2026-07-30",
+          "time": "19:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-CG-007-S1",
+          "date": "2026-08-05",
+          "time": "16:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-CG-007-S2",
+          "date": "2026-08-06",
+          "time": "17:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "DN-HC-003",
+      "title": "Căn hộ chung cư 88m² ban công thoáng - Hải Châu, Đà Nẵng",
+      "property_type": "can_ho_chung_cu",
+      "property_type_label": "Căn hộ chung cư",
+      "status": "pending",
+      "price_vnd_month": 9200000,
+      "deposit_months": 2,
+      "min_lease_months": 3,
+      "area_m2": 88,
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "floor": 1,
+      "total_floors": 6,
+      "max_occupants": 5,
+      "furnishing": "full",
+      "amenities": [
+        "ban_cong",
+        "bep_rieng",
+        "camera_an_ninh",
+        "dieu_hoa",
+        "giuong",
+        "thang_may",
+        "tu_lanh",
+        "wifi"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 3500,
+        "water_vnd_per_m3": 100000,
+        "water_charge_mode": "per_m3",
+        "internet_vnd_month": 0,
+        "service_fee_vnd_month": 200000,
+        "motorbike_parking_vnd_month": 100000
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": null,
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": true
+      },
+      "location": {
+        "city": "Đà Nẵng",
+        "district": "Hải Châu",
+        "ward": "Thanh Bình",
+        "street": "Nguyễn Văn Linh",
+        "address_line": "Số 124, đường Nguyễn Văn Linh",
+        "full_address": "Số 124, đường Nguyễn Văn Linh, phường Thanh Bình, Hải Châu, Đà Nẵng",
+        "lat": 16.06489,
+        "lng": 108.21882,
+        "distance_to_city_center_km": 0.9
+      },
+      "nearby_places": [
+        {
+          "name": "Chợ Hàn",
+          "type": "market",
+          "distance_km": 0.8
+        },
+        {
+          "name": "Cầu Rồng",
+          "type": "landmark",
+          "distance_km": 1.3
+        },
+        {
+          "name": "BV Đà Nẵng",
+          "type": "hospital",
+          "distance_km": 1.4
+        }
+      ],
+      "landlord": {
+        "id": "LL-15",
+        "name": "Anh Đỗ Thu Dũng",
+        "phone": "0935986933",
+        "verified": true,
+        "response_rate": 0.73,
+        "avg_response_minutes": 120
+      },
+      "rating": 4.8,
+      "review_count": 1,
+      "images": [
+        "/static/img/dn-hc-003-1.jpg",
+        "/static/img/dn-hc-003-2.jpg",
+        "/static/img/dn-hc-003-3.jpg",
+        "/static/img/dn-hc-003-4.jpg"
+      ],
+      "description": "Căn hộ chung cư 88m² tại Hải Châu, Đà Nẵng. Phòng thoáng, có cửa sổ và ban công phơi đồ. Phòng thoáng, có cửa sổ và ban công phơi đồ.",
+      "available_from": "2026-08-07",
+      "posted_at": "2026-07-04",
+      "updated_at": "2026-07-21",
+      "viewing_slots": [
+        {
+          "slot_id": "DN-HC-003-S1",
+          "date": "2026-07-31",
+          "time": "10:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "DN-HC-003-S2",
+          "date": "2026-08-04",
+          "time": "17:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "SG-Q7-004",
+      "title": "Căn hộ chung cư 95m² view thành phố - Quận 7, TP.HCM",
+      "property_type": "can_ho_chung_cu",
+      "property_type_label": "Căn hộ chung cư",
+      "status": "available",
+      "price_vnd_month": 11500000,
+      "deposit_months": 2,
+      "min_lease_months": 12,
+      "area_m2": 95,
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "floor": 2,
+      "total_floors": 2,
+      "max_occupants": 4,
+      "furnishing": "basic",
+      "amenities": [
+        "gac_xep",
+        "giuong",
+        "thang_may",
+        "tu_quan_ao",
+        "wifi"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 4000,
+        "water_vnd_per_m3": 30000,
+        "water_charge_mode": "per_person_month",
+        "internet_vnd_month": 80000,
+        "service_fee_vnd_month": 100000,
+        "motorbike_parking_vnd_month": 150000
+      },
+      "rules": {
+        "pets_allowed": true,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": "00:00",
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": true
+      },
+      "location": {
+        "city": "TP.HCM",
+        "district": "Quận 7",
+        "ward": "Phú Mỹ",
+        "street": "Nguyễn Lương Bằng",
+        "address_line": "Số 73, đường Nguyễn Lương Bằng",
+        "full_address": "Số 73, đường Nguyễn Lương Bằng, phường Phú Mỹ, Quận 7, TP.HCM",
+        "lat": 10.74249,
+        "lng": 106.72771,
+        "distance_to_city_center_km": 8.5
+      },
+      "nearby_places": [
+        {
+          "name": "ĐH RMIT",
+          "type": "university",
+          "distance_km": 1.3
+        },
+        {
+          "name": "Crescent Mall",
+          "type": "mall",
+          "distance_km": 1.7
+        },
+        {
+          "name": "BV FV",
+          "type": "hospital",
+          "distance_km": 2.0
+        }
+      ],
+      "landlord": {
+        "id": "LL-16",
+        "name": "Anh Nguyễn Thanh Hương",
+        "phone": "0930726300",
+        "verified": true,
+        "response_rate": 0.87,
+        "avg_response_minutes": 15
+      },
+      "rating": 4.7,
+      "review_count": 69,
+      "images": [
+        "/static/img/sg-q7-004-1.jpg",
+        "/static/img/sg-q7-004-2.jpg",
+        "/static/img/sg-q7-004-3.jpg"
+      ],
+      "description": "Căn hộ chung cư 95m² tại Quận 7, TP.HCM. Nhà mới sơn sửa, wifi tốc độ cao đã lắp sẵn. Thích hợp cho sinh viên hoặc người đi làm.",
+      "available_from": "2026-08-07",
+      "posted_at": "2026-07-28",
+      "updated_at": "2026-07-27",
+      "viewing_slots": [
+        {
+          "slot_id": "SG-Q7-004-S1",
+          "date": "2026-07-29",
+          "time": "17:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "SG-Q7-004-S2",
+          "date": "2026-08-03",
+          "time": "10:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "SG-Q7-004-S3",
+          "date": "2026-08-05",
+          "time": "14:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "DN-ST-001",
+      "title": "Phòng trọ 25m² đầy đủ nội thất - Sơn Trà, Đà Nẵng",
+      "property_type": "phong_tro",
+      "property_type_label": "Phòng trọ",
+      "status": "pending",
+      "price_vnd_month": 2300000,
+      "deposit_months": 2,
+      "min_lease_months": 3,
+      "area_m2": 25,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 9,
+      "total_floors": 9,
+      "max_occupants": 1,
+      "furnishing": "full",
+      "amenities": [
+        "bep_rieng",
+        "camera_an_ninh",
+        "gac_xep",
+        "thang_may",
+        "tu_quan_ao"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 4200,
+        "water_vnd_per_m3": 120000,
+        "water_charge_mode": "per_person_month",
+        "internet_vnd_month": 120000,
+        "service_fee_vnd_month": 0,
+        "motorbike_parking_vnd_month": 0
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": null,
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "Đà Nẵng",
+        "district": "Sơn Trà",
+        "ward": "Phước Mỹ",
+        "street": "Dương Đình Nghệ",
+        "address_line": "Số 116, ngõ 316, đường Dương Đình Nghệ",
+        "full_address": "Số 116, ngõ 316, đường Dương Đình Nghệ, phường Phước Mỹ, Sơn Trà, Đà Nẵng",
+        "lat": 16.07944,
+        "lng": 108.23953,
+        "distance_to_city_center_km": 3.8
+      },
+      "nearby_places": [
+        {
+          "name": "Biển Phạm Văn Đồng",
+          "type": "beach",
+          "distance_km": 0.5
+        },
+        {
+          "name": "Vincom Ngô Quyền",
+          "type": "mall",
+          "distance_km": 1.1
+        },
+        {
+          "name": "Cầu Sông Hàn",
+          "type": "landmark",
+          "distance_km": 1.7
+        }
+      ],
+      "landlord": {
+        "id": "LL-17",
+        "name": "Anh Đặng Ngọc Tuấn",
+        "phone": "0911651494",
+        "verified": true,
+        "response_rate": 0.63,
+        "avg_response_minutes": 120
+      },
+      "rating": 3.2,
+      "review_count": 46,
+      "images": [
+        "/static/img/dn-st-001-1.jpg",
+        "/static/img/dn-st-001-2.jpg",
+        "/static/img/dn-st-001-3.jpg",
+        "/static/img/dn-st-001-4.jpg"
+      ],
+      "description": "Phòng trọ 25m² tại Sơn Trà, Đà Nẵng. Giờ giấc tự do, không chung chủ. Thích hợp cho sinh viên hoặc người đi làm.",
+      "available_from": "2026-08-11",
+      "posted_at": "2026-07-14",
+      "updated_at": "2026-07-25",
+      "viewing_slots": [
+        {
+          "slot_id": "DN-ST-001-S3",
+          "date": "2026-08-01",
+          "time": "19:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "DN-ST-001-S2",
+          "date": "2026-08-03",
+          "time": "14:00",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-6511"
+        },
+        {
+          "slot_id": "DN-ST-001-S4",
+          "date": "2026-08-04",
+          "time": "09:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "DN-ST-001-S1",
+          "date": "2026-08-07",
+          "time": "19:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "HN-HD-001",
+      "title": "Phòng trọ 27m² khu dân cư yên tĩnh - Hà Đông, Hà Nội",
+      "property_type": "phong_tro",
+      "property_type_label": "Phòng trọ",
+      "status": "available",
+      "price_vnd_month": 1700000,
+      "deposit_months": 1,
+      "min_lease_months": 12,
+      "area_m2": 27,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 4,
+      "total_floors": 5,
+      "max_occupants": 1,
+      "furnishing": "full",
+      "amenities": [
+        "bep_rieng",
+        "gac_xep",
+        "giuong",
+        "may_giat",
+        "tu_lanh"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 3500,
+        "water_vnd_per_m3": 100000,
+        "water_charge_mode": "per_m3",
+        "internet_vnd_month": 100000,
+        "service_fee_vnd_month": 0,
+        "motorbike_parking_vnd_month": 150000
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": "23:00",
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "Hà Nội",
+        "district": "Hà Đông",
+        "ward": "Văn Quán",
+        "street": "Quang Trung",
+        "address_line": "Số 223, đường Quang Trung",
+        "full_address": "Số 223, đường Quang Trung, phường Văn Quán, Hà Đông, Hà Nội",
+        "lat": 20.97241,
+        "lng": 105.78582,
+        "distance_to_city_center_km": 11.2
+      },
+      "nearby_places": [
+        {
+          "name": "Chợ Hà Đông",
+          "type": "market",
+          "distance_km": 1.0
+        },
+        {
+          "name": "ĐH Kiến trúc Hà Nội",
+          "type": "university",
+          "distance_km": 1.5
+        },
+        {
+          "name": "Aeon Mall Hà Đông",
+          "type": "mall",
+          "distance_km": 2.3
+        }
+      ],
+      "landlord": {
+        "id": "LL-18",
+        "name": "Chú Dương Hải Phúc",
+        "phone": "0985965866",
+        "verified": true,
+        "response_rate": 0.8,
+        "avg_response_minutes": 120
+      },
+      "rating": 4.8,
+      "review_count": 33,
+      "images": [
+        "/static/img/hn-hd-001-1.jpg"
+      ],
+      "description": "Phòng trọ 27m² tại Hà Đông, Hà Nội. Thích hợp cho sinh viên hoặc người đi làm. Khu vực an ninh, có bảo vệ trông xe ban đêm.",
+      "available_from": "2026-07-29",
+      "posted_at": "2026-06-29",
+      "updated_at": "2026-07-21",
+      "viewing_slots": []
+    },
+    {
+      "id": "SG-Q7-005",
+      "title": "Căn hộ dịch vụ 40m² view thành phố - Quận 7, TP.HCM",
+      "property_type": "can_ho_dich_vu",
+      "property_type_label": "Căn hộ dịch vụ",
+      "status": "pending",
+      "price_vnd_month": 9200000,
+      "deposit_months": 1,
+      "min_lease_months": 3,
+      "area_m2": 40,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 6,
+      "total_floors": 8,
+      "max_occupants": 3,
+      "furnishing": "basic",
+      "amenities": [
+        "bao_ve_24_7",
+        "bep_rieng",
+        "camera_an_ninh",
+        "dieu_hoa",
+        "giuong",
+        "thang_may",
+        "tu_quan_ao"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 3500,
+        "water_vnd_per_m3": 120000,
+        "water_charge_mode": "per_person_month",
+        "internet_vnd_month": 100000,
+        "service_fee_vnd_month": 150000,
+        "motorbike_parking_vnd_month": 0
+      },
+      "rules": {
+        "pets_allowed": true,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": null,
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "TP.HCM",
+        "district": "Quận 7",
+        "ward": "Tân Phú",
+        "street": "Nguyễn Lương Bằng",
+        "address_line": "Số 135, hẻm 277, đường Nguyễn Lương Bằng",
+        "full_address": "Số 135, hẻm 277, đường Nguyễn Lương Bằng, phường Tân Phú, Quận 7, TP.HCM",
+        "lat": 10.72522,
+        "lng": 106.72059,
+        "distance_to_city_center_km": 8.4
+      },
+      "nearby_places": [
+        {
+          "name": "ĐH RMIT",
+          "type": "university",
+          "distance_km": 1.4
+        },
+        {
+          "name": "Crescent Mall",
+          "type": "mall",
+          "distance_km": 1.7
+        },
+        {
+          "name": "BV FV",
+          "type": "hospital",
+          "distance_km": 2.4
+        }
+      ],
+      "landlord": {
+        "id": "LL-19",
+        "name": "Chị Lý Thị Phúc",
+        "phone": "0913544489",
+        "verified": true,
+        "response_rate": 0.9,
+        "avg_response_minutes": 120
+      },
+      "rating": 4.8,
+      "review_count": 31,
+      "images": [
+        "/static/img/sg-q7-005-1.jpg",
+        "/static/img/sg-q7-005-2.jpg"
+      ],
+      "description": "Căn hộ dịch vụ 40m² tại Quận 7, TP.HCM. Phòng thoáng, có cửa sổ và ban công phơi đồ. Chủ nhà thân thiện, hỗ trợ đăng ký tạm trú.",
+      "available_from": "2026-08-02",
+      "posted_at": "2026-07-04",
+      "updated_at": "2026-07-24",
+      "viewing_slots": [
+        {
+          "slot_id": "SG-Q7-005-S4",
+          "date": "2026-07-29",
+          "time": "14:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "SG-Q7-005-S1",
+          "date": "2026-07-30",
+          "time": "10:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "SG-Q7-005-S3",
+          "date": "2026-08-02",
+          "time": "16:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "SG-Q7-005-S2",
+          "date": "2026-08-02",
+          "time": "20:00",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-4906"
+        }
+      ]
+    },
+    {
+      "id": "DN-HC-004",
+      "title": "Căn hộ dịch vụ 50m² thang máy, hầm để xe - Hải Châu, Đà Nẵng",
+      "property_type": "can_ho_dich_vu",
+      "property_type_label": "Căn hộ dịch vụ",
+      "status": "rented",
+      "price_vnd_month": 6600000,
+      "deposit_months": 3,
+      "min_lease_months": 3,
+      "area_m2": 50,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 5,
+      "total_floors": 7,
+      "max_occupants": 3,
+      "furnishing": "full",
+      "amenities": [
+        "giuong",
+        "may_giat",
+        "nong_lanh",
+        "thang_may",
+        "tu_lanh",
+        "tu_quan_ao",
+        "wifi"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 2800,
+        "water_vnd_per_m3": 30000,
+        "water_charge_mode": "per_m3",
+        "internet_vnd_month": 80000,
+        "service_fee_vnd_month": 150000,
+        "motorbike_parking_vnd_month": 100000
+      },
+      "rules": {
+        "pets_allowed": true,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": "00:00",
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": true
+      },
+      "location": {
+        "city": "Đà Nẵng",
+        "district": "Hải Châu",
+        "ward": "Thanh Bình",
+        "street": "Trưng Nữ Vương",
+        "address_line": "Số 9, đường Trưng Nữ Vương",
+        "full_address": "Số 9, đường Trưng Nữ Vương, phường Thanh Bình, Hải Châu, Đà Nẵng",
+        "lat": 16.06994,
+        "lng": 108.22798,
+        "distance_to_city_center_km": 1.2
+      },
+      "nearby_places": [
+        {
+          "name": "Chợ Hàn",
+          "type": "market",
+          "distance_km": 0.9
+        },
+        {
+          "name": "Cầu Rồng",
+          "type": "landmark",
+          "distance_km": 1.0
+        },
+        {
+          "name": "BV Đà Nẵng",
+          "type": "hospital",
+          "distance_km": 1.2
+        }
+      ],
+      "landlord": {
+        "id": "LL-20",
+        "name": "Chị Lê Thu Nam",
+        "phone": "0920915418",
+        "verified": false,
+        "response_rate": 0.7,
+        "avg_response_minutes": 30
+      },
+      "rating": 3.3,
+      "review_count": 34,
+      "images": [
+        "/static/img/dn-hc-004-1.jpg",
+        "/static/img/dn-hc-004-2.jpg"
+      ],
+      "description": "Căn hộ dịch vụ 50m² tại Hải Châu, Đà Nẵng. Thích hợp cho sinh viên hoặc người đi làm. Phòng thoáng, có cửa sổ và ban công phơi đồ.",
+      "available_from": "2026-08-04",
+      "posted_at": "2026-07-11",
+      "updated_at": "2026-07-27",
+      "viewing_slots": []
+    },
+    {
+      "id": "SG-BT-004",
+      "title": "Căn hộ dịch vụ 50m² an ninh 24/7 - Bình Thạnh, TP.HCM",
+      "property_type": "can_ho_dich_vu",
+      "property_type_label": "Căn hộ dịch vụ",
+      "status": "rented",
+      "price_vnd_month": 8600000,
+      "deposit_months": 1,
+      "min_lease_months": 6,
+      "area_m2": 50,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 7,
+      "total_floors": 7,
+      "max_occupants": 2,
+      "furnishing": "basic",
+      "amenities": [
+        "bao_ve_24_7",
+        "bep_rieng",
+        "dieu_hoa",
+        "giuong",
+        "nong_lanh",
+        "thang_may",
+        "tu_quan_ao"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 2800,
+        "water_vnd_per_m3": 25000,
+        "water_charge_mode": "per_m3",
+        "internet_vnd_month": 120000,
+        "service_fee_vnd_month": 150000,
+        "motorbike_parking_vnd_month": 150000
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": null,
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": true
+      },
+      "location": {
+        "city": "TP.HCM",
+        "district": "Bình Thạnh",
+        "ward": "Phường 13",
+        "street": "Ung Văn Khiêm",
+        "address_line": "Số 216, đường Ung Văn Khiêm",
+        "full_address": "Số 216, đường Ung Văn Khiêm, phường Phường 13, Bình Thạnh, TP.HCM",
+        "lat": 10.7951,
+        "lng": 106.71324,
+        "distance_to_city_center_km": 3.9
+      },
+      "nearby_places": [
+        {
+          "name": "ĐH Hutech",
+          "type": "university",
+          "distance_km": 1.0
+        },
+        {
+          "name": "Vincom Landmark",
+          "type": "mall",
+          "distance_km": 1.1
+        },
+        {
+          "name": "Landmark 81",
+          "type": "landmark",
+          "distance_km": 1.4
+        }
+      ],
+      "landlord": {
+        "id": "LL-21",
+        "name": "Chú Lê Minh Tuấn",
+        "phone": "0926919239",
+        "verified": true,
+        "response_rate": 0.75,
+        "avg_response_minutes": 60
+      },
+      "rating": 4.3,
+      "review_count": 45,
+      "images": [
+        "/static/img/sg-bt-004-1.jpg",
+        "/static/img/sg-bt-004-2.jpg"
+      ],
+      "description": "Căn hộ dịch vụ 50m² tại Bình Thạnh, TP.HCM. Chủ nhà thân thiện, hỗ trợ đăng ký tạm trú. Khu vực an ninh, có bảo vệ trông xe ban đêm.",
+      "available_from": "2026-08-11",
+      "posted_at": "2026-07-17",
+      "updated_at": "2026-07-22",
+      "viewing_slots": []
+    },
+    {
+      "id": "HN-HB-004",
+      "title": "Căn hộ dịch vụ 53m² đầy đủ nội thất - Hai Bà Trưng, Hà Nội",
+      "property_type": "can_ho_dich_vu",
+      "property_type_label": "Căn hộ dịch vụ",
+      "status": "available",
+      "price_vnd_month": 6300000,
+      "deposit_months": 1,
+      "min_lease_months": 3,
+      "area_m2": 53,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 1,
+      "total_floors": 3,
+      "max_occupants": 2,
+      "furnishing": "basic",
+      "amenities": [
+        "giuong",
+        "may_giat",
+        "nong_lanh",
+        "thang_may",
+        "tu_lanh"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 2800,
+        "water_vnd_per_m3": 25000,
+        "water_charge_mode": "per_m3",
+        "internet_vnd_month": 100000,
+        "service_fee_vnd_month": 0,
+        "motorbike_parking_vnd_month": 0
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": true,
+        "shared_with_owner": true,
+        "curfew": "00:00",
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": true
+      },
+      "location": {
+        "city": "Hà Nội",
+        "district": "Hai Bà Trưng",
+        "ward": "Bách Khoa",
+        "street": "Minh Khai",
+        "address_line": "Số 90, ngõ 202, đường Minh Khai",
+        "full_address": "Số 90, ngõ 202, đường Minh Khai, phường Bách Khoa, Hai Bà Trưng, Hà Nội",
+        "lat": 20.99996,
+        "lng": 105.8591,
+        "distance_to_city_center_km": 3.3
+      },
+      "nearby_places": [
+        {
+          "name": "ĐH Bách Khoa Hà Nội",
+          "type": "university",
+          "distance_km": 0.4
+        },
+        {
+          "name": "BV Bạch Mai",
+          "type": "hospital",
+          "distance_km": 1.1
+        },
+        {
+          "name": "Times City",
+          "type": "mall",
+          "distance_km": 1.9
+        }
+      ],
+      "landlord": {
+        "id": "LL-22",
+        "name": "Chị Nguyễn Thị Khánh",
+        "phone": "0966923013",
+        "verified": true,
+        "response_rate": 0.78,
+        "avg_response_minutes": 45
+      },
+      "rating": 4.2,
+      "review_count": 13,
+      "images": [
+        "/static/img/hn-hb-004-1.jpg",
+        "/static/img/hn-hb-004-2.jpg",
+        "/static/img/hn-hb-004-3.jpg"
+      ],
+      "description": "Căn hộ dịch vụ 53m² tại Hai Bà Trưng, Hà Nội. Thích hợp cho sinh viên hoặc người đi làm. Chủ nhà thân thiện, hỗ trợ đăng ký tạm trú.",
+      "available_from": "2026-07-29",
+      "posted_at": "2026-07-03",
+      "updated_at": "2026-07-24",
+      "viewing_slots": [
+        {
+          "slot_id": "HN-HB-004-S1",
+          "date": "2026-07-30",
+          "time": "19:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-HB-004-S2",
+          "date": "2026-08-07",
+          "time": "14:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "DN-LC-002",
+      "title": "Chung cư mini 32m² cửa sổ lớn đón nắng - Liên Chiểu, Đà Nẵng",
+      "property_type": "chung_cu_mini",
+      "property_type_label": "Chung cư mini",
+      "status": "pending",
+      "price_vnd_month": 2900000,
+      "deposit_months": 2,
+      "min_lease_months": 12,
+      "area_m2": 32,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 1,
+      "total_floors": 8,
+      "max_occupants": 3,
+      "furnishing": "basic",
+      "amenities": [
+        "ban_cong",
+        "bao_ve_24_7",
+        "dieu_hoa",
+        "thang_may",
+        "tu_lanh",
+        "wifi"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 4000,
+        "water_vnd_per_m3": 30000,
+        "water_charge_mode": "per_m3",
+        "internet_vnd_month": 120000,
+        "service_fee_vnd_month": 100000,
+        "motorbike_parking_vnd_month": 100000
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": false,
+        "shared_with_owner": false,
+        "curfew": null,
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "Đà Nẵng",
+        "district": "Liên Chiểu",
+        "ward": "Hòa Khánh Bắc",
+        "street": "Âu Cơ",
+        "address_line": "Số 168, đường Âu Cơ",
+        "full_address": "Số 168, đường Âu Cơ, phường Hòa Khánh Bắc, Liên Chiểu, Đà Nẵng",
+        "lat": 16.06479,
+        "lng": 108.15332,
+        "distance_to_city_center_km": 11.1
+      },
+      "nearby_places": [
+        {
+          "name": "ĐH Bách Khoa Đà Nẵng",
+          "type": "university",
+          "distance_km": 0.8
+        },
+        {
+          "name": "Chợ Hòa Khánh",
+          "type": "market",
+          "distance_km": 0.9
+        },
+        {
+          "name": "KCN Hòa Khánh",
+          "type": "landmark",
+          "distance_km": 1.9
+        }
+      ],
+      "landlord": {
+        "id": "LL-23",
+        "name": "Anh Hoàng Quang Hương",
+        "phone": "0916978642",
+        "verified": true,
+        "response_rate": 0.64,
+        "avg_response_minutes": 45
+      },
+      "rating": 4.0,
+      "review_count": 27,
+      "images": [
+        "/static/img/dn-lc-002-1.jpg",
+        "/static/img/dn-lc-002-2.jpg",
+        "/static/img/dn-lc-002-3.jpg",
+        "/static/img/dn-lc-002-4.jpg"
+      ],
+      "description": "Chung cư mini 32m² tại Liên Chiểu, Đà Nẵng. Phòng thoáng, có cửa sổ và ban công phơi đồ. Phòng thoáng, có cửa sổ và ban công phơi đồ.",
+      "available_from": "2026-08-18",
+      "posted_at": "2026-06-27",
+      "updated_at": "2026-07-28",
+      "viewing_slots": [
+        {
+          "slot_id": "DN-LC-002-S2",
+          "date": "2026-08-02",
+          "time": "17:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "DN-LC-002-S3",
+          "date": "2026-08-03",
+          "time": "17:30",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-7346"
+        },
+        {
+          "slot_id": "DN-LC-002-S1",
+          "date": "2026-08-07",
+          "time": "16:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "DN-LC-003",
+      "title": "Chung cư mini 47m² khu dân cư yên tĩnh - Liên Chiểu, Đà Nẵng",
+      "property_type": "chung_cu_mini",
+      "property_type_label": "Chung cư mini",
+      "status": "available",
+      "price_vnd_month": 2900000,
+      "deposit_months": 1,
+      "min_lease_months": 12,
+      "area_m2": 47,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 9,
+      "total_floors": 9,
+      "max_occupants": 3,
+      "furnishing": "empty",
+      "amenities": [
+        "bep_rieng",
+        "thang_may",
+        "wifi"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 2800,
+        "water_vnd_per_m3": 25000,
+        "water_charge_mode": "per_m3",
+        "internet_vnd_month": 120000,
+        "service_fee_vnd_month": 0,
+        "motorbike_parking_vnd_month": 100000
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": false,
+        "shared_with_owner": false,
+        "curfew": null,
+        "students_welcome": false
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "Đà Nẵng",
+        "district": "Liên Chiểu",
+        "ward": "Hòa Khánh Bắc",
+        "street": "Tôn Đức Thắng",
+        "address_line": "Số 208, đường Tôn Đức Thắng",
+        "full_address": "Số 208, đường Tôn Đức Thắng, phường Hòa Khánh Bắc, Liên Chiểu, Đà Nẵng",
+        "lat": 16.06323,
+        "lng": 108.15818,
+        "distance_to_city_center_km": 12.5
+      },
+      "nearby_places": [
+        {
+          "name": "ĐH Bách Khoa Đà Nẵng",
+          "type": "university",
+          "distance_km": 0.6
+        },
+        {
+          "name": "Chợ Hòa Khánh",
+          "type": "market",
+          "distance_km": 0.9
+        },
+        {
+          "name": "KCN Hòa Khánh",
+          "type": "landmark",
+          "distance_km": 1.7
+        }
+      ],
+      "landlord": {
+        "id": "LL-01",
+        "name": "Chú Bùi Xuân Lan",
+        "phone": "0913903056",
+        "verified": false,
+        "response_rate": 0.7,
+        "avg_response_minutes": 10
+      },
+      "rating": 4.7,
+      "review_count": 18,
+      "images": [
+        "/static/img/dn-lc-003-1.jpg",
+        "/static/img/dn-lc-003-2.jpg",
+        "/static/img/dn-lc-003-3.jpg"
+      ],
+      "description": "Chung cư mini 47m² tại Liên Chiểu, Đà Nẵng. Chủ nhà thân thiện, hỗ trợ đăng ký tạm trú. Phòng thoáng, có cửa sổ và ban công phơi đồ.",
+      "available_from": "2026-08-18",
+      "posted_at": "2026-07-26",
+      "updated_at": "2026-07-24",
+      "viewing_slots": [
+        {
+          "slot_id": "DN-LC-003-S1",
+          "date": "2026-08-03",
+          "time": "14:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "DN-LC-003-S2",
+          "date": "2026-08-06",
+          "time": "10:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "SG-Q7-006",
+      "title": "Phòng trọ 19m² bếp riêng rộng rãi - Quận 7, TP.HCM",
+      "property_type": "phong_tro",
+      "property_type_label": "Phòng trọ",
+      "status": "available",
+      "price_vnd_month": 2800000,
+      "deposit_months": 1,
+      "min_lease_months": 6,
+      "area_m2": 19,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 7,
+      "total_floors": 9,
+      "max_occupants": 2,
+      "furnishing": "full",
+      "amenities": [
+        "giuong",
+        "nong_lanh",
+        "thang_may",
+        "tu_quan_ao"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 3800,
+        "water_vnd_per_m3": 100000,
+        "water_charge_mode": "per_person_month",
+        "internet_vnd_month": 0,
+        "service_fee_vnd_month": 0,
+        "motorbike_parking_vnd_month": 80000
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": false,
+        "shared_with_owner": false,
+        "curfew": null,
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "TP.HCM",
+        "district": "Quận 7",
+        "ward": "Tân Phong",
+        "street": "Huỳnh Tấn Phát",
+        "address_line": "Số 121, đường Huỳnh Tấn Phát",
+        "full_address": "Số 121, đường Huỳnh Tấn Phát, phường Tân Phong, Quận 7, TP.HCM",
+        "lat": 10.73595,
+        "lng": 106.72814,
+        "distance_to_city_center_km": 8.6
+      },
+      "nearby_places": [
+        {
+          "name": "ĐH RMIT",
+          "type": "university",
+          "distance_km": 1.1
+        },
+        {
+          "name": "Crescent Mall",
+          "type": "mall",
+          "distance_km": 1.3
+        },
+        {
+          "name": "BV FV",
+          "type": "hospital",
+          "distance_km": 1.6
+        }
+      ],
+      "landlord": {
+        "id": "LL-02",
+        "name": "Chú Lý Quang Nam",
+        "phone": "0949340147",
+        "verified": true,
+        "response_rate": 0.96,
+        "avg_response_minutes": 5
+      },
+      "rating": 4.5,
+      "review_count": 41,
+      "images": [
+        "/static/img/sg-q7-006-1.jpg",
+        "/static/img/sg-q7-006-2.jpg"
+      ],
+      "description": "Phòng trọ 19m² tại Quận 7, TP.HCM. Nhà mới sơn sửa, wifi tốc độ cao đã lắp sẵn. Nhà mới sơn sửa, wifi tốc độ cao đã lắp sẵn.",
+      "available_from": "2026-08-02",
+      "posted_at": "2026-06-29",
+      "updated_at": "2026-07-24",
+      "viewing_slots": [
+        {
+          "slot_id": "SG-Q7-006-S2",
+          "date": "2026-07-29",
+          "time": "10:30",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-9477"
+        },
+        {
+          "slot_id": "SG-Q7-006-S1",
+          "date": "2026-08-07",
+          "time": "16:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "DN-ST-002",
+      "title": "Căn hộ dịch vụ 67m² view thành phố - Sơn Trà, Đà Nẵng",
+      "property_type": "can_ho_dich_vu",
+      "property_type_label": "Căn hộ dịch vụ",
+      "status": "available",
+      "price_vnd_month": 5800000,
+      "deposit_months": 3,
+      "min_lease_months": 12,
+      "area_m2": 67,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 3,
+      "total_floors": 5,
+      "max_occupants": 3,
+      "furnishing": "empty",
+      "amenities": [
+        "dieu_hoa",
+        "nong_lanh",
+        "thang_may"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 3500,
+        "water_vnd_per_m3": 25000,
+        "water_charge_mode": "per_m3",
+        "internet_vnd_month": 80000,
+        "service_fee_vnd_month": 150000,
+        "motorbike_parking_vnd_month": 150000
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": true,
+        "shared_with_owner": true,
+        "curfew": "23:00",
+        "students_welcome": false
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "Đà Nẵng",
+        "district": "Sơn Trà",
+        "ward": "An Hải Bắc",
+        "street": "Hồ Nghinh",
+        "address_line": "Số 182, hẻm 486, đường Hồ Nghinh",
+        "full_address": "Số 182, hẻm 486, đường Hồ Nghinh, phường An Hải Bắc, Sơn Trà, Đà Nẵng",
+        "lat": 16.06296,
+        "lng": 108.2375,
+        "distance_to_city_center_km": 3.4
+      },
+      "nearby_places": [
+        {
+          "name": "Biển Phạm Văn Đồng",
+          "type": "beach",
+          "distance_km": 0.5
+        },
+        {
+          "name": "Vincom Ngô Quyền",
+          "type": "mall",
+          "distance_km": 1.3
+        },
+        {
+          "name": "Cầu Sông Hàn",
+          "type": "landmark",
+          "distance_km": 1.4
+        }
+      ],
+      "landlord": {
+        "id": "LL-03",
+        "name": "Cô Ngô Thị Dũng",
+        "phone": "0988694591",
+        "verified": true,
+        "response_rate": 0.77,
+        "avg_response_minutes": 10
+      },
+      "rating": 4.4,
+      "review_count": 42,
+      "images": [
+        "/static/img/dn-st-002-1.jpg",
+        "/static/img/dn-st-002-2.jpg",
+        "/static/img/dn-st-002-3.jpg",
+        "/static/img/dn-st-002-4.jpg"
+      ],
+      "description": "Căn hộ dịch vụ 67m² tại Sơn Trà, Đà Nẵng. Thích hợp cho sinh viên hoặc người đi làm. Thích hợp cho sinh viên hoặc người đi làm.",
+      "available_from": "2026-08-18",
+      "posted_at": "2026-07-01",
+      "updated_at": "2026-07-27",
+      "viewing_slots": [
+        {
+          "slot_id": "DN-ST-002-S3",
+          "date": "2026-07-30",
+          "time": "19:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "DN-ST-002-S2",
+          "date": "2026-08-04",
+          "time": "17:30",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-2320"
+        },
+        {
+          "slot_id": "DN-ST-002-S1",
+          "date": "2026-08-07",
+          "time": "09:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    },
+    {
+      "id": "SG-Q3-003",
+      "title": "Phòng trọ 21m² khu dân cư yên tĩnh - Quận 3, TP.HCM",
+      "property_type": "phong_tro",
+      "property_type_label": "Phòng trọ",
+      "status": "pending",
+      "price_vnd_month": 3700000,
+      "deposit_months": 1,
+      "min_lease_months": 3,
+      "area_m2": 21,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 3,
+      "total_floors": 3,
+      "max_occupants": 2,
+      "furnishing": "full",
+      "amenities": [
+        "ban_cong",
+        "camera_an_ninh",
+        "gac_xep",
+        "giuong",
+        "wifi"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 2800,
+        "water_vnd_per_m3": 120000,
+        "water_charge_mode": "per_m3",
+        "internet_vnd_month": 100000,
+        "service_fee_vnd_month": 200000,
+        "motorbike_parking_vnd_month": 150000
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": null,
+        "students_welcome": false
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "TP.HCM",
+        "district": "Quận 3",
+        "ward": "Võ Thị Sáu",
+        "street": "Lý Chính Thắng",
+        "address_line": "Số 211, ngõ 307, đường Lý Chính Thắng",
+        "full_address": "Số 211, ngõ 307, đường Lý Chính Thắng, phường Võ Thị Sáu, Quận 3, TP.HCM",
+        "lat": 10.78409,
+        "lng": 106.67683,
+        "distance_to_city_center_km": 2.3
+      },
+      "nearby_places": [
+        {
+          "name": "Hồ Con Rùa",
+          "type": "landmark",
+          "distance_km": 1.3
+        },
+        {
+          "name": "BV Từ Dũ",
+          "type": "hospital",
+          "distance_km": 1.3
+        },
+        {
+          "name": "ĐH Kiến trúc TP.HCM",
+          "type": "university",
+          "distance_km": 2.0
+        }
+      ],
+      "landlord": {
+        "id": "LL-04",
+        "name": "Anh Phạm Đức Mai",
+        "phone": "0925381800",
+        "verified": true,
+        "response_rate": 0.67,
+        "avg_response_minutes": 15
+      },
+      "rating": 4.5,
+      "review_count": 38,
+      "images": [
+        "/static/img/sg-q3-003-1.jpg",
+        "/static/img/sg-q3-003-2.jpg"
+      ],
+      "description": "Phòng trọ 21m² tại Quận 3, TP.HCM. Giờ giấc tự do, không chung chủ. Chủ nhà thân thiện, hỗ trợ đăng ký tạm trú.",
+      "available_from": "2026-08-02",
+      "posted_at": "2026-07-09",
+      "updated_at": "2026-07-23",
+      "viewing_slots": [
+        {
+          "slot_id": "SG-Q3-003-S3",
+          "date": "2026-07-30",
+          "time": "09:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "SG-Q3-003-S4",
+          "date": "2026-07-31",
+          "time": "09:00",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-7976"
+        },
+        {
+          "slot_id": "SG-Q3-003-S1",
+          "date": "2026-08-02",
+          "time": "17:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "SG-Q3-003-S2",
+          "date": "2026-08-05",
+          "time": "17:30",
+          "duration_minutes": 30,
+          "status": "booked",
+          "booked_by": "KH-9191"
+        }
+      ]
+    },
+    {
+      "id": "HN-DD-004",
+      "title": "Chung cư mini 39m² bếp riêng rộng rãi - Đống Đa, Hà Nội",
+      "property_type": "chung_cu_mini",
+      "property_type_label": "Chung cư mini",
+      "status": "available",
+      "price_vnd_month": 4400000,
+      "deposit_months": 1,
+      "min_lease_months": 6,
+      "area_m2": 39,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "floor": 1,
+      "total_floors": 6,
+      "max_occupants": 3,
+      "furnishing": "full",
+      "amenities": [
+        "gac_xep",
+        "giuong",
+        "may_giat",
+        "thang_may",
+        "tu_lanh",
+        "wifi"
+      ],
+      "utilities": {
+        "electricity_vnd_per_kwh": 4000,
+        "water_vnd_per_m3": 30000,
+        "water_charge_mode": "per_m3",
+        "internet_vnd_month": 120000,
+        "service_fee_vnd_month": 0,
+        "motorbike_parking_vnd_month": 100000
+      },
+      "rules": {
+        "pets_allowed": false,
+        "cooking_allowed": true,
+        "shared_with_owner": false,
+        "curfew": null,
+        "students_welcome": true
+      },
+      "parking": {
+        "motorbike": true,
+        "car": false
+      },
+      "location": {
+        "city": "Hà Nội",
+        "district": "Đống Đa",
+        "ward": "Trung Liệt",
+        "street": "Chùa Bộc",
+        "address_line": "Số 97, đường Chùa Bộc",
+        "full_address": "Số 97, đường Chùa Bộc, phường Trung Liệt, Đống Đa, Hà Nội",
+        "lat": 21.01722,
+        "lng": 105.82393,
+        "distance_to_city_center_km": 3.1
+      },
+      "nearby_places": [
+        {
+          "name": "Chợ Kim Liên",
+          "type": "market",
+          "distance_km": 0.8
+        },
+        {
+          "name": "Vincom Phạm Ngọc Thạch",
+          "type": "mall",
+          "distance_km": 0.9
+        },
+        {
+          "name": "BV Bạch Mai",
+          "type": "hospital",
+          "distance_km": 2.1
+        }
+      ],
+      "landlord": {
+        "id": "LL-05",
+        "name": "Chú Vũ Xuân Hà",
+        "phone": "0978295508",
+        "verified": true,
+        "response_rate": 0.74,
+        "avg_response_minutes": 15
+      },
+      "rating": 3.8,
+      "review_count": 79,
+      "images": [
+        "/static/img/hn-dd-004-1.jpg",
+        "/static/img/hn-dd-004-2.jpg"
+      ],
+      "description": "Chung cư mini 39m² tại Đống Đa, Hà Nội. Thích hợp cho sinh viên hoặc người đi làm. Giờ giấc tự do, không chung chủ.",
+      "available_from": "2026-08-18",
+      "posted_at": "2026-07-25",
+      "updated_at": "2026-07-23",
+      "viewing_slots": [
+        {
+          "slot_id": "HN-DD-004-S1",
+          "date": "2026-07-31",
+          "time": "19:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-DD-004-S4",
+          "date": "2026-08-01",
+          "time": "16:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-DD-004-S3",
+          "date": "2026-08-03",
+          "time": "20:00",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        },
+        {
+          "slot_id": "HN-DD-004-S2",
+          "date": "2026-08-06",
+          "time": "10:30",
+          "duration_minutes": 30,
+          "status": "available",
+          "booked_by": null
+        }
+      ]
+    }
+  ],
+  "bookings": []
+}
