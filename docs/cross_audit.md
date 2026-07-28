@@ -44,4 +44,6 @@ Root cause nếu fail:
 ## Trạng thái hiện tại
 
 `main` đã có successful trace, failed trace, RCA, scoring matrix và hybrid flowchart.
+Diễn tập nội bộ với năm đòn A1-A5 đã được chạy trên `Agent Level 3 + MockProvider`.
+Kết quả là ba `pass`, một `partial` và một `fail`; lỗi A5 cùng RCA đã được ghi trong `docs/trace_eval.md`.
 Cross-audit liên nhóm vẫn đang chờ thực hiện trực tiếp.
