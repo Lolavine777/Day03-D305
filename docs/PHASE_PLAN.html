@@ -1,0 +1,1085 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phase Plan · Trợ lý Tìm & Đặt lịch xem Nhà trọ / Căn hộ cho thuê (Day03-D305)</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --panel:#fff; --ink:#161a20; --muted:#5d6673; --line:#e2e6ec;
+    --accent:#2f6df6; --accent-soft:#e8f0ff;
+    --par:#0f9d76; --par-soft:#e2f6f0;
+    --seq:#c2410c; --seq-soft:#fdeee4;
+    --warn:#b45309; --warn-soft:#fdf3e0;
+    --crit:#b91c1c; --crit-soft:#fdeaea;
+    --code:#f2f4f8;
+    --r1:#2f6df6; --r2:#0f9d76; --r3:#7c3aed; --r4:#c2410c; --r5:#0891b2;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0d1117; --panel:#151b23; --ink:#e6edf3; --muted:#9aa4b2; --line:#2a323d;
+      --accent:#589bff; --accent-soft:#16243d;
+      --par:#3fd0a3; --par-soft:#10261f;
+      --seq:#fb923c; --seq-soft:#2a1a10;
+      --warn:#fbbf24; --warn-soft:#2a2210;
+      --crit:#f87171; --crit-soft:#2c1414;
+      --code:#0f151d;
+      --r1:#589bff; --r2:#3fd0a3; --r3:#a78bfa; --r4:#fb923c; --r5:#22d3ee;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:15px/1.65 "Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;}
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 20px 90px}
+  h1{font-size:26px;line-height:1.3;margin:0 0 6px}
+  h2{font-size:20px;margin:44px 0 4px;padding-top:14px;border-top:2px solid var(--line)}
+  h3{font-size:16px;margin:0}
+  h4{font-size:13px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin:16px 0 6px}
+  p{margin:8px 0}
+  code,kbd{background:var(--code);border:1px solid var(--line);border-radius:5px;
+       padding:1px 5px;font-family:"Cascadia Mono",Consolas,monospace;font-size:.88em}
+  pre{background:var(--code);border:1px solid var(--line);border-radius:10px;padding:14px;
+      overflow-x:auto;font-family:"Cascadia Mono",Consolas,monospace;font-size:12.5px;line-height:1.55}
+  pre code{background:none;border:0;padding:0}
+  a{color:var(--accent)}
+  .lede{color:var(--muted);margin-bottom:18px}
+
+  .cardgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:18px 0}
+  .kv{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .kv b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:3px}
+
+  .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.3px;
+         padding:2px 8px;border-radius:999px;border:1px solid transparent;white-space:nowrap}
+  .b-par{background:var(--par-soft);color:var(--par);border-color:var(--par)}
+  .b-seq{background:var(--seq-soft);color:var(--seq);border-color:var(--seq)}
+  .b-crit{background:var(--crit-soft);color:var(--crit);border-color:var(--crit)}
+  .b-time{background:var(--accent-soft);color:var(--accent);border-color:var(--accent)}
+  .b-opt{background:var(--warn-soft);color:var(--warn);border-color:var(--warn)}
+  .r1{color:var(--r1);border-color:var(--r1)}.r2{color:var(--r2);border-color:var(--r2)}
+  .r3{color:var(--r3);border-color:var(--r3)}.r4{color:var(--r4);border-color:var(--r4)}
+  .r5{color:var(--r5);border-color:var(--r5)}
+  .role{background:transparent;border-width:1px}
+
+  /* ---- cây phase ---- */
+  .tree{--ind:22px;margin:14px 0 0;padding:0;list-style:none}
+  .tree ul{list-style:none;margin:0;padding-left:var(--ind);position:relative}
+  .tree ul::before{content:"";position:absolute;left:8px;top:0;bottom:14px;border-left:2px solid var(--line)}
+  .tree li{position:relative;padding:3px 0 3px 16px}
+  .tree ul li::before{content:"";position:absolute;left:-14px;top:17px;width:16px;border-top:2px solid var(--line)}
+  .tree .node{background:var(--panel);border:1px solid var(--line);border-radius:9px;
+              padding:5px 10px;display:inline-flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .tree .node.par{border-left:4px solid var(--par)}
+  .tree .node.seq{border-left:4px solid var(--seq)}
+  .tree .node.crit{border-left:4px solid var(--crit);box-shadow:0 0 0 1px var(--crit-soft)}
+  .tree .node.opt{border-left:4px solid var(--warn);opacity:.92}
+  .tree .pid{font-family:"Cascadia Mono",Consolas,monospace;font-weight:700;font-size:12px;color:var(--accent)}
+  .tree .lbl{font-weight:600}
+  .tree .hint{color:var(--muted);font-size:12.5px}
+  .wavehead{font-weight:800;letter-spacing:.4px}
+
+  /* ---- thẻ phase chi tiết ---- */
+  .phase{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin:14px 0;overflow:hidden}
+  .phase>header{display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+                padding:12px 16px;border-bottom:1px solid var(--line);background:linear-gradient(0deg,transparent,var(--accent-soft))}
+  .phase>header .pid{font-family:"Cascadia Mono",Consolas,monospace;font-weight:800;color:var(--accent);font-size:13px}
+  .phase .inner{padding:4px 16px 16px}
+  .deps{font-size:12.5px;color:var(--muted);padding:8px 16px;border-bottom:1px dashed var(--line);background:var(--code)}
+  .deps b{color:var(--ink)}
+  ol,ul{margin:6px 0;padding-left:22px}
+  li{margin:3px 0}
+  .dod li{list-style:none;position:relative;padding-left:22px}
+  .dod li::before{content:"☐";position:absolute;left:0;color:var(--par);font-weight:700}
+  .note{border-left:4px solid var(--warn);background:var(--warn-soft);border-radius:0 10px 10px 0;padding:10px 14px;margin:12px 0;font-size:14px}
+  .danger{border-left-color:var(--crit);background:var(--crit-soft)}
+  .ok{border-left-color:var(--par);background:var(--par-soft)}
+
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+  th{background:var(--code);font-size:12px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted)}
+  .scroll{overflow-x:auto}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;margin:10px 0 0}
+  .legend span{font-size:13px;color:var(--muted)}
+  footer{margin-top:50px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>🏠 PHASE PLAN — Trợ lý Tìm &amp; Đặt lịch xem Nhà trọ / Căn hộ cho thuê</h1>
+<p class="lede">Lab 3 · Chatbot vs ReAct Agent (Day03-D305). Đích đến: <b>một Web App tra cứu &amp; đặt lịch xem nhà</b>,
+trong đó <b>Thought → Action → Observation</b>, <b>tool call</b> và <b>Guardrail</b> hiển thị trực tiếp trên UI như một
+“hộp đen” quan sát được (Trace Inspector).</p>
+
+<div class="cardgrid">
+  <div class="kv"><b>Tổng thời lượng</b>240 phút (5–6 người)</div>
+  <div class="kv"><b>Số phase</b>5 wave · 22 phase</div>
+  <div class="kv"><b>Dataset</b><code>config/listings.json</code> — 50 tin đã sinh sẵn</div>
+  <div class="kv"><b>Đường găng</b>P0 → P1-B/C/D → P2-B → P3-C → P4-A → P4-B</div>
+</div>
+
+<div class="legend">
+  <span><span class="badge b-seq">TUẦN TỰ</span> phải xong mới đi tiếp — chặn cả nhóm</span>
+  <span><span class="badge b-par">SONG SONG</span> các nhánh cùng wave chạy đồng thời</span>
+  <span><span class="badge b-crit">ĐƯỜNG GĂNG</span> trễ phase này là trễ cả lab</span>
+  <span><span class="badge b-opt">TÙY CHỌN</span> bonus / làm nếu còn thời gian</span>
+</div>
+
+<!-- ============================= CÂY PHASE ============================= -->
+<h2>1. Cây phase &amp; thứ tự thực hiện</h2>
+<p>Đọc từ trên xuống. Các node cùng một cấp trong <b>Wave 1</b>, <b>Wave 3</b>, <b>Wave 4</b> là các nhánh <b>chạy song song</b>;
+các Wave nối tiếp nhau theo chiều dọc.</p>
+
+<ul class="tree">
+  <li>
+    <span class="node seq wavehead"><span class="pid">WAVE 0</span><span class="lbl">NỀN MÓNG &amp; CHỐT HỢP ĐỒNG</span>
+      <span class="badge b-seq">TUẦN TỰ</span><span class="badge b-time">30′</span></span>
+    <ul>
+      <li><span class="node seq crit"><span class="pid">P0-A</span><span class="lbl">Setup môi trường + smoke test</span>
+        <span class="badge role r4">Role 4</span><span class="badge b-time">8′</span></span></li>
+      <li><span class="node seq crit"><span class="pid">P0-B</span><span class="lbl">Chốt Data Contract (listings.json + data.py)</span>
+        <span class="badge role r2">Role 2</span><span class="badge b-time">7′</span><span class="hint">dataset đã có sẵn</span></span></li>
+      <li><span class="node seq crit"><span class="pid">P0-C</span><span class="lbl">FREEZE Tool Contract (6 tool · 8 câu hỏi)</span>
+        <span class="badge role r2">Role 2</span><span class="badge role r3">Role 3</span><span class="badge b-time">8′</span></span></li>
+      <li><span class="node seq crit"><span class="pid">P0-D</span><span class="lbl">FREEZE Trace Event Schema (src/trace.py)</span>
+        <span class="badge role r5">Role 5</span><span class="badge role r4">Role 4</span><span class="badge b-time">7′</span>
+        <span class="hint">← hợp đồng giữa backend &amp; UI</span></span></li>
+      <li><span class="node seq"><span class="pid">P0-E</span><span class="lbl">Phân vai + branch Git + quy ước commit</span>
+        <span class="badge b-time">5′</span></span></li>
+    </ul>
+  </li>
+
+  <li>
+    <span class="node par wavehead"><span class="pid">WAVE 1</span><span class="lbl">5 NHÁNH SONG SONG — XÂY LINH KIỆN</span>
+      <span class="badge b-par">SONG SONG</span><span class="badge b-time">70′</span></span>
+    <ul>
+      <li><span class="node par"><span class="pid">P1-A</span><span class="lbl">Test Cases + Rubric</span>
+        <span class="badge role r1">Role 1</span><span class="badge b-time">45′</span><span class="hint">cần: P0-B</span></span></li>
+      <li><span class="node par crit"><span class="pid">P1-B</span><span class="lbl">Data layer + 6 Tools + unit test</span>
+        <span class="badge role r2">Role 2</span><span class="badge b-time">70′</span><span class="hint">cần: P0-B, P0-C</span></span></li>
+      <li><span class="node par crit"><span class="pid">P1-C</span><span class="lbl">Prompts (Baseline + ReAct) + Guardrail config</span>
+        <span class="badge role r3">Role 3</span><span class="badge b-time">55′</span><span class="hint">cần: P0-C</span></span></li>
+      <li><span class="node par crit"><span class="pid">P1-D</span><span class="lbl">Khung ReAct loop chạy với FakeProvider</span>
+        <span class="badge role r4">Role 4</span><span class="badge b-time">65′</span><span class="hint">cần: P0-C, P0-D</span></span></li>
+      <li><span class="node par"><span class="pid">P1-E</span><span class="lbl">UI shell + Trace Inspector chạy bằng fixture</span>
+        <span class="badge role r5">Role 5</span><span class="badge b-time">70′</span><span class="hint">cần: P0-D</span></span></li>
+    </ul>
+  </li>
+
+  <li>
+    <span class="node seq wavehead"><span class="pid">WAVE 2</span><span class="lbl">RÁP MẠCH THẬT</span>
+      <span class="badge b-time">45′</span></span>
+    <ul>
+      <li><span class="node par"><span class="pid">P2-A</span><span class="lbl">Chatbot Baseline thật (1 LLM call, 0 tool)</span>
+        <span class="badge role r3">Role 3</span><span class="badge role r5">Role 5</span><span class="badge b-time">20′</span>
+        <span class="hint">cần: P1-A, P1-C</span></span></li>
+      <li><span class="node par crit"><span class="pid">P2-B</span><span class="lbl">ReAct Agent V1 (LLM thật + tool thật, CLI)</span>
+        <span class="badge role r4">Role 4</span><span class="badge b-time">45′</span>
+        <span class="hint">cần: P1-B, P1-C, P1-D</span></span></li>
+      <li><span class="node par"><span class="pid">P2-C</span><span class="lbl">Web server + API + SSE stream</span>
+        <span class="badge role r4">Role 4</span><span class="badge role r5">Role 5</span><span class="badge b-time">35′</span>
+        <span class="hint">cần: P0-D, P1-D — song song được với P2-B</span></span></li>
+    </ul>
+  </li>
+
+  <li>
+    <span class="node seq wavehead"><span class="pid">WAVE 3</span><span class="lbl">NỐI UI ↔ AGENT &amp; NÂNG CẤP V2</span>
+      <span class="badge b-time">50′</span></span>
+    <ul>
+      <li><span class="node par"><span class="pid">P3-A</span><span class="lbl">Nối UI với API thật (bỏ fixture)</span>
+        <span class="badge role r5">Role 5</span><span class="badge b-time">30′</span><span class="hint">cần: P1-E, P2-C</span></span></li>
+      <li><span class="node par"><span class="pid">P3-B</span><span class="lbl">Bơm lỗi có chủ đích → thu Failed Trace + RCA</span>
+        <span class="badge role r1">Role 1</span><span class="badge role r5">Role 5</span><span class="badge b-time">25′</span>
+        <span class="hint">cần: P2-B</span></span></li>
+      <li><span class="node par crit"><span class="pid">P3-C</span><span class="lbl">Agent V2: parser mềm + recovery + safe fallback</span>
+        <span class="badge role r3">Role 3</span><span class="badge role r4">Role 4</span><span class="badge b-time">45′</span>
+        <span class="hint">cần: P3-B (phải có bằng chứng lỗi trước)</span></span></li>
+    </ul>
+  </li>
+
+  <li>
+    <span class="node seq wavehead"><span class="pid">WAVE 4</span><span class="lbl">ĐO ĐẠC &amp; BÁO CÁO</span>
+      <span class="badge b-time">40′</span></span>
+    <ul>
+      <li><span class="node seq crit"><span class="pid">P4-A</span><span class="lbl">Chạy eval batch 3 mode × 7 case → traces JSONL</span>
+        <span class="badge role r5">Role 5</span><span class="badge b-time">15′</span><span class="hint">cần: P2-A, P3-C</span></span></li>
+      <li><span class="node par crit"><span class="pid">P4-B</span><span class="lbl">docs/trace_eval.md (log + Scoring Matrix + RCA)</span>
+        <span class="badge role r5">Role 5</span><span class="badge role r1">Role 1</span><span class="badge b-time">30′</span></span></li>
+      <li><span class="node par"><span class="pid">P4-C</span><span class="lbl">Hybrid Decision Flowchart (mermaid)</span>
+        <span class="badge role r3">Role 3</span><span class="badge b-time">15′</span></span></li>
+      <li><span class="node par"><span class="pid">P4-D</span><span class="lbl">README + ảnh chụp UI + hướng dẫn chạy</span>
+        <span class="badge role r1">Role 1</span><span class="badge b-time">15′</span></span></li>
+    </ul>
+  </li>
+
+  <li>
+    <span class="node seq wavehead"><span class="pid">WAVE 5</span><span class="lbl">CHỐT SỔ &amp; NỘP</span>
+      <span class="badge b-time">20′</span></span>
+    <ul>
+      <li><span class="node seq crit"><span class="pid">P5-A</span><span class="lbl">Security check + .gitignore + push + nộp link</span>
+        <span class="badge b-time">15′</span><span class="hint">cần: toàn bộ Wave 4</span></span></li>
+      <li><span class="node par"><span class="pid">P5-B</span><span class="lbl">Cross-Audit liên nhóm (tấn công / phòng thủ)</span>
+        <span class="badge b-time">20′</span></span></li>
+      <li><span class="node opt"><span class="pid">P5-C</span><span class="lbl">BONUS: Autonomous Agent (Planner + Memory)</span>
+        <span class="badge b-opt">TÙY CHỌN +10%</span><span class="badge b-time">30′</span></span></li>
+    </ul>
+  </li>
+</ul>
+
+<h4>Đường găng (critical path)</h4>
+<pre><code>P0-A → P0-B → P0-C → P0-D → P1-B ─┐
+                     P1-C ────────┼→ P2-B → P3-B → P3-C → P4-A → P4-B → P5-A
+                     P1-D ────────┘
+(P1-A, P1-E, P2-A, P2-C, P3-A, P4-C, P4-D nằm ngoài đường găng — trễ chút không chết lab,
+ nhưng P1-E trễ thì mất phần "hiển thị Observation/Guardrail trên UI" = mất điểm đích đến.)</code></pre>
+
+<!-- ============================= WAVE 0 ============================= -->
+<h2>2. WAVE 0 — Nền móng &amp; chốt hợp đồng <span class="badge b-seq">TUẦN TỰ</span></h2>
+<p>Wave này <b>không được làm song song</b>: cả 5 nhánh Wave 1 đều đọc kết quả của nó. Sai ở đây → 5 người code lệch nhau.</p>
+
+<article class="phase" id="P0-A">
+  <header><span class="pid">P0-A</span><h3>Setup môi trường &amp; smoke test</h3>
+    <span class="badge role r4">Role 4</span><span class="badge b-time">8′</span><span class="badge b-crit">ĐƯỜNG GĂNG</span></header>
+  <div class="deps"><b>Phụ thuộc:</b> — · <b>Chặn:</b> tất cả</div>
+  <div class="inner">
+    <h4>Yêu cầu chi tiết</h4>
+    <ol>
+      <li>Tạo venv &amp; cài thư viện:
+        <pre><code>python -m venv .venv
+.venv\Scripts\Activate.ps1        # Windows PowerShell
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python -m pip install fastapi uvicorn        # thêm cho phần Web (Wave 2)
+copy .env.example .env</code></pre></li>
+      <li>Bổ sung <code>fastapi</code>, <code>uvicorn</code> vào <code>requirements.txt</code> và commit.</li>
+      <li>Điền <code>LLM_PROVIDER</code> + API key vào <code>.env</code>. Nếu chưa có key → để <code>LLM_PROVIDER=mock</code> để cả nhóm vẫn code được offline.</li>
+      <li>Smoke test 2 lệnh: <code>python src/providers.py</code> và <code>python src/app.py</code>.</li>
+      <li>Kiểm tra <code>.gitignore</code> đã chặn <code>.env</code>, <code>__pycache__/</code>, <code>.venv/</code>. Chưa có thì tạo ngay (đừng để tới lúc nộp).</li>
+    </ol>
+    <h4>Definition of Done</h4>
+    <ul class="dod">
+      <li>Terminal hiện <code>(.venv)</code>, <code>python src/app.py</code> chạy không traceback.</li>
+      <li><code>git status</code> không thấy <code>.env</code> trong danh sách chờ commit.</li>
+      <li>Mọi thành viên đều nói được: Provider / Agent / Tool / Observation / Telemetry là gì.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="phase" id="P0-B">
+  <header><span class="pid">P0-B</span><h3>Chốt Data Contract — <code>config/listings.json</code> + <code>src/data.py</code></h3>
+    <span class="badge role r2">Role 2</span><span class="badge b-time">7′</span><span class="badge b-crit">ĐƯỜNG GĂNG</span></header>
+  <div class="deps"><b>Phụ thuộc:</b> P0-A · <b>Chặn:</b> P1-A, P1-B</div>
+  <div class="inner">
+    <div class="note ok"><b>Đã có sẵn:</b> <code>config/listings.json</code> — 50 tin (Hà Nội 20 · TP.HCM 20 · Đà Nẵng 10),
+      giá 1.7tr–26tr, 6 loại hình, 40 <code>available</code> / 7 <code>pending</code> / 3 <code>rented</code>,
+      95 khung giờ xem nhà còn trống, 8 tin cố tình <b>không còn slot</b> để làm edge case.</div>
+    <h4>Yêu cầu chi tiết</h4>
+    <ol>
+      <li>Cả nhóm đọc 1 lần cấu trúc file (xem Phụ lục A) và <b>không ai được đổi tên field</b> sau phase này.</li>
+      <li>Viết <code>src/data.py</code>: <code>load_listings()</code> đọc JSON 1 lần và cache vào biến module-level;
+        <code>get_by_id(listing_id)</code> trả <code>None</code> nếu không có; <code>all_listings()</code>; <code>save_bookings()</code>
+        ghi lại mảng <code>bookings</code> (tool đặt lịch sẽ ghi vào đây).</li>
+      <li>Chuẩn hoá tìm kiếm tiếng Việt: hàm <code>norm(s)</code> bỏ dấu + lower (<code>"cầu giấy" == "cau giay" == "Cầu Giấy"</code>).
+        Đây là nguồn lỗi số 1 khi LLM gõ tên quận không dấu.</li>
+      <li>Đường dẫn file tính từ gốc repo (dùng <code>os.path.dirname(__file__)</code>), <b>không</b> dùng đường dẫn tương đối theo cwd.</li>
+    </ol>
+    <h4>Definition of Done</h4>
+    <ul class="dod">
+      <li><code>python src/data.py</code> in ra <code>50 listings</code> + số quận theo từng thành phố.</li>
+      <li><code>get_by_id("KHONG-CO")</code> trả <code>None</code>, không raise.</li>
+      <li><code>norm("Cầu Giấy") == norm("cau giay")</code>.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="phase" id="P0-C">
+  <header><span class="pid">P0-C</span><h3>FREEZE Tool Contract — 6 tool, trả lời đủ 8 câu hỏi</h3>
+    <span class="badge role r2">Role 2</span><span class="badge role r3">Role 3</span><span class="badge b-time">8′</span><span class="badge b-crit">ĐƯỜNG GĂNG</span></header>
+  <div class="deps"><b>Phụ thuộc:</b> P0-B · <b>Chặn:</b> P1-B, P1-C, P1-D</div>
+  <div class="inner">
+    <p>Role 2 viết code tool, Role 3 viết mô tả tool trong prompt, Role 4 parse tên tool — <b>ba người phải dùng chung
+      đúng một bảng tên &amp; tham số</b>. Chốt xong dán bảng này vào <code>docs/trace_eval.md</code>.</p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Tool</th><th>Mục đích / khi nào dùng</th><th>Input</th><th>Output khi thành công</th><th>Error semantics</th><th>Side effect</th></tr></thead>
+      <tbody>
+        <tr><td><code>search_listings</code></td><td>Tìm tin theo bộ lọc. Dùng đầu tiên cho mọi câu “tìm/ở đâu/có phòng nào”.</td>
+          <td><code>city</code>(bắt buộc), <code>district</code>, <code>max_price</code>, <code>min_price</code>, <code>property_type</code>, <code>min_area</code>, <code>amenities</code>, <code>pets_allowed</code></td>
+          <td>JSON: <code>{"count":n,"results":[{id,title,price_vnd_month,area_m2,district,rating,slots_available}]}</code> tối đa 5 tin, sort giá tăng dần</td>
+          <td>Không khớp thành phố → <code>{"error":"CITY_NOT_FOUND","message":"...","available_cities":[...]}</code>; khớp 0 tin → <code>count:0</code> + gợi ý nới lỏng bộ lọc</td><td>read-only</td></tr>
+        <tr><td><code>get_listing_detail</code></td><td>Lấy đầy đủ thông tin 1 tin (nội thất, nội quy, chủ nhà, phí).</td>
+          <td><code>listing_id</code></td><td>JSON đầy đủ trừ <code>viewing_slots</code></td>
+          <td>ID sai → <code>{"error":"LISTING_NOT_FOUND","hint":"Dùng search_listings để lấy id hợp lệ"}</code></td><td>read-only</td></tr>
+        <tr><td><code>check_viewing_slots</code></td><td>Xem khung giờ còn trống của 1 tin.</td>
+          <td><code>listing_id</code>, <code>date</code>(tuỳ chọn, <code>YYYY-MM-DD</code>)</td>
+          <td>JSON danh sách <code>{slot_id,date,time,status}</code> chỉ lấy <code>available</code></td>
+          <td>ID sai → <code>LISTING_NOT_FOUND</code>; ngày sai định dạng/không tồn tại (32/13) → <code>INVALID_DATE</code>; hết slot → <code>{"count":0,"message":"Tin này hiện không còn lịch xem"}</code></td><td>read-only</td></tr>
+        <tr><td><code>book_viewing</code></td><td>Đặt 1 khung giờ. <b>Chỉ gọi khi đã có <code>slot_id</code> thật từ <code>check_viewing_slots</code>.</b></td>
+          <td><code>listing_id</code>, <code>slot_id</code>, <code>customer_name</code>, <code>customer_phone</code></td>
+          <td><code>{"booking_id":"BK-0001","status":"confirmed","listing_id":...,"date":...,"time":...}</code></td>
+          <td>Slot đã bị đặt → <code>SLOT_TAKEN</code> + danh sách slot thay thế; thiếu tên/SĐT → <code>MISSING_FIELD</code>; SĐT không hợp lệ → <code>INVALID_PHONE</code></td>
+          <td><b>WRITE</b> — ghi vào <code>bookings</code></td></tr>
+        <tr><td><code>estimate_monthly_cost</code></td><td>Tính tổng chi phí thực/tháng (thuê + điện + nước + net + dịch vụ + gửi xe).</td>
+          <td><code>listing_id</code>, <code>occupants</code>, <code>kwh_per_month</code>(mặc định 150)</td>
+          <td><code>{"rent":...,"electricity":...,"water":...,"total_vnd_month":...,"breakdown_text":"..."}</code></td>
+          <td>ID sai → <code>LISTING_NOT_FOUND</code>; <code>occupants</code> vượt <code>max_occupants</code> → cảnh báo <code>OVER_CAPACITY</code> nhưng vẫn trả số liệu</td><td>read-only</td></tr>
+        <tr><td><code>compare_listings</code></td><td>So sánh 2–3 tin theo giá/diện tích/tiện nghi/khoảng cách.</td>
+          <td><code>listing_ids</code> (list 2–3 id)</td><td>Bảng so sánh dạng text + <code>recommendation</code></td>
+          <td>&lt;2 id hợp lệ → <code>NEED_AT_LEAST_2_IDS</code></td><td>read-only</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="note danger"><b>Nguyên tắc bất biến:</b> tool <b>không bao giờ raise</b>. Mọi lỗi nghiệp vụ trả về
+      <b>chuỗi JSON có field <code>error</code></b> để Agent đọc và tự chuyển hướng. Exception Python = Agent mù.</div>
+    <h4>Definition of Done</h4>
+    <ul class="dod">
+      <li>Bảng 6 tool được chốt, dán vào <code>docs/trace_eval.md</code>, 3 role ký xác nhận (comment trong PR/nhóm chat).</li>
+      <li>Thống nhất cú pháp Action duy nhất: <code>Action: ten_tool[{"key": "value"}]</code> (JSON trong ngoặc vuông).</li>
+    </ul>
+  </div>
+</article>
+
+<article class="phase" id="P0-D">
+  <header><span class="pid">P0-D</span><h3>FREEZE Trace Event Schema — <code>src/trace.py</code></h3>
+    <span class="badge role r5">Role 5</span><span class="badge role r4">Role 4</span><span class="badge b-time">7′</span><span class="badge b-crit">ĐƯỜNG GĂNG</span></header>
+  <div class="deps"><b>Phụ thuộc:</b> P0-C · <b>Chặn:</b> P1-D, P1-E, P2-C</div>
+  <div class="inner">
+    <p>Đây là <b>hợp đồng giữa backend và giao diện</b>. Chốt trước ⇒ Role 5 dựng được UI bằng dữ liệu giả trong khi Role 4
+      còn đang code agent. Không chốt trước ⇒ UI phải chờ agent xong mới bắt đầu = trễ lab.</p>
+    <h4>Yêu cầu chi tiết</h4>
+    <ol>
+      <li>Định nghĩa <code>TraceEvent</code> (dataclass hoặc dict thuần) đúng các field:
+<pre><code>{
+  "run_id": "run-20260728-153001-a7",
+  "seq": 4,                       // tăng dần, UI dùng để sort
+  "step": 2,                      // vòng lặp ReAct thứ mấy
+  "type": "observation",          // xem bảng bên dưới
+  "ts": "2026-07-28T15:30:04.512",
+  "latency_ms": 812,
+  "data": { ... }                 // payload riêng theo type
+}</code></pre></li>
+      <li>Chốt đủ 10 <code>type</code> (UI render mỗi loại một kiểu thẻ khác nhau):
+        <div class="scroll"><table>
+          <thead><tr><th>type</th><th>Ý nghĩa</th><th><code>data</code> chứa gì</th><th>UI hiển thị</th></tr></thead>
+          <tbody>
+            <tr><td><code>run_start</code></td><td>Bắt đầu một lượt hỏi</td><td><code>query, mode, model, max_iterations</code></td><td>Header phiên + thanh budget</td></tr>
+            <tr><td><code>llm_call</code></td><td>Gọi LLM</td><td><code>prompt_chars, response_raw, tokens_in, tokens_out</code></td><td>Thẻ xám, gấp/mở raw prompt</td></tr>
+            <tr><td><code>thought</code></td><td>Suy luận của agent</td><td><code>text</code></td><td>Thẻ 🧠 tím</td></tr>
+            <tr><td><code>action</code></td><td>Agent quyết định gọi tool</td><td><code>tool, args, raw</code></td><td>Thẻ 🛠️ cam + JSON args</td></tr>
+            <tr><td><code>observation</code></td><td>Kết quả THẬT từ tool</td><td><code>tool, result, is_error, duration_ms</code></td><td>Thẻ 👁️ xanh, đỏ nếu <code>is_error</code></td></tr>
+            <tr><td><code>guardrail</code></td><td>Phanh an toàn kích hoạt</td><td><code>rule, detail, action_taken</code></td><td>Thẻ 🛡️ đỏ + tên rule</td></tr>
+            <tr><td><code>retry</code></td><td>Agent tự sửa sai và thử lại</td><td><code>reason, attempt</code></td><td>Thẻ ♻️ vàng</td></tr>
+            <tr><td><code>final</code></td><td>Câu trả lời cuối</td><td><code>text, grounded_on:[ids]</code></td><td>Bong bóng chat + chip nguồn</td></tr>
+            <tr><td><code>fallback</code></td><td>Trả lời lịch sự khi bí</td><td><code>text, reason</code></td><td>Bong bóng chat viền vàng</td></tr>
+            <tr><td><code>run_end</code></td><td>Kết thúc</td><td><code>steps_used, tool_calls, total_ms, stop_reason</code></td><td>Thanh tổng kết cuối</td></tr>
+          </tbody>
+        </table></div>
+      </li>
+      <li>Viết <code>TraceLogger</code>: <code>emit(type, **data)</code> vừa <b>append vào list trong bộ nhớ</b>,
+        vừa <b>ghi 1 dòng JSONL</b> vào <code>docs/traces/&lt;run_id&gt;.jsonl</code>, vừa <b>gọi callback</b> (để server đẩy SSE).</li>
+      <li>Tạo <code>docs/fixtures/trace_sample.jsonl</code> — một trace mẫu viết tay đủ 10 type để Role 5 dựng UI ngay (P1-E).</li>
+    </ol>
+    <h4>Definition of Done</h4>
+    <ul class="dod">
+      <li><code>src/trace.py</code> chạy độc lập, sinh ra file JSONL đọc lại được bằng <code>json.loads</code> từng dòng.</li>
+      <li><code>docs/fixtures/trace_sample.jsonl</code> tồn tại và có đủ 10 <code>type</code>.</li>
+      <li>Role 4 và Role 5 xác nhận: <b>không đổi schema nữa</b> cho tới hết Wave 3.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="phase" id="P0-E">
+  <header><span class="pid">P0-E</span><h3>Phân vai, branch, quy ước làm việc</h3><span class="badge b-time">5′</span></header>
+  <div class="deps"><b>Phụ thuộc:</b> P0-A · <b>Chặn:</b> Wave 1</div>
+  <div class="inner">
+    <h4>Yêu cầu chi tiết</h4>
+    <ol>
+      <li>Chốt tên 5 role theo <code>docs/PHAN_CONG_CONG_VIEC.md</code>. Nhóm 6 người → người thứ 6 làm <b>Frontend</b> cùng Role 5.</li>
+      <li>Mỗi role một branch: <code>role1-testcases</code>, <code>role2-tools</code>, <code>role3-prompts</code>, <code>role4-agent</code>, <code>role5-ui</code>.</li>
+      <li><b>Luật chống đụng file:</b> mỗi file chỉ 1 chủ sở hữu. Role khác cần sửa → nhắn chủ sở hữu, không tự sửa.</li>
+      <li>Role 4 là Integrator: cứ 30 phút <code>git pull</code> gộp các nhánh vào <code>main</code> một lần.</li>
+    </ol>
+    <h4>Definition of Done</h4>
+    <ul class="dod"><li>Bảng phân vai + bảng chủ sở hữu file được dán vào <code>docs/PHAN_CONG_CONG_VIEC.md</code>.</li></ul>
+  </div>
+</article>
+
+<!-- ============================= WAVE 1 ============================= -->
+<h2>3. WAVE 1 — 5 nhánh song song <span class="badge b-par">SONG SONG</span></h2>
+<p>Sau khi Wave 0 xong, <b>cả 5 nhánh khởi động cùng lúc</b> và không nhánh nào phải chờ nhánh nào — vì mọi hợp đồng đã chốt.</p>
+
+<article class="phase" id="P1-A">
+  <header><span class="pid">P1-A</span><h3>Nhánh A — Test Cases &amp; Rubric</h3>
+    <span class="badge role r1">Role 1</span><span class="badge b-time">45′</span><span class="badge b-par">SONG SONG</span></header>
+  <div class="deps"><b>Phụ thuộc:</b> P0-B · <b>Song song với:</b> P1-B, P1-C, P1-D, P1-E · <b>Chặn:</b> P2-A, P3-B</div>
+  <div class="inner">
+    <h4>Yêu cầu chi tiết</h4>
+    <ol>
+      <li>Viết lại <code>config/test_cases.json</code> theo chủ đề thuê nhà, <b>7 case</b> (5 bắt buộc + 2 bẫy nâng cao).
+        Mỗi case đủ field: <code>id, category, question, expected_behavior, expected_tools, must_contain, is_trap</code>.</li>
+      <li>Nội dung 7 case bắt buộc phải có:
+        <div class="scroll"><table>
+          <thead><tr><th>#</th><th>Loại</th><th>Câu hỏi mẫu</th><th>Kỳ vọng ở Agent</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>🟢 Lý thuyết</td><td>“Đặt cọc thuê nhà thường mấy tháng? Khi nào bị mất cọc?”</td><td>Trả lời ngay, <code>tool_calls = 0</code>. Chatbot nhanh hơn Agent.</td></tr>
+            <tr><td>2</td><td>🟢 Quy định</td><td>“Thuê trọ cần giấy tờ gì để đăng ký tạm trú?”</td><td>Trả lời ngay, không gọi tool.</td></tr>
+            <tr><td>3</td><td>🟡 1 tool</td><td>“Tìm phòng trọ ở Cầu Giấy, Hà Nội dưới 4 triệu, có điều hòa.”</td><td><code>search_listings</code> → liệt kê tin <b>có mã tin thật</b>.</td></tr>
+            <tr><td>4</td><td>🟡 3 tool nối tiếp</td><td>“Tìm căn hộ Quận 7 dưới 8 triệu, cho biết tổng chi phí/tháng của căn rẻ nhất và đặt lịch xem giúp mình (tên Minh, SĐT 0901234567).”</td><td><code>search_listings</code> → <code>estimate_monthly_cost</code> → <code>check_viewing_slots</code> → <code>book_viewing</code>. Mỗi bước dùng output bước trước.</td></tr>
+            <tr><td>5</td><td>🔴 Bẫy địa danh + ngày ảo</td><td>“Tìm nhà ở thành phố Atlantis giá dưới 200 nghìn, đặt lịch xem ngày 32/13/2026.”</td><td>Tool trả <code>CITY_NOT_FOUND</code> / <code>INVALID_DATE</code> → Agent <b>không lặp lại tool cũ</b>, dừng bằng fallback lịch sự.</td></tr>
+            <tr><td>6</td><td>🔴 Bẫy hết slot</td><td>“Đặt lịch xem tin <code>&lt;id một tin đã rented / hết slot&gt;</code> vào tối mai.”</td><td><code>check_viewing_slots</code> trả 0 slot → Agent chuyển hướng gợi ý tin tương tự, không gọi <code>book_viewing</code> bừa.</td></tr>
+            <tr><td>7</td><td>🔴 Bẫy hallucination</td><td>“Giá điện của tin <code>HN-XX-999</code> là bao nhiêu?”</td><td>Tool trả <code>LISTING_NOT_FOUND</code> → Agent nói không có mã tin đó, <b>tuyệt đối không bịa số</b>.</td></tr>
+          </tbody>
+        </table></div>
+      </li>
+      <li>Lấy <b>ID tin thật</b> từ <code>config/listings.json</code> cho case 6 &amp; 7 (mở file, chọn tin <code>status:"rented"</code> hoặc tin có <code>viewing_slots: []</code>).</li>
+      <li>Dựng bảng Rubric 0–2 điểm × 4 tiêu chí (Factual / Grounding / Tool selection / Termination) dưới dạng bảng markdown trống, sẵn sàng điền ở P4-B.</li>
+      <li>Viết mục <b>Agentic Fit</b> (4 tiêu chí) trong <code>docs/trace_eval.md</code>: vì sao bài toán thuê nhà xứng đáng dùng Agent
+        (dữ liệu thay đổi theo thời gian, nhiều bước phụ thuộc nhau, có hành động ghi trạng thái, chi phí sai cao).</li>
+    </ol>
+    <h4>Definition of Done</h4>
+    <ul class="dod">
+      <li><code>json.load(open("config/test_cases.json"))</code> chạy được, đúng 7 phần tử.</li>
+      <li>Mỗi ID tin nhắc trong test case đều tồn tại (hoặc cố ý không tồn tại — ghi rõ trong <code>expected_behavior</code>).</li>
+      <li>Bảng Agentic Fit + khung Rubric đã nằm trong <code>docs/trace_eval.md</code>.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="phase" id="P1-B">
+  <header><span class="pid">P1-B</span><h3>Nhánh B — Data layer + 6 Tools + unit test</h3>
+    <span class="badge role r2">Role 2</span><span class="badge b-time">70′</span><span class="badge b-crit">ĐƯỜNG GĂNG</span></header>
+  <div class="deps"><b>Phụ thuộc:</b> P0-B, P0-C · <b>Chặn:</b> P2-B</div>
+  <div class="inner">
+    <h4>Yêu cầu chi tiết</h4>
+    <ol>
+      <li>Thay toàn bộ <code>src/tools.py</code> cũ (get_weather/search_flights) bằng 6 tool trong bảng P0-C.</li>
+      <li>Mỗi hàm bắt buộc có: <b>docstring đủ 8 mục</b> (name, purpose, khi nào KHÔNG dùng, input schema, output schema,
+        error semantics, side effect, ví dụ input/output).</li>
+      <li>Mọi tool <b>trả về chuỗi</b> (JSON dumps với <code>ensure_ascii=False</code>) — vì Observation sẽ được nhét thẳng vào prompt.</li>
+      <li>Bọc <b>toàn bộ thân hàm</b> trong <code>try/except Exception as e</code> → trả
+        <code>{"error":"TOOL_CRASH","message":str(e)}</code>. Không để một exception nào lọt ra ngoài.</li>
+      <li>Validate tham số trước khi chạy: kiểu sai (<code>max_price="rẻ"</code>), ngày sai (<code>32/13/2026</code>),
+        thiếu field bắt buộc → trả lỗi có <code>hint</code> hướng dẫn gọi lại cho đúng.</li>
+      <li><code>search_listings</code> phải: bỏ dấu khi so khớp thành phố/quận, loại bỏ tin <code>status="rented"</code>,
+        <b>giới hạn 5 kết quả</b> (Observation dài quá sẽ làm nổ context và khiến LLM lạc), kèm <code>slots_available</code> mỗi tin.</li>
+      <li><code>book_viewing</code> là tool duy nhất có side effect: đổi <code>slot.status</code> thành <code>booked</code>,
+        thêm bản ghi vào <code>bookings</code>, ghi file. <b>Phải kiểm tra slot còn trống trước khi ghi</b>.</li>
+      <li>Đăng ký cả 6 vào <code>AVAILABLE_TOOLS = {...}</code> + thêm <code>TOOL_SPECS</code> (dict mô tả ngắn từng tool)
+        để Role 3 sinh phần “danh sách tool” trong prompt và UI hiển thị Tool Registry.</li>
+      <li>Viết <code>tests/test_tools.py</code> — tối thiểu 12 assert: happy path mỗi tool (6) + 6 ca lỗi
+        (thành phố ảo, id ảo, ngày 32/13, slot đã đặt, thiếu SĐT, tham số sai kiểu).</li>
+    </ol>
+    <div class="note"><b>Lý do test tool trước khi ráp Agent:</b> nếu ráp tool chưa test vào Agent rồi thấy sai,
+      bạn không biết lỗi ở Tool hay ở Agent. Test riêng = loại hẳn một nguồn nghi ngờ.</div>
+    <h4>Definition of Done</h4>
+    <ul class="dod">
+      <li><code>python tests/test_tools.py</code> pass 100%, không traceback.</li>
+      <li>Gọi mọi tool với tham số rác vẫn trả chuỗi JSON có <code>error</code>, chương trình không chết.</li>
+      <li><code>book_viewing</code> gọi 2 lần cùng <code>slot_id</code> → lần 2 trả <code>SLOT_TAKEN</code>.</li>
+      <li><code>AVAILABLE_TOOLS</code> có đúng 6 key; <code>TOOL_SPECS</code> mô tả khớp docstring.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="phase" id="P1-C">
+  <header><span class="pid">P1-C</span><h3>Nhánh C — Prompts &amp; Guardrail config</h3>
+    <span class="badge role r3">Role 3</span><span class="badge b-time">55′</span><span class="badge b-crit">ĐƯỜNG GĂNG</span></header>
+  <div class="deps"><b>Phụ thuộc:</b> P0-C · <b>Chặn:</b> P2-A, P2-B</div>
+  <div class="inner">
+    <h4>Yêu cầu chi tiết</h4>
+    <ol>
+      <li><b><code>CHATBOT_BASELINE_PROMPT</code></b> — vai “tư vấn thuê nhà thân thiện”, dựa hoàn toàn vào kiến thức sẵn có.
+        <span class="badge b-crit">CẤM</span> nhét dữ liệu từ <code>listings.json</code> vào prompt này, cấm mô tả tool.
+        Baseline phải <b>công bằng</b> thì so sánh mới có giá trị.</li>
+      <li><b><code>REACT_SYSTEM_PROMPT</code></b> gồm 5 khối:
+        <ul>
+          <li><b>Vai trò</b> + phạm vi (chỉ tư vấn thuê nhà tại HN / TP.HCM / Đà Nẵng theo dữ liệu có sẵn).</li>
+          <li><b>Danh sách 6 tool</b> — sinh động từ <code>TOOL_SPECS</code>, mỗi dòng ghi rõ tham số bắt buộc.</li>
+          <li><b>Định dạng bắt buộc</b>:
+<pre><code>Thought: &lt;suy luận 1 câu&gt;
+Action: search_listings[{"city": "Hà Nội", "district": "Cầu Giấy", "max_price": 4000000}]
+
+(dừng lại, chờ hệ thống trả Observation)
+
+...khi đã đủ dữ liệu:
+Thought: Tôi đã có đủ thông tin.
+Final Answer: &lt;câu trả lời, luôn kèm mã tin&gt;</code></pre></li>
+          <li><b>6 luật cứng:</b> (1) mỗi lượt chỉ 1 Action; (2) <b>không tự viết Observation</b>;
+            (3) chưa có Observation thì chưa được ra Final Answer với dữ liệu cụ thể;
+            (4) chỉ dùng tên tool trong danh sách; (5) nếu Observation có <code>error</code> → <b>đổi cách làm</b>,
+            cấm gọi lại y hệt tool + tham số cũ; (6) mọi con số (giá, diện tích, mã tin) phải trích từ Observation.</li>
+          <li><b>Luật dừng:</b> hết 2 lần lỗi liên tiếp hoặc không thể tiến triển → ra
+            <code>Final Answer</code> dạng xin lỗi + đề xuất bước tiếp theo cho người dùng.</li>
+        </ul>
+      </li>
+      <li><b>Guardrail config</b> trong <code>src/prompts.py</code> (Role 4 sẽ thực thi):
+<pre><code>MAX_ITERATIONS       = 6      # trần vòng lặp ReAct
+MAX_TOOL_ERRORS      = 3      # tổng số Observation lỗi cho phép
+MAX_REPEAT_ACTION    = 2      # gọi lại y hệt (tool+args) quá 2 lần -> cắt
+TOOL_TIMEOUT_SECONDS = 10
+MAX_OBSERVATION_CHARS= 1500   # cắt bớt Observation quá dài
+ALLOWED_TOOLS        = set(AVAILABLE_TOOLS)   # whitelist chặn tool ảo
+FALLBACK_MESSAGE     = "Xin lỗi, mình chưa tra cứu được ... Bạn có thể thử ..."</code></pre></li>
+      <li>Viết <code>PROMPT_VERSION = "v1"</code> để P3-C nâng lên <code>"v2"</code> và báo cáo so sánh Before/After có mốc rõ ràng.</li>
+    </ol>
+    <h4>Definition of Done</h4>
+    <ul class="dod">
+      <li>Dán <code>REACT_SYSTEM_PROMPT</code> vào ChatGPT/Gemini bằng tay + 1 câu hỏi mẫu → model trả đúng định dạng <code>Thought/Action</code>.</li>
+      <li>Baseline prompt không chứa bất kỳ mã tin hay tên tool nào (kiểm tra bằng Ctrl+F).</li>
+      <li>Đủ 7 hằng số guardrail; <code>ALLOWED_TOOLS</code> lấy động từ <code>AVAILABLE_TOOLS</code>, không hard-code.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="phase" id="P1-D">
+  <header><span class="pid">P1-D</span><h3>Nhánh D — Khung ReAct loop (parser · executor · guardrail) chạy với FakeProvider</h3>
+    <span class="badge role r4">Role 4</span><span class="badge b-time">65′</span><span class="badge b-crit">ĐƯỜNG GĂNG</span></header>
+  <div class="deps"><b>Phụ thuộc:</b> P0-C, P0-D · <b>Chặn:</b> P2-B, P2-C</div>
+  <div class="inner">
+    <p>Tách agent ra file riêng <code>src/agent.py</code> (không nhét trong <code>app.py</code>) vì cả CLI lẫn Web server đều gọi nó.</p>
+    <h4>Yêu cầu chi tiết</h4>
+    <ol>
+      <li><b>Chữ ký hàm</b> — bắt buộc nhận callback để đẩy trace realtime:
+<pre><code>def run_react_agent(query: str, provider, tracer: TraceLogger,
+                    version: str = "v1") -> dict:
+    """Trả về {"answer":..., "steps":n, "tool_calls":n,
+               "stop_reason":"final|guardrail|error", "trace":[...]}"""</code></pre></li>
+      <li><b>Parser</b> <code>parse_action(text)</code>:
+        <ul>
+          <li>Bóc <code>Thought:</code>, <code>Action:</code>, <code>Final Answer:</code> bằng regex, chấp nhận có/không dấu <code>**</code> in đậm.</li>
+          <li>Bóc <code>ten_tool[ {...} ]</code> → <code>(tool_name, args_dict)</code>. Ưu tiên <code>json.loads</code>;
+            hỏng thì (V1) trả lỗi parse — <b>đừng vá vội, V2 mới vá</b>, ta cần failed trace ở P3-B.</li>
+          <li>Nếu LLM lỡ tự viết cả <code>Observation:</code> → <b>cắt bỏ toàn bộ phần sau <code>Action:</code></b>
+            (chống LLM tự bịa kết quả — đây là lỗi kinh điển).</li>
+        </ul>
+      </li>
+      <li><b>Executor</b>: kiểm tra <code>tool_name in ALLOWED_TOOLS</code> → nếu không, Observation =
+        <code>{"error":"UNKNOWN_TOOL","available":[...]}</code> và <b>vẫn tiếp tục vòng lặp</b> (cho agent cơ hội tự sửa).</li>
+      <li><b>Bộ nhớ hội thoại</b>: scratchpad nối dồn <code>Thought/Action/Observation</code> của các bước trước rồi
+        nối vào prompt bước sau. <b>Đây là điều kiện bắt buộc để chấm điểm</b> — phải chứng minh được Observation bước n
+        xuất hiện trong prompt bước n+1.</li>
+      <li><b>4 guardrail</b> phải cài đủ, mỗi lần kích hoạt <b>emit một event <code>guardrail</code></b>:
+        <table>
+          <thead><tr><th>Rule</th><th>Điều kiện</th><th>Hành động</th></tr></thead>
+          <tbody>
+            <tr><td><code>MAX_ITERATIONS</code></td><td><code>step &gt; 6</code></td><td>Cắt vòng lặp, trả fallback</td></tr>
+            <tr><td><code>REPEAT_ACTION</code></td><td>Cùng <code>(tool,args)</code> lần thứ 3</td><td>Chèn Observation cảnh báo “bạn đang lặp, hãy đổi cách”, đếm 1 lỗi</td></tr>
+            <tr><td><code>TOOL_ERROR_BUDGET</code></td><td>≥3 Observation lỗi</td><td>Cắt, trả fallback</td></tr>
+            <tr><td><code>UNKNOWN_TOOL</code></td><td>Tool ngoài whitelist</td><td>Trả danh sách tool hợp lệ, cho thử lại</td></tr>
+          </tbody>
+        </table>
+      </li>
+      <li><b>FakeProvider</b> trong <code>src/providers.py</code> (hoặc <code>tests/fake_provider.py</code>): trả về một
+        kịch bản script sẵn theo lượt gọi — <code>[Thought+Action search, Thought+Action check_slots, Final Answer]</code>.
+        Cho phép test toàn bộ loop <b>không tốn API key, không mạng, chạy trong 1 giây</b>.</li>
+      <li>Thêm kịch bản Fake “nghịch ngợm” để test guardrail: luôn trả cùng một Action → phải thấy
+        <code>REPEAT_ACTION</code> rồi <code>MAX_ITERATIONS</code> kích hoạt.</li>
+      <li>Mọi bước đều gọi <code>tracer.emit(...)</code> đúng schema P0-D — không <code>print()</code> tự do nữa.</li>
+    </ol>
+    <h4>Definition of Done</h4>
+    <ul class="dod">
+      <li>Chạy với FakeProvider: trace in ra đúng thứ tự <code>run_start → llm_call → thought → action → observation → … → final → run_end</code>.</li>
+      <li>Kịch bản “nghịch ngợm” dừng đúng ở bước 6, có event <code>guardrail</code>, <b>không treo, không lặp vô hạn</b>.</li>
+      <li>In ra được prompt bước 3 và chỉ rõ trong đó có Observation của bước 1 &amp; 2.</li>
+      <li>Số Observation luôn <b>bằng đúng</b> số Action đã thực thi (1–1, không thừa không thiếu).</li>
+    </ul>
+  </div>
+</article>
+
+<article class="phase" id="P1-E">
+  <header><span class="pid">P1-E</span><h3>Nhánh E — Web UI shell + Trace Inspector (chạy bằng fixture)</h3>
+    <span class="badge role r5">Role 5</span><span class="badge b-time">70′</span><span class="badge b-par">SONG SONG</span></header>
+  <div class="deps"><b>Phụ thuộc:</b> P0-D (chỉ cần schema, <b>không cần</b> agent chạy được) · <b>Chặn:</b> P3-A</div>
+  <div class="inner">
+    <p>Đây là phần tạo ra <b>đích đến của bài</b>: người xem phải <em>nhìn thấy</em> agent suy nghĩ, gọi tool và bị phanh.</p>
+    <h4>Bố cục 3 cột bắt buộc</h4>
+<pre><code>┌──────────────────────────────────────────────────────────────────────────────┐
+│  🏠 Trợ lý tìm & đặt lịch xem nhà     [Chatbot ▾] [Agent V1] [Agent V2]       │
+├───────────────┬──────────────────────────────┬───────────────────────────────┤
+│ TEST CASES    │  HỘI THOẠI                   │  🔍 TRACE INSPECTOR           │
+│ ○ Case 1 🟢   │  👤 Tìm phòng Cầu Giấy <4tr  │  Step 1/6  ▓▓░░░░ budget      │
+│ ○ Case 2 🟢   │                              │  🧠 Thought  Cần lọc theo...  │
+│ ● Case 3 🟡   │  🤖 Mình tìm được 3 tin:     │  🛠️ Action  search_listings   │
+│ ○ Case 4 🟡   │     • HN-CG-002 · 3.6tr/th   │      {"city":"Hà Nội",...} ▾  │
+│ ○ Case 5 🔴   │       25m² · ⭐4.4           │  👁️ Observation  count:3 ▾    │
+│ ○ Case 6 🔴   │       [Xem chi tiết]         │      812ms · ✅ ok            │
+│ ○ Case 7 🔴   │       [Đặt lịch xem]         │  🛡️ Guardrail  REPEAT_ACTION  │
+│               │                              │  🏁 Final  grounded: HN-CG-002│
+│ 🛠️ TOOL       │  [nhập câu hỏi....] [Gửi]    │  ── run_end ──                │
+│  REGISTRY     │                              │  6 steps · 3 tool · 4.2s      │
+│ search ✔ 3x   │                              │  stop: final                  │
+│ book   ✔ 1x   │                              │  [Tải trace .jsonl]           │
+└───────────────┴──────────────────────────────┴───────────────────────────────┘</code></pre>
+    <h4>Yêu cầu chi tiết</h4>
+    <ol>
+      <li>Tạo <code>src/web/static/index.html</code>, <code>styles.css</code>, <code>app.js</code> — <b>vanilla JS, không framework, không build step</b>
+        (lab 240 phút, không đủ thời gian cho npm).</li>
+      <li>Giai đoạn này <b>đọc <code>docs/fixtures/trace_sample.jsonl</code></b> và render lần lượt mỗi 400ms để giả lập stream.
+        Nhờ vậy UI xong sớm, không phải chờ Role 4.</li>
+      <li>Mỗi <code>type</code> event → một kiểu thẻ riêng (màu + icon theo bảng P0-D). Thẻ <code>action</code> và
+        <code>observation</code> có nút gấp/mở để xem JSON đầy đủ.</li>
+      <li><b>Thanh Guardrail budget</b>: hiển thị <code>step / MAX_ITERATIONS</code> dạng progress bar,
+        chuyển đỏ khi chạm trần; badge riêng cho mỗi rule bị kích hoạt.</li>
+      <li><b>Panel Tool Registry</b>: liệt kê 6 tool, đếm số lần được gọi trong phiên hiện tại — giúp chứng minh
+        “Chatbot = 0 tool call” bằng hình ảnh.</li>
+      <li><b>Bộ chọn chế độ</b> 3 nút: <code>chatbot</code> / <code>agent_v1</code> / <code>agent_v2</code>.
+        Ở chế độ <code>chatbot</code>, cột Trace chỉ có <code>run_start → llm_call → final</code> và Tool Registry toàn số 0 —
+        <b>đây chính là bằng chứng trực quan cho phần so sánh</b>.</li>
+      <li>Danh sách 7 test case bấm phát điền sẵn câu hỏi (đọc từ <code>/api/test_cases</code>, tạm thời hard-code).</li>
+      <li>Nút <b>“Tải trace .jsonl”</b> để Role 5 lấy log dán vào báo cáo.</li>
+      <li>Tiếng Việt UTF-8, responsive tối thiểu: dưới 900px thì 3 cột xếp dọc.</li>
+    </ol>
+    <h4>Definition of Done</h4>
+    <ul class="dod">
+      <li>Mở <code>index.html</code> bằng trình duyệt → thấy trace mẫu chạy tuần tự, đủ 10 loại thẻ.</li>
+      <li>Thẻ <code>guardrail</code> nổi bật màu đỏ, thanh budget đổi màu khi chạm trần.</li>
+      <li>Không lỗi trong Console; không gọi CDN ngoài (chấm bài có thể không có mạng).</li>
+    </ul>
+  </div>
+</article>
+
+<!-- ============================= WAVE 2 ============================= -->
+<h2>4. WAVE 2 — Ráp mạch thật</h2>
+
+<article class="phase" id="P2-A">
+  <header><span class="pid">P2-A</span><h3>Chatbot Baseline thật — đúng 1 LLM call, 0 tool</h3>
+    <span class="badge role r3">Role 3</span><span class="badge role r5">Role 5</span><span class="badge b-time">20′</span><span class="badge b-par">SONG SONG với P2-B</span></header>
+  <div class="deps"><b>Phụ thuộc:</b> P1-A, P1-C · <b>Chặn:</b> P4-A</div>
+  <div class="inner">
+    <h4>Yêu cầu chi tiết</h4>
+    <ol>
+      <li><code>run_baseline_chatbot(query, provider, tracer)</code>: emit <code>run_start</code> → <code>llm_call</code> →
+        <code>final</code> → <code>run_end</code> với <code>tool_calls = 0</code>. <b>Đúng một lần gọi provider.</b></li>
+      <li>Chạy cả 7 test case, lưu raw answer vào <code>docs/traces/baseline_&lt;case_id&gt;.jsonl</code>.</li>
+      <li>Role 5 phân loại từng output vào 3 nhãn và ghi vào <code>docs/trace_eval.md</code>:
+        <b>correct</b> (đúng &amp; có căn cứ) · <b>safe fallback</b> (thừa nhận không tra cứu được) ·
+        <b>hallucinated</b> (bịa mã tin / bịa giá / khẳng định đã đặt lịch xong).</li>
+      <li>Chú ý săn bằng chứng vàng: baseline thường bịa ra mã tin kiểu “HN-001” hoặc giá “3.5 triệu” cho case 3–4.
+        <b>Chụp lại</b> — đó là dẫn chứng mạnh nhất của cả báo cáo.</li>
+    </ol>
+    <div class="note"><b>Đừng vội kết luận Agent luôn thắng.</b> Case 1 &amp; 2 baseline gần như chắc chắn thắng về
+      tốc độ và chi phí (1 call vs 3–6 call). Báo cáo phải nói thẳng điều này thì mới đúng tinh thần “Agentic Fit”.</div>
+    <h4>Definition of Done</h4>
+    <ul class="dod">
+      <li>Đếm được chính xác: baseline = 1 LLM call, 0 tool call (nhìn thấy trên UI ở panel Tool Registry).</li>
+      <li>7/7 case có raw answer + nhãn phân loại trong <code>docs/trace_eval.md</code>.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="phase" id="P2-B">
+  <header><span class="pid">P2-B</span><h3>ReAct Agent V1 — LLM thật + tool thật (CLI trước, UI sau)</h3>
+    <span class="badge role r4">Role 4</span><span class="badge b-time">45′</span><span class="badge b-crit">ĐƯỜNG GĂNG</span></header>
+  <div class="deps"><b>Phụ thuộc:</b> P1-B, P1-C, P1-D · <b>Chặn:</b> P3-B</div>
+  <div class="inner">
+    <h4>Yêu cầu chi tiết</h4>
+    <ol>
+      <li>Integrator <code>git pull</code> gộp nhánh Role 1/2/3 vào <code>main</code>, giải quyết xung đột.</li>
+      <li>Thay <code>FakeProvider</code> bằng provider thật, chạy <code>python src/app.py --mode agent --case 3</code>.</li>
+      <li>Bổ sung CLI cho <code>src/app.py</code>: <code>--mode chatbot|agent</code>, <code>--case N</code>,
+        <code>--all</code> (chạy cả 7 case), <code>--query "..."</code>.</li>
+      <li>Xử lý 3 sự cố kinh điển ngay tại đây:
+        <ul>
+          <li>LLM viết dư văn xuôi sau <code>Action:</code> → parser đã cắt (P1-D), xác nhận lại bằng log.</li>
+          <li>LLM dùng nháy đơn thay vì JSON hợp lệ → V1 <b>cứ để lỗi</b>, ghi lại trace (nguyên liệu cho P3-B).</li>
+          <li>Observation quá dài làm hỏng prompt → cắt theo <code>MAX_OBSERVATION_CHARS</code>.</li>
+        </ul>
+      </li>
+      <li>Chạy đủ 7 case, lưu 7 file trace vào <code>docs/traces/agent_v1_&lt;case_id&gt;.jsonl</code>.</li>
+    </ol>
+    <h4>Definition of Done</h4>
+    <ul class="dod">
+      <li>Case 3 đi đúng: 1 tool call → Final Answer <b>có mã tin thật</b> tra được trong <code>listings.json</code>.</li>
+      <li>Case 4 gọi <b>≥3 tool nối tiếp</b>, tham số bước sau lấy từ Observation bước trước (chỉ ra được trong log).</li>
+      <li>Case 5 dừng bằng guardrail hoặc fallback, <b>không chạy quá 6 bước, không crash</b>.</li>
+      <li>Đủ 7 file trace JSONL trong <code>docs/traces/</code>.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="phase" id="P2-C">
+  <header><span class="pid">P2-C</span><h3>Web server + REST API + SSE stream</h3>
+    <span class="badge role r4">Role 4</span><span class="badge role r5">Role 5</span><span class="badge b-time">35′</span><span class="badge b-par">SONG SONG với P2-B</span></header>
+  <div class="deps"><b>Phụ thuộc:</b> P0-D, P1-D · <b>Chặn:</b> P3-A</div>
+  <div class="inner">
+    <p>Chỉ cần <code>run_react_agent</code> có chữ ký ổn định (P1-D) là viết được server, <b>không cần đợi P2-B chạy đúng</b>.</p>
+    <h4>API bắt buộc</h4>
+    <div class="scroll"><table>
+      <thead><tr><th>Endpoint</th><th>Method</th><th>Vào</th><th>Ra</th></tr></thead>
+      <tbody>
+        <tr><td><code>/</code></td><td>GET</td><td>—</td><td><code>index.html</code></td></tr>
+        <tr><td><code>/api/test_cases</code></td><td>GET</td><td>—</td><td>7 test case từ <code>config/test_cases.json</code></td></tr>
+        <tr><td><code>/api/tools</code></td><td>GET</td><td>—</td><td><code>TOOL_SPECS</code> để UI vẽ Tool Registry</td></tr>
+        <tr><td><code>/api/ask</code></td><td>POST</td><td><code>{query, mode}</code> · mode = <code>chatbot|agent_v1|agent_v2</code></td><td><code>{run_id, answer, trace:[...], stats}</code> (đồng bộ, để chấm/eval)</td></tr>
+        <tr><td><code>/api/stream</code></td><td>GET (SSE)</td><td><code>?query=...&amp;mode=...</code></td><td>Từng <code>TraceEvent</code> một dạng <code>data: {...}\n\n</code> ngay khi phát sinh</td></tr>
+        <tr><td><code>/api/listings/{id}</code></td><td>GET</td><td>id</td><td>Chi tiết tin để UI vẽ card nhà</td></tr>
+      </tbody>
+    </table></div>
+    <h4>Yêu cầu chi tiết</h4>
+    <ol>
+      <li><code>src/web/server.py</code> dùng FastAPI + <code>StreamingResponse(media_type="text/event-stream")</code>.</li>
+      <li>Chạy agent trong thread/executor riêng, đẩy event qua <code>queue.Queue</code> → generator SSE lấy ra và yield.
+        <b>Không được chờ agent xong mới trả</b> — mất hoàn toàn ý nghĩa “xem agent suy nghĩ trực tiếp”.</li>
+      <li>Bọc try/except toàn bộ handler: lỗi phải thành event <code>guardrail</code>/<code>fallback</code> gửi về UI,
+        <b>không để trình duyệt treo</b>.</li>
+      <li>Mount static: <code>app.mount("/static", StaticFiles(directory=...))</code>.</li>
+      <li>Lệnh chạy chuẩn ghi vào README: <code>uvicorn src.web.server:app --reload --port 8000</code>.</li>
+    </ol>
+    <h4>Definition of Done</h4>
+    <ul class="dod">
+      <li><code>curl -N "http://localhost:8000/api/stream?query=test&amp;mode=agent_v1"</code> in ra event <b>nhỏ giọt theo thời gian</b>, không ra một cục.</li>
+      <li><code>/api/ask</code> trả JSON đủ <code>trace</code> + <code>stats</code>.</li>
+      <li>Mở <code>http://localhost:8000</code> thấy UI của P1-E.</li>
+    </ul>
+  </div>
+</article>
+
+<!-- ============================= WAVE 3 ============================= -->
+<h2>5. WAVE 3 — Nối UI ↔ Agent &amp; nâng cấp V2</h2>
+
+<article class="phase" id="P3-A">
+  <header><span class="pid">P3-A</span><h3>Nối UI với API thật (gỡ fixture)</h3>
+    <span class="badge role r5">Role 5</span><span class="badge b-time">30′</span><span class="badge b-par">SONG SONG</span></header>
+  <div class="deps"><b>Phụ thuộc:</b> P1-E, P2-C · <b>Chặn:</b> P4-D (ảnh chụp UI)</div>
+  <div class="inner">
+    <h4>Yêu cầu chi tiết</h4>
+    <ol>
+      <li>Thay nguồn fixture bằng <code>new EventSource("/api/stream?query=...&amp;mode=...")</code>; giữ nguyên hàm render
+        (vì schema đã freeze từ P0-D — đây là phần thưởng của việc chốt hợp đồng sớm).</li>
+      <li>Render <b>card nhà</b> khi Observation của <code>search_listings</code> trả về: ảnh placeholder, giá, diện tích,
+        quận, ⭐, số slot còn trống, nút <b>Chi tiết</b> / <b>Đặt lịch xem</b>.</li>
+      <li>Chip <b>“Nguồn: HN-CG-002”</b> gắn dưới Final Answer, bấm vào thì cuộn tới đúng thẻ Observation đã sinh ra nó
+        — <b>đây là phần thể hiện “grounding” rõ nhất cho người chấm</b>.</li>
+      <li>Trạng thái chạy: nút Gửi khoá lại, hiện “Agent đang suy nghĩ… (step 2/6)”, có nút <b>Dừng</b> đóng EventSource.</li>
+      <li>Xử lý lỗi mạng/timeout: hiện thẻ đỏ “Mất kết nối tới server”, không im lặng.</li>
+    </ol>
+    <h4>Definition of Done</h4>
+    <ul class="dod">
+      <li>Gõ câu hỏi case 4 → thấy 3 tool call hiện lên <b>lần lượt theo thời gian thực</b> trên cột phải.</li>
+      <li>Chuyển sang mode <code>chatbot</code> cùng câu hỏi → cột trace chỉ có 3 event, Tool Registry đếm 0.</li>
+      <li>Case 5 → thẻ Guardrail đỏ hiện trên UI kèm tên rule.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="phase" id="P3-B">
+  <header><span class="pid">P3-B</span><h3>Bơm lỗi có chủ đích → thu Failed Trace + RCA</h3>
+    <span class="badge role r1">Role 1</span><span class="badge role r5">Role 5</span><span class="badge b-time">25′</span></header>
+  <div class="deps"><b>Phụ thuộc:</b> P2-B · <b>Chặn:</b> P3-C</div>
+  <div class="inner">
+    <div class="note danger"><b>Bắt buộc làm TRƯỚC P3-C.</b> Nâng cấp V2 mà không có bằng chứng lỗi thì báo cáo
+      không có phần “Before”, mất điểm mục Guardrails &amp; Observability.</div>
+    <h4>Yêu cầu chi tiết — ép lộ đủ 3 failure mode</h4>
+    <ol>
+      <li><b>Unknown Tool</b>: tạm thêm dòng “bạn có thể dùng <code>search_room</code>” vào prompt hoặc hỏi
+        “kiểm tra tin này có bị ngập nước không” (không có tool nào làm được) → agent bịa tên tool.</li>
+      <li><b>Malformed Args</b>: hỏi bằng câu nhiều tham số lộn xộn để LLM viết <code>search_listings['Hà Nội', 4tr]</code>
+        (nháy đơn / thiếu ngoặc / số có chữ) → parser V1 lỗi.</li>
+      <li><b>Repeated Action</b>: dùng case 5 (Atlantis) → agent gọi lại <code>search_listings</code> y hệt nhiều lần
+        cho tới khi chạm <code>MAX_ITERATIONS</code>.</li>
+      <li>Lưu 3 trace lỗi vào <code>docs/traces/failed_*.jsonl</code> và chụp màn hình UI lúc thẻ Guardrail đỏ bật lên.</li>
+      <li>Viết <b>RCA</b> cho ít nhất 1 lỗi trong <code>docs/trace_eval.md</code> theo 4 mục:
+        <b>Triệu chứng</b> (trích đúng dòng trace) → <b>Nguyên nhân trực tiếp</b> → <b>Nguyên nhân gốc</b>
+        (prompt thiếu luật? parser cứng? tool trả lỗi mơ hồ?) → <b>Biện pháp sửa</b> (giao cho P3-C).</li>
+    </ol>
+    <h4>Definition of Done</h4>
+    <ul class="dod">
+      <li>≥1 failed trace đầy đủ (có <code>run_start</code> đến <code>run_end</code>) dán trong báo cáo.</li>
+      <li>Phần RCA chỉ đúng dòng log gây lỗi, không nói chung chung.</li>
+      <li>Có ảnh chụp UI hiển thị guardrail kích hoạt.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="phase" id="P3-C">
+  <header><span class="pid">P3-C</span><h3>Agent V2 — parser mềm, tự phục hồi, safe fallback</h3>
+    <span class="badge role r3">Role 3</span><span class="badge role r4">Role 4</span><span class="badge b-time">45′</span><span class="badge b-crit">ĐƯỜNG GĂNG</span></header>
+  <div class="deps"><b>Phụ thuộc:</b> P3-B · <b>Chặn:</b> P4-A</div>
+  <div class="inner">
+    <h4>Yêu cầu chi tiết</h4>
+    <div class="scroll"><table>
+      <thead><tr><th>Failure mode (từ P3-B)</th><th>Sửa ở Parser / Code (Role 4)</th><th>Sửa ở Prompt (Role 3)</th></tr></thead>
+      <tbody>
+        <tr><td>Unknown tool</td><td>Observation trả <code>{"error":"UNKNOWN_TOOL","available":[6 tên]}</code> + gợi ý tool gần đúng nhất (so khớp chuỗi)</td><td>Thêm luật: “Chỉ được dùng 6 tool trong danh sách. Nếu không tool nào phù hợp, trả lời thẳng là dữ liệu không hỗ trợ.”</td></tr>
+        <tr><td>Malformed args</td><td>Parser 3 tầng: <code>json.loads</code> → thay nháy đơn thành nháy kép → bóc <code>key=value</code>/tham số vị trí. Vẫn hỏng thì trả <code>{"error":"BAD_ARGS","expected_format":"..."}</code></td><td>Thêm 2 ví dụ Action đúng định dạng ngay trong prompt (few-shot)</td></tr>
+        <tr><td>Repeated action</td><td>Bộ đếm chữ ký <code>hash(tool+args)</code>; lần 2 chèn Observation cảnh báo, lần 3 cắt phiên</td><td>Luật: “Nếu Observation có <code>error</code>, PHẢI đổi tham số hoặc đổi tool, cấm gọi lại y hệt.”</td></tr>
+        <tr><td>Chạm trần lặp</td><td>Sinh <b>fallback lịch sự có nội dung</b>: tóm tắt đã thử gì, còn thiếu gì, gợi ý 2 hành động cho người dùng</td><td>Mẫu câu fallback trong <code>FALLBACK_MESSAGE</code></td></tr>
+        <tr><td>Bịa số liệu</td><td>Kiểm tra hậu kỳ: mọi mã tin xuất hiện trong Final Answer phải từng có trong Observation; nếu không → emit <code>guardrail: UNGROUNDED_CLAIM</code></td><td>Luật: “Mọi con số và mã tin phải trích từ Observation.”</td></tr>
+      </tbody>
+    </table></div>
+    <ol>
+      <li>Giữ V1 <b>còn chạy được</b> (tham số <code>version="v1"</code>) để so sánh Before/After công bằng trên cùng test case.</li>
+      <li>Đặt <code>PROMPT_VERSION = "v2"</code>, ghi rõ trong trace để báo cáo phân biệt được hai lần chạy.</li>
+      <li>UI thêm nút mode <code>agent_v2</code> (đã chừa chỗ ở P1-E).</li>
+    </ol>
+    <h4>Definition of Done</h4>
+    <ul class="dod">
+      <li>Chạy lại đúng 3 câu gây lỗi ở P3-B: V2 <b>không crash</b>, và mỗi lỗi đều có event <code>retry</code> hoặc <code>fallback</code>.</li>
+      <li>Case 5 (Atlantis): V2 dừng sớm hơn V1 (ít bước hơn) và trả lời lịch sự, có gợi ý thành phố hợp lệ.</li>
+      <li>Case 7: V2 nói rõ “không tìm thấy mã tin HN-XX-999”, tuyệt đối không bịa giá điện.</li>
+      <li>V1 vẫn chạy được để đối chứng.</li>
+    </ul>
+  </div>
+</article>
+
+<!-- ============================= WAVE 4 ============================= -->
+<h2>6. WAVE 4 — Đo đạc &amp; báo cáo</h2>
+
+<article class="phase" id="P4-A">
+  <header><span class="pid">P4-A</span><h3>Chạy eval batch: 3 mode × 7 case = 21 lượt</h3>
+    <span class="badge role r5">Role 5</span><span class="badge b-time">15′</span><span class="badge b-crit">ĐƯỜNG GĂNG</span></header>
+  <div class="deps"><b>Phụ thuộc:</b> P2-A, P3-C · <b>Chặn:</b> P4-B</div>
+  <div class="inner">
+    <h4>Yêu cầu chi tiết</h4>
+    <ol>
+      <li>Viết <code>src/evaluate.py</code>: lặp qua 7 case × 3 mode, gọi hàm tương ứng, ghi
+        <code>docs/traces/&lt;mode&gt;_&lt;case_id&gt;.jsonl</code> và tổng hợp <code>docs/traces/summary.csv</code>.</li>
+      <li>Cột bắt buộc trong summary: <code>case_id, mode, steps, tool_calls, llm_calls, total_ms, stop_reason,
+        guardrail_hits, answer_chars</code>.</li>
+      <li>Chạy <b>trước</b> khi vào giờ báo cáo — nếu hết quota API, chuyển <code>LLM_PROVIDER=mock</code> và ghi chú rõ trong báo cáo.</li>
+    </ol>
+    <h4>Definition of Done</h4>
+    <ul class="dod">
+      <li>21 file trace + 1 file <code>summary.csv</code> có đủ 21 dòng.</li>
+      <li>Không lượt nào có <code>stop_reason = "crash"</code>.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="phase" id="P4-B">
+  <header><span class="pid">P4-B</span><h3><code>docs/trace_eval.md</code> — báo cáo &amp; Scoring Matrix</h3>
+    <span class="badge role r5">Role 5</span><span class="badge role r1">Role 1</span><span class="badge b-time">30′</span><span class="badge b-crit">ĐƯỜNG GĂNG</span></header>
+  <div class="deps"><b>Phụ thuộc:</b> P4-A · <b>Chặn:</b> P5-A</div>
+  <div class="inner">
+    <h4>Cấu trúc báo cáo bắt buộc (8 mục)</h4>
+    <ol>
+      <li><b>Bài toán &amp; Agentic Fit</b> — 4 tiêu chí, vì sao chọn Agent (từ P1-A).</li>
+      <li><b>Tool Contract</b> — bảng 6 tool (từ P0-C).</li>
+      <li><b>Trace đầy đủ 1 case multi-tool</b> — dán nguyên trace case 4, đủ <code>Thought/Action/Observation</code>.</li>
+      <li><b>Failed Trace + RCA</b> — từ P3-B, 4 mục Triệu chứng → Nguyên nhân gốc → Sửa.</li>
+      <li><b>Before/After V1 → V2</b> — bảng 2 cột trên cùng câu hỏi, kèm số bước &amp; kết quả.</li>
+      <li><b>Scoring Matrix</b> — 7 case × 3 mode, mỗi ô 4 tiêu chí × 0–2 điểm:
+        <div class="scroll"><table>
+          <thead><tr><th>Case</th><th>Mode</th><th>Factual</th><th>Grounding</th><th>Tool selection</th><th>Termination</th><th>Tổng /8</th><th>Nhận xét</th></tr></thead>
+          <tbody><tr><td>3</td><td>chatbot</td><td>0</td><td>0</td><td>0</td><td>2</td><td>2</td><td>Bịa mã tin “HN-001” không tồn tại</td></tr>
+                 <tr><td>3</td><td>agent_v2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>8</td><td>Trích đúng HN-CG-002 từ Observation</td></tr></tbody>
+        </table></div>
+      </li>
+      <li><b>Chi phí vs lợi ích</b> — bảng số LLM call &amp; thời gian trung bình mỗi mode; <b>chỉ rõ case nào Chatbot thắng</b>
+        (case 1–2) và vì sao. Kết luận phải nêu ngưỡng: “khi câu hỏi cần dữ liệu động hoặc ≥2 bước phụ thuộc → dùng Agent”.</li>
+      <li><b>Bài học &amp; hạn chế</b> — mock data không phải dữ liệu thật, chưa có xác thực người dùng, tool <code>book_viewing</code>
+        không có cơ chế rollback…</li>
+    </ol>
+    <h4>Definition of Done</h4>
+    <ul class="dod">
+      <li>Đủ 8 mục; mọi con số trong báo cáo <b>truy được về</b> file trace trong <code>docs/traces/</code>.</li>
+      <li>Có ít nhất 2 ảnh chụp UI: một lúc agent gọi tool, một lúc guardrail bật.</li>
+      <li>Có ít nhất 1 kết luận “Chatbot thắng ở case …” — chứng tỏ nhóm đánh giá công bằng, không thiên vị Agent.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="phase" id="P4-C">
+  <header><span class="pid">P4-C</span><h3>Hybrid Decision Flowchart</h3>
+    <span class="badge role r3">Role 3</span><span class="badge b-time">15′</span><span class="badge b-par">SONG SONG với P4-B</span></header>
+  <div class="deps"><b>Phụ thuộc:</b> P4-A</div>
+  <div class="inner">
+    <h4>Yêu cầu chi tiết</h4>
+    <ol>
+      <li>Tạo <code>docs/hybrid_flowchart.mermaid</code>: câu hỏi vào → có cần dữ liệu tin đăng / lịch xem không?
+        → <b>không</b>: đi nhánh Chatbot (1 call, rẻ, nhanh) → <b>có</b>: đi nhánh ReAct Agent →
+        cần ghi trạng thái (đặt lịch) không? → có: bắt buộc xác nhận người dùng trước khi <code>book_viewing</code>.</li>
+      <li>Vẽ luôn nhánh guardrail: quá 6 bước / 3 lỗi → safe fallback → chuyển cho người thật.</li>
+      <li>Ghi rõ ngưỡng định lượng trên cạnh nối (VD: “≥2 bước phụ thuộc”, “dữ liệu đổi theo ngày”).</li>
+    </ol>
+    <h4>Definition of Done</h4>
+    <ul class="dod"><li>File mermaid render được (dán vào mermaid.live), có đủ 2 nhánh + nhánh guardrail.</li></ul>
+  </div>
+</article>
+
+<article class="phase" id="P4-D">
+  <header><span class="pid">P4-D</span><h3>README + ảnh chụp + hướng dẫn chạy</h3>
+    <span class="badge role r1">Role 1</span><span class="badge b-time">15′</span><span class="badge b-par">SONG SONG với P4-B</span></header>
+  <div class="deps"><b>Phụ thuộc:</b> P3-A</div>
+  <div class="inner">
+    <h4>Yêu cầu chi tiết</h4>
+    <ol>
+      <li>Thêm mục <b>“Chạy Web App”</b> vào README: cài đặt → <code>uvicorn src.web.server:app --port 8000</code> → mở <code>localhost:8000</code>.</li>
+      <li>Thêm sơ đồ kiến trúc thật của nhóm (Browser → SSE → FastAPI → agent → tools → listings.json → trace).</li>
+      <li>Cập nhật cây thư mục cho khớp code thật (có <code>src/data.py</code>, <code>src/agent.py</code>, <code>src/trace.py</code>, <code>src/web/</code>, <code>config/listings.json</code>).</li>
+      <li>Chèn 2–3 ảnh chụp UI vào <code>docs/img/</code>.</li>
+    </ol>
+    <h4>Definition of Done</h4>
+    <ul class="dod"><li>Người lạ clone repo, làm theo README, chạy được web trong 5 phút.</li></ul>
+  </div>
+</article>
+
+<!-- ============================= WAVE 5 ============================= -->
+<h2>7. WAVE 5 — Chốt sổ &amp; nộp</h2>
+
+<article class="phase" id="P5-A">
+  <header><span class="pid">P5-A</span><h3>Security check + push + nộp link</h3>
+    <span class="badge b-time">15′</span><span class="badge b-crit">ĐƯỜNG GĂNG</span></header>
+  <div class="deps"><b>Phụ thuộc:</b> P4-B, P4-C, P4-D</div>
+  <div class="inner">
+    <h4>Yêu cầu chi tiết</h4>
+    <ol>
+      <li><code>git status</code> + mở <code>.gitignore</code>: chắc chắn <code>.env</code>, <code>.venv/</code>,
+        <code>__pycache__/</code>, <code>*.pyc</code> không lên Git.</li>
+      <li>Rà soát API key bị lộ trong code/log/báo cáo: tìm chuỗi <code>sk-</code>, <code>AIza</code> trong toàn repo.
+        <b>Nếu đã lỡ commit key → revoke key ngay</b>, xoá file khỏi lịch sử rồi mới push.</li>
+      <li>Kiểm tra <b>checklist artifacts</b> đủ 8 mục (xem Phụ lục C).</li>
+      <li><code>git add . &amp;&amp; git commit -m "Hoan thanh Lab 03: Chatbot vs ReAct Agent E402" &amp;&amp; git push</code>.</li>
+      <li>Nộp link repo cho Coach.</li>
+    </ol>
+    <h4>Definition of Done</h4>
+    <ul class="dod">
+      <li>Repo trên GitHub không chứa <code>.env</code> và không chứa key.</li>
+      <li>Đủ 8 artifact bắt buộc, README hiển thị đúng.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="phase" id="P5-B">
+  <header><span class="pid">P5-B</span><h3>Cross-Audit liên nhóm (tấn công / phòng thủ)</h3>
+    <span class="badge b-time">20′</span><span class="badge b-par">SONG SONG</span></header>
+  <div class="deps"><b>Phụ thuộc:</b> P3-C (agent V2 phải chạy được)</div>
+  <div class="inner">
+    <h4>Yêu cầu chi tiết</h4>
+    <ol>
+      <li>Nhóm bạn <b>tấn công</b> agent nhóm khác bằng 3 kiểu: địa danh ảo, mã tin ảo, yêu cầu đặt lịch mơ hồ
+        (“đặt giúp mình cái nào rẻ nhất” — không tên, không SĐT, không chọn slot).</li>
+      <li>Ghi biên bản: câu tấn công → agent phản ứng thế nào → thủng hay đỡ được.</li>
+      <li>Phòng thủ: giải thích được mỗi guardrail dùng để làm gì và tại sao đặt ngưỡng đó.</li>
+    </ol>
+    <h4>Definition of Done</h4>
+    <ul class="dod"><li>Biên bản Cross-Audit (≥3 câu tấn công) nằm trong <code>docs/trace_eval.md</code>.</li></ul>
+  </div>
+</article>
+
+<article class="phase" id="P5-C">
+  <header><span class="pid">P5-C</span><h3>BONUS — Autonomous Agent (Planner + Memory)</h3>
+    <span class="badge b-opt">TÙY CHỌN +10%</span><span class="badge b-time">30′</span></header>
+  <div class="deps"><b>Phụ thuộc:</b> P3-C · <b>Chỉ làm khi Wave 4 đã xong</b></div>
+  <div class="inner">
+    <h4>Yêu cầu chi tiết</h4>
+    <ol>
+      <li><b>Planner</b>: thêm bước 0 — LLM tự rã câu hỏi thành checklist các bước, emit event <code>plan</code>,
+        UI hiển thị checklist tự tick khi từng bước xong.</li>
+      <li><b>Memory</b>: nhớ ràng buộc người dùng trong phiên (ngân sách, quận ưa thích, đã xem tin nào) và
+        tự áp vào lượt hỏi sau mà không cần nhắc lại.</li>
+      <li><b>Self-critique</b>: trước khi ra Final Answer, hỏi lại LLM “câu trả lời này đã có bằng chứng Observation chưa?”
+        → nếu chưa, quay lại vòng lặp (nhớ vẫn tính vào <code>MAX_ITERATIONS</code>).</li>
+    </ol>
+    <h4>Definition of Done</h4>
+    <ul class="dod"><li>Demo được 1 phiên 2 lượt hỏi: lượt 2 tự nhớ ngân sách đã nêu ở lượt 1.</li></ul>
+  </div>
+</article>
+
+<!-- ============================= PHỤ LỤC ============================= -->
+<h2>8. Phụ lục A — Cấu trúc <code>config/listings.json</code> (đã sinh sẵn)</h2>
+<pre><code>{
+  "meta": {
+    "dataset": "rental-listings-vn", "version": "1.0.0", "total_listings": 50,
+    "cities": ["Hà Nội","TP.HCM","Đà Nẵng"],
+    "districts_by_city": {...},                  // dùng cho lỗi CITY_NOT_FOUND / gợi ý
+    "property_types": {"phong_tro":"Phòng trọ", "chung_cu_mini":"Chung cư mini",
+                       "studio":"Căn hộ studio", "can_ho_dich_vu":"Căn hộ dịch vụ",
+                       "can_ho_chung_cu":"Căn hộ chung cư", "nha_nguyen_can":"Nhà nguyên căn"},
+    "amenity_vocabulary": {"dieu_hoa":"Điều hòa", ...},   // map mã -> tiếng Việt cho UI
+    "status_vocabulary": {...}, "slot_status_vocabulary": {...},
+    "price_range_vnd_month": {"min": 1700000, "max": 26000000}
+  },
+  "listings": [ 50 phần tử, mỗi phần tử: {
+      "id": "HN-CG-002",                    // &lt;MÃ TP&gt;-&lt;MÃ QUẬN&gt;-&lt;SỐ&gt;
+      "title", "property_type", "property_type_label",
+      "status": "available | pending | rented",
+      "price_vnd_month", "deposit_months", "min_lease_months",
+      "area_m2", "bedrooms", "bathrooms", "floor", "total_floors", "max_occupants",
+      "furnishing": "full|basic|empty",
+      "amenities": ["dieu_hoa","nong_lanh", ...],
+      "utilities": { "electricity_vnd_per_kwh", "water_vnd_per_m3", "water_charge_mode",
+                     "internet_vnd_month", "service_fee_vnd_month",
+                     "motorbike_parking_vnd_month" },        // -> estimate_monthly_cost
+      "rules": { "pets_allowed", "cooking_allowed", "shared_with_owner",
+                 "curfew", "students_welcome" },
+      "parking": { "motorbike", "car" },
+      "location": { "city","district","ward","street","address_line","full_address",
+                    "lat","lng","distance_to_city_center_km" },
+      "nearby_places": [ {"name","type","distance_km"} ],
+      "landlord": { "id","name","phone","verified","response_rate","avg_response_minutes" },
+      "rating", "review_count", "images", "description",
+      "available_from", "posted_at", "updated_at",
+      "viewing_slots": [ {"slot_id","date","time","duration_minutes",
+                          "status":"available|booked","booked_by"} ]   // -> check/book
+  } ],
+  "bookings": []        // book_viewing ghi vào đây
+}</code></pre>
+<div class="note ok"><b>Đã cài sẵn edge case trong dữ liệu:</b> 3 tin <code>rented</code> · 7 tin <code>pending</code> ·
+  8 tin <b>không còn khung giờ xem</b> · tin rẻ nhất 1.7tr &amp; đắt nhất 26tr (thử lọc khoảng giá) ·
+  4 tin cho nuôi thú cưng (thử lọc nhiều điều kiện) · 95 slot còn trống để đặt lịch.</div>
+
+<h2>9. Phụ lục B — Cây file mục tiêu khi nộp</h2>
+<pre><code>Day03-D305/
+├── README.md                     # P4-D
+├── requirements.txt              # + fastapi, uvicorn (P0-A)
+├── .env.example / .env(ignored)
+├── config/
+│   ├── listings.json             # ✅ đã có — 50 tin mockdata
+│   └── test_cases.json           # P1-A — 7 case
+├── src/
+│   ├── data.py                   # P0-B  loader + chuẩn hoá tiếng Việt
+│   ├── tools.py                  # P1-B  6 tool + AVAILABLE_TOOLS + TOOL_SPECS
+│   ├── prompts.py                # P1-C  baseline + ReAct v1/v2 + guardrail config
+│   ├── trace.py                  # P0-D  TraceEvent + TraceLogger (JSONL + callback)
+│   ├── agent.py                  # P1-D/P2-B/P3-C  ReAct loop, parser, executor
+│   ├── providers.py              # có sẵn + FakeProvider (P1-D)
+│   ├── evaluate.py               # P4-A  batch 3 mode × 7 case
+│   ├── app.py                    # CLI: --mode --case --all --query
+│   └── web/
+│       ├── server.py             # P2-C  FastAPI + SSE
+│       └── static/{index.html, styles.css, app.js}   # P1-E / P3-A
+├── tests/test_tools.py           # P1-B
+└── docs/
+    ├── PHASE_PLAN.html           # ← file này
+    ├── trace_eval.md             # P4-B  báo cáo chính
+    ├── hybrid_flowchart.mermaid  # P4-C
+    ├── PHAN_CONG_CONG_VIEC.md    # P0-E
+    ├── fixtures/trace_sample.jsonl   # P0-D
+    ├── traces/*.jsonl + summary.csv  # P2-B / P3-B / P4-A
+    └── img/*.png                 # ảnh chụp UI (P4-B)</code></pre>
+
+<h2>10. Phụ lục C — Checklist nộp bài</h2>
+<ul class="dod">
+  <li><code>README.md</code> — kiến trúc, cách chạy web, rubric</li>
+  <li><code>docs/PHAN_CONG_CONG_VIEC.md</code> — 5 role + checklist theo mốc</li>
+  <li><code>docs/DANH_SACH_DE_TAI.md</code> — có sẵn</li>
+  <li><code>docs/trace_eval.md</code> — trace log + Scoring Matrix + RCA + Cross-Audit</li>
+  <li><code>docs/hybrid_flowchart.mermaid</code> — sơ đồ quyết định</li>
+  <li><code>config/test_cases.json</code> — 7 case (2 lý thuyết · 2 tool · 3 bẫy)</li>
+  <li><code>config/listings.json</code> — 50 tin mockdata</li>
+  <li><code>src/tools.py</code> · <code>src/prompts.py</code> · <code>src/agent.py</code> · <code>src/web/server.py</code> — code chạy được</li>
+  <li>Web app chạy được và <b>hiển thị Thought / Action / Observation / Guardrail trên UI</b></li>
+  <li>Không có <code>.env</code> hay API key trong repo</li>
+</ul>
+
+<h2>11. Phụ lục D — Rủi ro &amp; phương án dự phòng</h2>
+<div class="scroll"><table>
+  <thead><tr><th>Rủi ro</th><th>Dấu hiệu sớm</th><th>Phương án</th></tr></thead>
+  <tbody>
+    <tr><td>Hết quota / không có API key</td><td>Provider trả chuỗi <code>[... Error]</code></td><td>Chuyển <code>LLM_PROVIDER=mock</code> + dùng FakeProvider; toàn bộ loop, guardrail, UI vẫn demo được. Ghi chú rõ trong báo cáo.</td></tr>
+    <tr><td>LLM không tuân định dạng ReAct</td><td>Parser lỗi liên tục ở P2-B</td><td>Thêm few-shot 2 ví dụ vào prompt (việc của P3-C, kéo lên làm sớm); giảm nhiệt độ; đổi model mạnh hơn.</td></tr>
+    <tr><td>SSE khó (P2-C trễ)</td><td>Quá 20′ chưa stream được</td><td>Hạ cấp: dùng <code>/api/ask</code> đồng bộ rồi UI phát lại trace theo từng 300ms. Vẫn đạt yêu cầu “hiển thị trên UI”, chỉ mất tính realtime.</td></tr>
+    <tr><td>Role 5 chờ Role 4</td><td>UI đứng im ở Wave 1</td><td>Đúng lý do phải freeze schema ở P0-D — UI làm bằng fixture, không được phép chờ.</td></tr>
+    <tr><td>Xung đột Git</td><td>Merge conflict liên tục</td><td>Luật 1 file 1 chủ (P0-E); Integrator gộp 30′/lần.</td></tr>
+    <tr><td>Hết giờ ở Wave 4</td><td>Còn &lt;40′ mà chưa eval</td><td>Cắt P5-C (bonus) và giảm eval xuống 5 case cốt lõi. <b>Không được cắt P4-B</b> — báo cáo chiếm trọng số lớn nhất.</td></tr>
+  </tbody>
+</table></div>
+
+<footer>
+  Phase plan cho bài lab Day03-D305 · Chủ đề: Trợ lý Tìm &amp; Đặt lịch xem Nhà trọ / Căn hộ cho thuê ·
+  Dữ liệu trong <code>config/listings.json</code> là dữ liệu giả lập phục vụ học tập, không phải tin đăng thật.
+</footer>
+
+</div>
+</body>
+</html>
