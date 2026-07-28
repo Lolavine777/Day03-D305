@@ -18,9 +18,8 @@ if sys.stdout.encoding != 'utf-8':
     except Exception:
         pass
 
-# Import các thành phần từ file của Role 2, Role 3 & Multi-Provider Adapter
-from tools import AVAILABLE_TOOLS, get_weather, search_flights
-from prompts import CHATBOT_BASELINE_PROMPT, REACT_SYSTEM_PROMPT, MAX_ITERATIONS
+# Import các thành phần từ file của Role 3 & Multi-Provider Adapter.
+from prompts import CHATBOT_BASELINE_PROMPT
 from providers import get_llm_provider
 
 load_dotenv()
@@ -38,44 +37,32 @@ def load_test_cases():
         return json.load(f)
 
 
-def run_baseline_chatbot(user_query: str, provider):
+def run_baseline_chatbot(user_query: str, provider, *, emit: bool = True) -> str:
     """
     Dựng Chatbot gốc (Baseline) không có công cụ.
+
+    Baseline chỉ thực hiện đúng một lượt gọi provider.
+    ``emit=False`` dùng khi cần lưu kết quả để trace hoặc chạy test.
     """
-    print(f"\n💬 [CHATBOT BASELINE] Câu hỏi: {user_query}")
-    print(f"⚙️ System Prompt: {CHATBOT_BASELINE_PROMPT.strip()}")
-    
-    # Gọi LLM Provider thực hiện sinh câu trả lời
     response = provider.generate(user_query, system_prompt=CHATBOT_BASELINE_PROMPT)
-    print(f"🤖 Chatbot trả lời:\n{response}")
+    if emit:
+        print(f"\n💬 [CHATBOT BASELINE] Câu hỏi: {user_query}")
+        print(f"⚙️ System Prompt: {CHATBOT_BASELINE_PROMPT.strip()}")
+        print(f"🤖 Chatbot trả lời:\n{response}")
+    return response
 
 
-def run_react_agent(user_query: str, provider):
-    """
-    Dựng vòng lặp ReAct Agent (Thought -> Action -> Observation) có Guardrails.
-    """
-    print(f"\n🤖 [REACT AGENT] Câu hỏi: {user_query}")
-    step = 0
-    
-    while step < MAX_ITERATIONS:
-        step += 1
-        print(f"\n--- 🔄 Vòng lặp ReAct (Step {step}/{MAX_ITERATIONS}) ---")
-        
-        if step == 1:
-            print("🧠 Thought: Câu hỏi này cần tra cứu thời tiết thời gian thực.")
-            print("🛠️ Action: get_weather['Hà Nội']")
-            
-            # Thực thi tool
-            obs = get_weather("Hà Nội")
-            print(f"👁️ Observation: {obs}")
-            
-        elif step == 2:
-            print("🧠 Thought: Tôi đã có thông tin thời tiết Hà Nội, giờ tôi có thể tư vấn trang phục.")
-            print("🏁 Final Answer: Thời tiết Hà Nội hôm nay 28°C, nắng nhẹ. Bạn nên mặc áo phông thoáng mát!")
-            break
-            
-    if step >= MAX_ITERATIONS:
-        print(f"🛡️ GUARDRAIL TRIGGERED: Đã đạt giới hạn tối đa {MAX_ITERATIONS} bước. Ngắt lặp an toàn!")
+def run_baseline_suite(provider, tests=None, *, emit: bool = True):
+    """Chạy baseline trên từng test case và trả kết quả để ghi trace."""
+    tests = load_test_cases() if tests is None else tests
+    results = []
+    for case in tests:
+        results.append({
+            "id": case.get("id"),
+            "question": case["question"],
+            "response": run_baseline_chatbot(case["question"], provider, emit=emit),
+        })
+    return results
 
 
 if __name__ == "__main__":
@@ -91,11 +78,5 @@ if __name__ == "__main__":
     tests = load_test_cases()
     print(f"✅ Đã tải thành công {len(tests)} Test Cases từ config/test_cases.json\n")
     
-    # Chạy thử câu test số 3
-    sample_query = tests[2]["question"]
-    
-    print("--- DEMO 1: CHẠY TRÊN CHATBOT BASELINE ---")
-    run_baseline_chatbot(sample_query, provider)
-    
-    print("\n--- DEMO 2: CHẠY TRÊN REACT AGENT ---")
-    run_react_agent(sample_query, provider)
+    print("--- MỐC 2: CHẠY BASELINE TRÊN 5 TEST CASES ---")
+    run_baseline_suite(provider, tests)
