@@ -1,30 +1,78 @@
-"""
-🧠 CẤP ĐỘ 3: REACTIVE AGENT (ReAct Agent - Thought -> Action -> Observation)
-Agent biết suy nghĩ, tự ra quyết định gọi Tool thực tế và quan sát kết quả để trả lời.
-"""
+"""Level 3 — thin demo adapter around the shared ReAct orchestration seam."""
 
-import json
+from __future__ import annotations
 
-# Định nghĩa Tool thực tế
-def get_weather(city: str) -> str:
-    return f"Thời tiết tại {city}: 28°C, Nắng nhẹ, Độ ẩm 65%."
+from typing import TYPE_CHECKING, Any
 
-def search_flights(origin: str, destination: str) -> str:
-    return f"Chuyến bay {origin} -> {destination}: Vé VN123 giá 1.500.000 VNĐ."
+if TYPE_CHECKING:
+    try:
+        from providers import BaseLLMProvider
+    except ImportError:
+        from src.providers import BaseLLMProvider
 
-def reactive_agent_step(user_goal: str):
-    print(f"🎯 Goal: {user_goal}")
-    
-    # Bước 1: Thought & Action gọi weather tool
-    print("\n🧠 [Thought 1]: Cần kiểm tra thời tiết thực tế trước.")
-    print("🛠️ [Action 1] : get_weather('Hà Nội')")
-    obs1 = get_weather("Hà Nội")
-    print(f"👁️ [Observation 1]: {obs1}")
-    
-    # Bước 2: Thought & Final Answer
-    print("\n🧠 [Thought 2]: Đã có dữ liệu thời tiết 28°C nắng nhẹ. Đưa ra câu trả lời.")
-    print(f"🏁 [Final Answer]: Thời tiết Hà Nội hôm nay 28°C nắng nhẹ. Bạn nên mặc áo phông thoáng mát!")
+
+def reactive_agent_step(
+    user_goal: str,
+    provider: "BaseLLMProvider | None" = None,
+    tool_registry: dict[str, Any] | None = None,
+) -> Any:
+    """Delegate to the shared core without duplicating tools or loop code.
+
+    With no injected dependencies, the standalone demo builds the default
+    SQLite runtime so rental Actions have real tools. Tests and other callers
+    may inject a provider plus registry through the same compatibility wrapper.
+    """
+
+    if provider is None and tool_registry is None:
+        try:
+            from app import build_default_runtime
+        except ImportError:
+            import sys
+            from pathlib import Path
+
+            sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+            from app import build_default_runtime
+
+        engine, _store = build_default_runtime()
+        return engine.run_turn(user_goal, mode="level3")
+
+    if provider is None:
+        try:
+            from providers import get_llm_provider
+        except ImportError:
+            import sys
+            from pathlib import Path
+
+            sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+            from providers import get_llm_provider
+
+        provider = get_llm_provider()
+
+    # Lazy import prevents app -> ai_levels -> app circular imports.
+    try:
+        from app import run_react_agent
+    except ImportError:
+        import sys
+        from pathlib import Path
+
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+        from app import run_react_agent
+
+    if tool_registry is None:
+        return run_react_agent(user_goal, provider)
+    return run_react_agent(user_goal, provider, tool_registry)
+
 
 if __name__ == "__main__":
-    print("=== DEMO CẤP ĐỘ 3: REACTIVE AGENT (ReAct Loop) ===")
-    reactive_agent_step("Thời tiết Hà Nội hôm nay thế nào và nên mặc gì?")
+    import json
+    import sys
+
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except (AttributeError, OSError):
+        pass
+    demo_result = reactive_agent_step(
+        "Tìm phòng ở Cầu Giấy dưới 5 triệu, có điều hòa và chỗ để xe."
+    )
+    payload = demo_result.to_dict() if hasattr(demo_result, "to_dict") else demo_result
+    print(json.dumps(payload, ensure_ascii=False, indent=2))
