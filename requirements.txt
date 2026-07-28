@@ -3,3 +3,8 @@ openai
 anthropic
 python-dotenv
 requests
+fastapi
+uvicorn[standard]
+pydantic
+pytest
+httpx
