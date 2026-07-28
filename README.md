@@ -10,16 +10,28 @@ TypeScript, SQLite và trace `Thought -> Action -> Observation`.
 
 ```powershell
 python -m venv .venv
-.venv\Scripts\Activate.ps1
+.\.venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
 Copy-Item .env.example .env
-python src/app.py
 ```
+
+Mở `.env`, chọn một provider thật trong `gemini | openai | anthropic |
+openrouter` và điền API key tương ứng. Ví dụ:
+
+```dotenv
+LLM_PROVIDER=openai
+OPENAI_API_KEY=your_real_api_key
+LLM_MODEL=gpt-4o-mini
+```
+
+Runtime bắt buộc dùng provider thật từ `.env`; thiếu provider, API key không
+hợp lệ, giá trị `mock` hoặc provider không hỗ trợ đều bị từ chối thay vì âm
+thầm fallback sang `MockProvider`. Không commit file `.env`.
 
 Chạy web ở hai terminal:
 
 ```powershell
-uvicorn src.web_api:app --reload
+python -m uvicorn src.web_api:app --reload
 ```
 
 ```powershell
@@ -28,8 +40,19 @@ npm install
 npm run dev
 ```
 
-Mở `http://localhost:5173`. Chế độ mặc định là `mock`, không cần API key.
-Để dùng model thật, đổi `LLM_PROVIDER` và API key tương ứng trong `.env`.
+Mở `http://localhost:5173`. Kiểm tra provider runtime mà không gửi prompt:
+
+```powershell
+Invoke-RestMethod http://127.0.0.1:8000/api/health
+```
+
+Health check chỉ xác nhận provider/model đã được cấu hình và runtime dựng được;
+API key được nhà cung cấp xác thực ở lần chat đầu tiên. Nếu OpenAI trả
+`401 invalid_api_key`, hãy thay `OPENAI_API_KEY` rồi restart backend.
+
+Sau khi đổi `.env`, hãy khởi động lại Uvicorn. `python src/app.py` chạy batch
+demo bằng provider thật và có thể phát sinh nhiều lượt gọi API; giao diện web
+phù hợp hơn để thử từng yêu cầu.
 
 ### Kiểm thử và build
 
@@ -98,7 +121,7 @@ Bài Lab giúp bạn hiểu rõ sự tiến hóa qua 4 cấp độ của hệ th
 │   ├── 📄 artifacts.py           <-- Project tool output thành UI artifacts
 │   ├── 📄 privacy.py             <-- Chính sách che số điện thoại dùng chung
 │   ├── 📄 prompts.py             <-- Baseline/ReAct/Autonomous prompts
-│   ├── 📄 providers.py           <-- Mock + các LLM provider tùy chọn
+│   ├── 📄 providers.py           <-- Runtime LLM thật; mock chỉ dùng trong test
 │   ├── 📄 storage.py             <-- SQLite inventory, slots và booking
 │   ├── 📄 tools.py               <-- 5 rental tools và registry
 │   └── 📄 web_api.py             <-- FastAPI adapter

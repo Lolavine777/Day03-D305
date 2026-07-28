@@ -1,8 +1,12 @@
 # Báo cáo đánh giá cuối cùng RentMate Agent
 
-> Phiên nghiệm thu: `mock-local-2026-07-28`
-> Provider: `MockProvider`
-> Múi giờ: `Asia/Ho_Chi_Minh`
+> Role 1 + Role 5 — Product Architecture, Observability & Cross-audit
+> Lần nghiệm thu: `mock-local-2026-07-28`, `MockProvider`, múi giờ
+> `Asia/Ho_Chi_Minh`
+>
+> Các trace gắn `MockProvider` bên dưới là bằng chứng nghiệm thu deterministic
+> đã ghi trước đây. Runtime hiện tại bắt buộc dựng Agent bằng provider thật từ
+> `LLM_PROVIDER` và API key trong `.env`; không fallback sang mock.
 
 ## 1. Agentic Fit
 

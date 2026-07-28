@@ -7,28 +7,33 @@ import os
 import sqlite3
 import threading
 import uuid
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, tzinfo
 from pathlib import Path
 from typing import Any, Callable
-from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 try:
     from .privacy import mask_phone_number
+    from .timezone_support import (
+        DEFAULT_APP_TIMEZONE,
+        VIETNAM_TIMEZONE,
+        resolve_timezone,
+    )
 except ImportError:  # Supports ``python src/app.py``.
     from privacy import mask_phone_number
+    from timezone_support import (
+        DEFAULT_APP_TIMEZONE,
+        VIETNAM_TIMEZONE,
+        resolve_timezone,
+    )
 
 
-DEFAULT_APP_TIMEZONE = "Asia/Ho_Chi_Minh"
-APP_TIMEZONE = ZoneInfo(DEFAULT_APP_TIMEZONE)
+APP_TIMEZONE = VIETNAM_TIMEZONE
 DEFAULT_SLOT_TIMES = ("09:00", "14:00", "18:30")
 
 
-def _configured_timezone() -> ZoneInfo:
+def _configured_timezone() -> tzinfo:
     timezone_name = os.getenv("APP_TIMEZONE", "").strip() or DEFAULT_APP_TIMEZONE
-    try:
-        return ZoneInfo(timezone_name)
-    except (ValueError, ZoneInfoNotFoundError):
-        return APP_TIMEZONE
+    return resolve_timezone(timezone_name, fallback=APP_TIMEZONE)
 
 
 class RentalStoreError(RuntimeError):

@@ -4,8 +4,11 @@ import sys
 import json
 from pathlib import Path
 
+import pytest
+
 
 SRC_DIR = Path(__file__).resolve().parents[1] / "src"
+PROJECT_ROOT = SRC_DIR.parent
 if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
 
@@ -251,18 +254,142 @@ def test_mock_react_only_requests_booking_from_trusted_confirmation_context() ->
     assert "Action:" not in final
 
 
-def test_provider_factory_defaults_to_mock_and_preserves_public_generate_seam(
-    monkeypatch,
-) -> None:
-    from providers import BaseLLMProvider, MockProvider, get_llm_provider
+def test_provider_factory_requires_llm_provider_configuration(monkeypatch) -> None:
+    from providers import ProviderConfigurationError, get_llm_provider
 
     monkeypatch.delenv("LLM_PROVIDER", raising=False)
+
+    with pytest.raises(ProviderConfigurationError, match="LLM_PROVIDER"):
+        get_llm_provider()
+
+
+def test_env_example_selects_a_real_runtime_provider() -> None:
+    provider_line = next(
+        line
+        for line in (PROJECT_ROOT / ".env.example")
+        .read_text(encoding="utf-8")
+        .splitlines()
+        if line.startswith("LLM_PROVIDER=")
+    )
+
+    assert provider_line.partition("=")[2] in {
+        "gemini",
+        "openai",
+        "anthropic",
+        "openrouter",
+    }
+
+
+@pytest.mark.parametrize("provider_name", ["mock", "not-a-provider"])
+def test_provider_factory_rejects_non_llm_runtime_providers(provider_name) -> None:
+    from providers import ProviderConfigurationError, get_llm_provider
+
+    with pytest.raises(ProviderConfigurationError, match="không được hỗ trợ"):
+        get_llm_provider(provider_name)
+
+
+@pytest.mark.parametrize(
+    ("provider_name", "api_key_name"),
+    [
+        ("gemini", "GEMINI_API_KEY"),
+        ("openai", "OPENAI_API_KEY"),
+        ("anthropic", "ANTHROPIC_API_KEY"),
+        ("openrouter", "OPENROUTER_API_KEY"),
+    ],
+)
+def test_provider_factory_requires_selected_provider_api_key(
+    monkeypatch,
+    provider_name,
+    api_key_name,
+) -> None:
+    from providers import ProviderConfigurationError, get_llm_provider
+
+    monkeypatch.setenv("LLM_PROVIDER", provider_name)
+    monkeypatch.delenv(api_key_name, raising=False)
+
+    with pytest.raises(ProviderConfigurationError, match=api_key_name):
+        get_llm_provider()
+
+
+@pytest.mark.parametrize(
+    ("provider_name", "api_key_name", "expected_type_name"),
+    [
+        ("gemini", "GEMINI_API_KEY", "GeminiProvider"),
+        ("openai", "OPENAI_API_KEY", "OpenAIProvider"),
+        ("anthropic", "ANTHROPIC_API_KEY", "AnthropicProvider"),
+        ("openrouter", "OPENROUTER_API_KEY", "OpenRouterProvider"),
+    ],
+)
+def test_provider_factory_builds_real_provider_selected_in_environment(
+    monkeypatch,
+    provider_name,
+    api_key_name,
+    expected_type_name,
+) -> None:
+    from providers import get_llm_provider
+
+    monkeypatch.setenv("LLM_PROVIDER", provider_name)
+    monkeypatch.setenv(api_key_name, "test-only-api-key")
+
     provider = get_llm_provider()
 
-    assert isinstance(provider, MockProvider)
-    assert isinstance(provider, BaseLLMProvider)
-    assert isinstance(provider.generate("Xin chào", ""), str)
-    assert isinstance(get_llm_provider("not-a-provider"), MockProvider)
+    assert provider.__class__.__name__ == expected_type_name
+    assert provider.__class__.__name__ != "MockProvider"
+
+
+def test_provider_factory_rejects_placeholder_api_key(monkeypatch) -> None:
+    from providers import ProviderConfigurationError, get_llm_provider
+
+    monkeypatch.setenv("LLM_PROVIDER", "openai")
+    monkeypatch.setenv("OPENAI_API_KEY", "your_openai_api_key_here")
+
+    with pytest.raises(ProviderConfigurationError, match="OPENAI_API_KEY"):
+        get_llm_provider()
+
+
+def test_openai_provider_forwards_model_and_chat_messages(monkeypatch) -> None:
+    from types import SimpleNamespace
+
+    import openai
+
+    from providers import OpenAIProvider
+
+    captured = {}
+
+    class FakeCompletions:
+        @staticmethod
+        def create(**kwargs):
+            captured.update(kwargs)
+            return SimpleNamespace(
+                choices=[
+                    SimpleNamespace(
+                        message=SimpleNamespace(content="Kết quả từ LLM.")
+                    )
+                ]
+            )
+
+    class FakeClient:
+        class Chat:
+            completions = FakeCompletions()
+
+        chat = Chat()
+
+    monkeypatch.setattr(openai, "OpenAI", lambda **_kwargs: FakeClient())
+    provider = OpenAIProvider(
+        api_key="test-only-api-key",
+        model="test-model",
+    )
+
+    answer = provider.generate("Câu hỏi", system_prompt="System instructions")
+
+    assert answer == "Kết quả từ LLM."
+    assert captured == {
+        "model": "test-model",
+        "messages": [
+            {"role": "system", "content": "System instructions"},
+            {"role": "user", "content": "Câu hỏi"},
+        ],
+    }
 
 
 def test_level1_and_level2_are_rental_domain_demos_without_duplicate_prompts() -> None:
@@ -286,6 +413,21 @@ def test_level1_and_level2_are_rental_domain_demos_without_duplicate_prompts() -
         "Câu trả lời từ provider."
     )
     assert provider.calls == [("Tư vấn hợp đồng", CHATBOT_BASELINE_PROMPT)]
+
+
+def test_level2_standalone_returns_safe_provider_error() -> None:
+    from src.ai_levels.level2_llm_chatbot import llm_chatbot
+    from src.providers import BaseLLMProvider, ProviderRequestError
+
+    class FailingProvider(BaseLLMProvider):
+        def generate(self, prompt: str, system_prompt: str = "") -> str:
+            raise ProviderRequestError(
+                "OpenAI từ chối API key. Hãy cập nhật OPENAI_API_KEY."
+            )
+
+    assert llm_chatbot("Tư vấn hợp đồng", provider=FailingProvider()) == (
+        "OpenAI từ chối API key. Hãy cập nhật OPENAI_API_KEY."
+    )
 
 
 def test_level3_delegates_to_core_lazily(monkeypatch) -> None:

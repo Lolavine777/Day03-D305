@@ -1,8 +1,8 @@
 """LLM provider adapters used by RentMate.
 
-The offline :class:`MockProvider` is intentionally deterministic.  It follows
-the same ``generate(prompt, system_prompt) -> str`` seam as real providers, so
-the core agent can be demonstrated and tested without an API key.
+Runtime composition requires a real provider selected through ``LLM_PROVIDER``.
+The deterministic :class:`MockProvider` implements the same
+``generate(prompt, system_prompt) -> str`` seam only for isolated tests.
 """
 
 from __future__ import annotations
@@ -13,13 +13,25 @@ import re
 import unicodedata
 from datetime import datetime, timedelta
 from typing import Any
-from zoneinfo import ZoneInfo
 
 import requests
 from dotenv import load_dotenv
 
+try:
+    from .timezone_support import VIETNAM_TIMEZONE
+except ImportError:  # Supports ``python src/app.py``.
+    from timezone_support import VIETNAM_TIMEZONE
+
 
 load_dotenv()
+
+
+class ProviderConfigurationError(RuntimeError):
+    """Raised when the runtime cannot build the configured real LLM provider."""
+
+
+class ProviderRequestError(RuntimeError):
+    """Raised when a configured LLM provider cannot complete a request."""
 
 
 class BaseLLMProvider:
@@ -38,7 +50,9 @@ class GeminiProvider(BaseLLMProvider):
 
     def generate(self, prompt: str, system_prompt: str = "") -> str:
         if not _usable_key(self.api_key, "your_gemini_api_key_here"):
-            return "[Gemini Error]: Chưa cấu hình GEMINI_API_KEY trong file .env."
+            raise ProviderConfigurationError(
+                "Chưa cấu hình GEMINI_API_KEY hợp lệ trong file .env."
+            )
         try:
             from google import genai
 
@@ -48,9 +62,17 @@ class GeminiProvider(BaseLLMProvider):
                 model=self.model_name,
                 contents=contents,
             )
-            return response.text or "[Gemini Error]: Model không trả về nội dung."
+            if not response.text:
+                raise ProviderRequestError("Gemini không trả về nội dung.")
+            return response.text
+        except ProviderRequestError:
+            raise
         except Exception as exc:  # pragma: no cover - depends on remote provider
-            return f"[Gemini Exception]: {exc}"
+            raise _provider_request_error(
+                "Gemini",
+                "GEMINI_API_KEY",
+                exc,
+            ) from exc
 
 
 class OpenAIProvider(BaseLLMProvider):
@@ -62,7 +84,9 @@ class OpenAIProvider(BaseLLMProvider):
 
     def generate(self, prompt: str, system_prompt: str = "") -> str:
         if not _usable_key(self.api_key, "your_openai_api_key_here"):
-            return "[OpenAI Error]: Chưa cấu hình OPENAI_API_KEY trong file .env."
+            raise ProviderConfigurationError(
+                "Chưa cấu hình OPENAI_API_KEY hợp lệ trong file .env."
+            )
         try:
             import openai
 
@@ -75,12 +99,18 @@ class OpenAIProvider(BaseLLMProvider):
                 model=self.model_name,
                 messages=messages,
             )
-            return (
-                response.choices[0].message.content
-                or "[OpenAI Error]: Model không trả về nội dung."
-            )
+            content = response.choices[0].message.content
+            if not content:
+                raise ProviderRequestError("OpenAI không trả về nội dung.")
+            return content
+        except ProviderRequestError:
+            raise
         except Exception as exc:  # pragma: no cover - depends on remote provider
-            return f"[OpenAI Exception]: {exc}"
+            raise _provider_request_error(
+                "OpenAI",
+                "OPENAI_API_KEY",
+                exc,
+            ) from exc
 
 
 class AnthropicProvider(BaseLLMProvider):
@@ -92,7 +122,9 @@ class AnthropicProvider(BaseLLMProvider):
 
     def generate(self, prompt: str, system_prompt: str = "") -> str:
         if not _usable_key(self.api_key, "your_anthropic_api_key_here"):
-            return "[Anthropic Error]: Chưa cấu hình ANTHROPIC_API_KEY trong file .env."
+            raise ProviderConfigurationError(
+                "Chưa cấu hình ANTHROPIC_API_KEY hợp lệ trong file .env."
+            )
         try:
             import anthropic
 
@@ -105,9 +137,18 @@ class AnthropicProvider(BaseLLMProvider):
             if system_prompt:
                 kwargs["system"] = system_prompt
             response = client.messages.create(**kwargs)
-            return response.content[0].text
+            content = response.content[0].text
+            if not content:
+                raise ProviderRequestError("Anthropic không trả về nội dung.")
+            return content
+        except ProviderRequestError:
+            raise
         except Exception as exc:  # pragma: no cover - depends on remote provider
-            return f"[Anthropic Exception]: {exc}"
+            raise _provider_request_error(
+                "Anthropic",
+                "ANTHROPIC_API_KEY",
+                exc,
+            ) from exc
 
 
 class OpenRouterProvider(BaseLLMProvider):
@@ -119,8 +160,8 @@ class OpenRouterProvider(BaseLLMProvider):
 
     def generate(self, prompt: str, system_prompt: str = "") -> str:
         if not _usable_key(self.api_key, "your_openrouter_api_key_here"):
-            return (
-                "[OpenRouter Error]: Chưa cấu hình OPENROUTER_API_KEY trong file .env."
+            raise ProviderConfigurationError(
+                "Chưa cấu hình OPENROUTER_API_KEY hợp lệ trong file .env."
             )
         try:
             messages: list[dict[str, str]] = []
@@ -137,15 +178,62 @@ class OpenRouterProvider(BaseLLMProvider):
                 timeout=30,
             )
             if response.status_code != 200:
-                return f"[OpenRouter API Error {response.status_code}]: {response.text}"
+                raise _provider_request_error(
+                    "OpenRouter",
+                    "OPENROUTER_API_KEY",
+                    response,
+                )
             data = response.json()
-            return data["choices"][0]["message"]["content"]
+            content = data["choices"][0]["message"]["content"]
+            if not content:
+                raise ProviderRequestError("OpenRouter không trả về nội dung.")
+            return content
+        except ProviderRequestError:
+            raise
         except Exception as exc:  # pragma: no cover - depends on remote provider
-            return f"[OpenRouter Exception]: {exc}"
+            raise _provider_request_error(
+                "OpenRouter",
+                "OPENROUTER_API_KEY",
+                exc,
+            ) from exc
 
 
 def _usable_key(value: str | None, placeholder: str) -> bool:
-    return bool(value and value.strip() and value != placeholder)
+    normalized = value.strip() if value else ""
+    return bool(normalized and normalized != placeholder)
+
+
+def _provider_request_error(
+    provider_name: str,
+    api_key_name: str,
+    failure: Any,
+) -> ProviderRequestError:
+    """Map provider failures to safe, actionable messages without raw details."""
+
+    status_code = getattr(failure, "status_code", None)
+    error_code = str(getattr(failure, "code", "") or "").casefold()
+    if status_code in {401, 403} or error_code in {
+        "invalid_api_key",
+        "authentication_error",
+    }:
+        return ProviderRequestError(
+            f"{provider_name} từ chối API key (HTTP {status_code or 401}). "
+            f"Hãy cập nhật {api_key_name} trong .env rồi khởi động lại backend."
+        )
+    if status_code == 429:
+        return ProviderRequestError(
+            f"{provider_name} đang giới hạn lượt gọi hoặc tài khoản đã hết quota "
+            "(HTTP 429). Hãy kiểm tra quota/billing rồi thử lại."
+        )
+    if status_code == 404:
+        return ProviderRequestError(
+            f"{provider_name} không tìm thấy model đã cấu hình (HTTP 404). "
+            "Hãy kiểm tra LLM_MODEL trong .env."
+        )
+    return ProviderRequestError(
+        f"Không thể hoàn tất yêu cầu tới {provider_name}. "
+        "Hãy kiểm tra kết nối, cấu hình provider và thử lại."
+    )
 
 
 def _fold(text: str) -> str:
@@ -169,7 +257,7 @@ def _final(answer: str, thought: str = "Đã có đủ thông tin để trả l�
 
 
 class MockProvider(BaseLLMProvider):
-    """Deterministic, rental-domain provider for offline demos and tests."""
+    """Deterministic rental-domain provider for isolated tests only."""
 
     model_name = "rentmate-deterministic-v1"
 
@@ -463,7 +551,7 @@ def _preferred_property_id(
 
 
 def _next_saturday() -> str:
-    today = datetime.now(ZoneInfo("Asia/Ho_Chi_Minh")).date()
+    today = datetime.now(VIETNAM_TIMEZONE).date()
     days_ahead = (5 - today.weekday()) % 7
     return (today + timedelta(days=days_ahead)).isoformat()
 
@@ -506,21 +594,59 @@ def _trusted_confirmation_context(prompt: str) -> dict[str, Any] | None:
 
 
 def get_llm_provider(provider_name: str | None = None) -> BaseLLMProvider:
-    """Create the provider selected by ``LLM_PROVIDER``; mock is the default."""
+    """Create the real provider selected by ``LLM_PROVIDER``."""
 
-    name = (provider_name or os.getenv("LLM_PROVIDER") or "mock").casefold().strip()
-    providers: dict[str, type[BaseLLMProvider]] = {
-        "mock": MockProvider,
-        "gemini": GeminiProvider,
-        "openai": OpenAIProvider,
-        "anthropic": AnthropicProvider,
-        "openrouter": OpenRouterProvider,
+    configured_name = provider_name or os.getenv("LLM_PROVIDER")
+    if not configured_name or not configured_name.strip():
+        raise ProviderConfigurationError(
+            "Thiếu LLM_PROVIDER trong file .env. "
+            "Hãy chọn gemini, openai, anthropic hoặc openrouter."
+        )
+    name = configured_name.casefold().strip()
+    providers: dict[
+        str,
+        tuple[type[BaseLLMProvider], str, str],
+    ] = {
+        "gemini": (
+            GeminiProvider,
+            "GEMINI_API_KEY",
+            "your_gemini_api_key_here",
+        ),
+        "openai": (
+            OpenAIProvider,
+            "OPENAI_API_KEY",
+            "your_openai_api_key_here",
+        ),
+        "anthropic": (
+            AnthropicProvider,
+            "ANTHROPIC_API_KEY",
+            "your_anthropic_api_key_here",
+        ),
+        "openrouter": (
+            OpenRouterProvider,
+            "OPENROUTER_API_KEY",
+            "your_openrouter_api_key_here",
+        ),
     }
-    return providers.get(name, MockProvider)()
+    provider_config = providers.get(name)
+    if provider_config is None:
+        raise ProviderConfigurationError(
+            f"LLM_PROVIDER '{name}' không được hỗ trợ. "
+            "Hãy chọn gemini, openai, anthropic hoặc openrouter."
+        )
+    provider_class, api_key_name, placeholder = provider_config
+    api_key = os.getenv(api_key_name)
+    if not _usable_key(api_key, placeholder):
+        raise ProviderConfigurationError(
+            f"Thiếu {api_key_name} hợp lệ cho LLM_PROVIDER='{name}' trong file .env."
+        )
+    return provider_class(api_key=api_key.strip())
 
 
 __all__ = [
     "BaseLLMProvider",
+    "ProviderConfigurationError",
+    "ProviderRequestError",
     "GeminiProvider",
     "OpenAIProvider",
     "AnthropicProvider",

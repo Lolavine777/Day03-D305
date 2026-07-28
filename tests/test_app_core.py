@@ -374,6 +374,67 @@ def test_agent_stops_repeated_action_before_second_tool_execution():
     assert result.stop_reason == "repeated_action"
 
 
+@pytest.mark.parametrize("mode", ["level2", "level3"])
+def test_openai_transport_failure_is_reported_as_provider_error(
+    monkeypatch,
+    mode,
+):
+    import openai
+
+    from src.providers import OpenAIProvider
+
+    class FailingCompletions:
+        @staticmethod
+        def create(**_kwargs):
+            raise RuntimeError("sensitive upstream failure")
+
+    class FailingClient:
+        class Chat:
+            completions = FailingCompletions()
+
+        chat = Chat()
+
+    monkeypatch.setattr(openai, "OpenAI", lambda **_kwargs: FailingClient())
+    engine = AgentEngine(OpenAIProvider(api_key="test-only-api-key"), {})
+
+    result = engine.run_turn("Tư vấn thuê nhà", mode=mode)
+
+    assert result.status == "error"
+    assert result.stop_reason == "provider_error"
+    assert "sensitive upstream failure" not in result.answer
+
+
+def test_openai_authentication_failure_explains_safe_env_fix(monkeypatch):
+    import openai
+
+    from src.providers import OpenAIProvider
+
+    class FakeAuthenticationError(RuntimeError):
+        status_code = 401
+        code = "invalid_api_key"
+
+    class FailingCompletions:
+        @staticmethod
+        def create(**_kwargs):
+            raise FakeAuthenticationError("do not expose upstream details")
+
+    class FailingClient:
+        class Chat:
+            completions = FailingCompletions()
+
+        chat = Chat()
+
+    monkeypatch.setattr(openai, "OpenAI", lambda **_kwargs: FailingClient())
+    engine = AgentEngine(OpenAIProvider(api_key="test-only-api-key"), {})
+
+    result = engine.run_turn("Tư vấn thuê nhà", mode="level2")
+
+    assert result.status == "error"
+    assert result.stop_reason == "provider_error"
+    assert "OPENAI_API_KEY" in result.answer
+    assert "do not expose upstream details" not in result.answer
+
+
 def test_baseline_uses_one_llm_call_and_never_executes_tools():
     provider = ScriptedProvider(
         ["Tôi có thể hướng dẫn các bước kiểm tra hợp đồng thuê."]
