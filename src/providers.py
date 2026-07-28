@@ -78,9 +78,20 @@ class GeminiProvider(BaseLLMProvider):
 class OpenAIProvider(BaseLLMProvider):
     """OpenAI chat-completions adapter."""
 
-    def __init__(self, api_key: str | None = None, model: str | None = None):
+    def __init__(
+        self,
+        api_key: str | None = None,
+        model: str | None = None,
+        base_url: str | None = None,
+    ):
         self.api_key = api_key or os.getenv("OPENAI_API_KEY")
         self.model_name = model or os.getenv("LLM_MODEL") or "gpt-4o-mini"
+        configured_base_url = (
+            base_url
+            or os.getenv("LLM_BASE_URL")
+            or os.getenv("OPENAI_BASE_URL")
+        )
+        self.base_url = configured_base_url.strip() if configured_base_url else None
 
     def generate(self, prompt: str, system_prompt: str = "") -> str:
         if not _usable_key(self.api_key, "your_openai_api_key_here"):
@@ -90,7 +101,10 @@ class OpenAIProvider(BaseLLMProvider):
         try:
             import openai
 
-            client = openai.OpenAI(api_key=self.api_key)
+            client_options: dict[str, Any] = {"api_key": self.api_key}
+            if self.base_url:
+                client_options["base_url"] = self.base_url
+            client = openai.OpenAI(**client_options)
             messages: list[dict[str, str]] = []
             if system_prompt:
                 messages.append({"role": "system", "content": system_prompt})

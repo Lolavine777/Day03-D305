@@ -390,6 +390,55 @@ def test_openai_provider_forwards_model_and_chat_messages(monkeypatch) -> None:
             {"role": "user", "content": "Câu hỏi"},
         ],
     }
+@pytest.mark.parametrize("base_url_env", ["LLM_BASE_URL", "OPENAI_BASE_URL"])
+def test_openai_provider_forwards_configured_base_url(
+    monkeypatch,
+    base_url_env,
+) -> None:
+    from types import SimpleNamespace
+
+    import openai
+
+    from providers import OpenAIProvider
+
+    captured = {}
+
+    class FakeCompletions:
+        @staticmethod
+        def create(**_kwargs):
+            return SimpleNamespace(
+                choices=[
+                    SimpleNamespace(
+                        message=SimpleNamespace(content="Provider response.")
+                    )
+                ]
+            )
+
+    class FakeClient:
+        class Chat:
+            completions = FakeCompletions()
+
+        chat = Chat()
+
+    def build_fake_client(**kwargs):
+        captured.update(kwargs)
+        return FakeClient()
+
+    monkeypatch.delenv("LLM_BASE_URL", raising=False)
+    monkeypatch.delenv("OPENAI_BASE_URL", raising=False)
+    monkeypatch.setenv(base_url_env, "https://provider.example/v1")
+    monkeypatch.setattr(openai, "OpenAI", build_fake_client)
+    provider = OpenAIProvider(
+        api_key="test-only-api-key",
+        model="test-model",
+    )
+
+    provider.generate("Question")
+
+    assert captured == {
+        "api_key": "test-only-api-key",
+        "base_url": "https://provider.example/v1",
+    }
 
 
 def test_level1_and_level2_are_rental_domain_demos_without_duplicate_prompts() -> None:
