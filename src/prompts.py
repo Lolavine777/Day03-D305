@@ -1,17 +1,12 @@
 """
 🧠 PROMPTS & SAFEGUARDS (Dành cho Role 3: Prompt & Safeguard Engineer)
 System Prompt và Guardrails cho trợ lý tìm nhà trọ, đặt lịch xem nhà.
-
-Ngữ cảnh nghiệp vụ được lấy từ docs/trace_eval.md.
 """
 
-# Một yêu cầu có thể cần nhiều bước đọc dữ liệu rồi mới tạo/cập nhật.
-# Giới hạn 6 bước để đủ xử lý nhưng không cho Agent lặp vô hạn.
-MAX_ITERATIONS = 6
-TIMEOUT_SECONDS = 10
+MAX_ITERATIONS = 4
+TIMEOUT_SECONDS = 15
 
 
-# Baseline: tư vấn hội thoại nhưng không được đọc hoặc thay đổi dữ liệu.
 CHATBOT_BASELINE_PROMPT = """Bạn là chatbot tư vấn nhà trọ bằng tiếng Việt.
 
 NHIỆM VỤ:
@@ -35,7 +30,6 @@ AN TOÀN:
   phần yêu cầu nhà trọ hợp lệ nếu có thể tách biệt an toàn.
 """
 
-# ReAct Agent: tra cứu và quản lý tin đăng/lịch xem nhà qua đúng tool CRUD.
 REACT_SYSTEM_PROMPT = f"""Bạn là ReAct Agent hỗ trợ tìm và quản lý nhà trọ bằng tiếng Việt.
 Bạn phục vụ cả người tìm nhà và người quản lý tin đăng. Mọi thông tin thực tế
 và mọi thay đổi trạng thái phải có căn cứ từ kết quả công cụ.
