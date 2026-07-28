@@ -1,22 +1,54 @@
-"""
-🤖 CẤP ĐỘ 2: LLM CHATBOT (Baseline Chatbot không có Tool)
-Dùng LLM sinh câu trả lời tự nhiên mượt mà, nhưng không thể truy cập dữ liệu thời gian thực.
-"""
+"""Level 2 — one LLM call, no tools."""
 
-CHATBOT_BASELINE_PROMPT = """Bạn là một Chatbot tư vấn thông thường.
-Hãy trả lời câu hỏi của người dùng một cách thân thiện dựa trên kiến thức có sẵn.
-Nếu không biết thông tin thực tế thời gian thực, hãy thông báo lịch sự cho người dùng.
-"""
+from __future__ import annotations
 
-def llm_chatbot(user_input: str) -> str:
-    text = user_input.lower()
-    if "thời tiết" in text or "vé máy bay" in text:
-        return "🤖 [LLM Chatbot]: Tôi là AI hội thoại nhưng không được cấp công cụ tra cứu dữ liệu thời gian thực, nên tôi không biết chính xác thời tiết/giá vé hôm nay!"
-    else:
-        return f"🤖 [LLM Chatbot]: Rất vui được hỗ trợ bạn về câu hỏi '{user_input}'!"
+from typing import TYPE_CHECKING
+
+try:
+    from prompts import CHATBOT_BASELINE_PROMPT
+except ImportError:  # Supports running this file directly from the repo root.
+    import sys
+    from pathlib import Path
+
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    from prompts import CHATBOT_BASELINE_PROMPT
+
+if TYPE_CHECKING:
+    try:
+        from providers import BaseLLMProvider
+    except ImportError:
+        from src.providers import BaseLLMProvider
+
+
+def llm_chatbot(
+    user_input: str,
+    provider: "BaseLLMProvider | None" = None,
+) -> str:
+    """Run the baseline protocol: exactly one provider call and zero tools."""
+
+    if provider is None:
+        try:
+            from providers import get_llm_provider
+        except ImportError:
+            import sys
+            from pathlib import Path
+
+            sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+            from providers import get_llm_provider
+
+        provider = get_llm_provider()
+
+    return provider.generate(
+        user_input,
+        system_prompt=CHATBOT_BASELINE_PROMPT,
+    )
+
 
 if __name__ == "__main__":
-    print("=== DEMO CẤP ĐỘ 2: LLM CHATBOT BASELINE ===")
-    q = "Thời tiết Hà Nội hôm nay thế nào?"
-    print(f"User: {q}")
-    print(f"Bot : {llm_chatbot(q)}")
+    import sys
+
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except (AttributeError, OSError):
+        pass
+    print(llm_chatbot("Tôi cần chú ý gì trong hợp đồng thuê nhà?"))

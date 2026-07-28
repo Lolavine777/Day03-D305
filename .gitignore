@@ -5,6 +5,15 @@ __pycache__/
 .venv/
 env/
 venv/
+data/*.db
+data/*.db-*
+data/exports/
+frontend/node_modules/
+frontend/dist/
+frontend/coverage/
+.pytest_cache/
+.coverage
 .obsidian/
 .agents/
 docs/superpowers/
+*.stackdump
