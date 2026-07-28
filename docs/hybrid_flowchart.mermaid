@@ -1,0 +1,18 @@
+flowchart TD
+    Start["User question"] --> Classify{"Needs live listing, slot, or state change?"}
+    Classify -->|"No"| Chatbot["Chatbot baseline"]
+    Chatbot --> General["General guidance only"]
+    Classify -->|"Yes"| Agent["ReAct Agent"]
+    Agent --> Context{"Enough location, budget, and intent data?"}
+    Context -->|"No"| Ask["Ask for missing constraints"]
+    Context -->|"Yes"| Read["Call the narrowest read tool"]
+    Read --> Observation["Append real Observation"]
+    Observation --> More{"More evidence needed?"}
+    More -->|"Yes"| Read
+    More -->|"No"| HighRisk{"Create, update, cancel, book, or delete?"}
+    HighRisk -->|"No"| Grounded["Grounded Final Answer"]
+    HighRisk -->|"Yes"| Confirm{"Explicit confirmation for exact action?"}
+    Confirm -->|"No"| SafeFallback["Safe fallback and request confirmation"]
+    Confirm -->|"Yes"| Write["Call one approved write tool"]
+    Write --> WriteObservation["Append write Observation"]
+    WriteObservation --> Grounded

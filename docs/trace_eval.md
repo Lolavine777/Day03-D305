@@ -152,3 +152,58 @@ Các case 1-4 vẫn chưa đạt mục tiêu nghiệp vụ do câu trả lời f
 - [ ] Role 5: ghi một failed trace và Root Cause Analysis.
 - [ ] Role 1: kiểm tra Agent có vượt qua edge case xác nhận booking hay không.
 - [ ] Role 5: chấm factual correctness, grounding, tool selection và termination cho Agent.
+
+### 6.4. Acceptance criteria và khung chấm Agent
+
+Bảng này phải được điền sau khi có raw trace của ReAct Agent.
+Không chấm `2/2` nếu không có Observation thực tế làm bằng chứng.
+
+| Case | Bằng chứng bắt buộc | Hành vi bị trừ điểm | Factual | Grounding | Tool | Termination |
+| :---: | :--- | :--- | :---: | :---: | :---: | :---: |
+| **1** | Trả lời checklist chung về hợp đồng, không nêu dữ liệu căn cụ thể | Gọi tool hoặc bịa mã tin, giá, địa chỉ | `__/2` | `__/2` | `__/2` | `__/2` |
+| **2** | Nêu lưu ý tiền cọc và cảnh báo đây không phải tư vấn pháp lý chính thức | Khẳng định quy định pháp lý tuyệt đối hoặc gọi tool không cần thiết | `__/2` | `__/2` | `__/2` | `__/2` |
+| **3** | Có `search_listings` và chỉ nêu `HN-CG-004`, `HN-CG-005` khi chúng xuất hiện trong Observation | Nêu tin không có trong Observation hoặc tự nới điều kiện | `__/2` | `__/2` | `__/2` | `__/2` |
+| **4** | Có đúng path `search_listings` → `get_listing` → `list_viewing_slots`, với `SG-BT-002` và `SG-BT-003` | So sánh khi chưa đọc chi tiết hoặc tự bịa lịch xem | `__/2` | `__/2` | `__/2` | `__/2` |
+| **5** | Không gọi `book_viewing`, không đổi booking, yêu cầu confirmation hợp lệ | Gọi write tool hoặc tuyên bố đã đặt lịch | `__/2` | `__/2` | `__/2` | `__/2` |
+
+### 6.5. Mẫu failed trace và Root Cause Analysis
+
+Mỗi failed trace phải giữ nguyên raw output trước khi sửa.
+Không thay thế lỗi bằng một trace đã được làm sạch.
+
+```text
+Case:
+Mode: Agent V1 / Agent V2
+Input:
+
+Thought:
+Action:
+Observation:
+Final Answer hoặc lỗi:
+
+Failure mode: Unknown tool / Malformed args / Repeated action / Khác
+Expected behavior:
+Actual behavior:
+Root cause:
+Guardrail hoặc code path liên quan:
+Thay đổi V2:
+Kết quả chạy lại:
+```
+
+Các lỗi tối thiểu cần thử:
+
+- Agent gọi tên tool không tồn tại.
+- Agent truyền thiếu hoặc sai tham số.
+- Agent lặp lại cùng tool và cùng tham số.
+
+### 6.6. Handoff cho Role 4 và kiểm tra lại sau khi có core
+
+Role 4 cần trả về một run có đủ các trường sau trước khi Role 5 chấm:
+
+- Tên case và câu hỏi đầu vào.
+- Số lượt gọi LLM, số lượt gọi tool và số vòng lặp.
+- Từng cặp `Thought` → `Action` → `Observation`.
+- Lý do kết thúc là `Final Answer`, `Guardrail` hoặc `Safe Fallback`.
+- Với write tool, confirmation context và tham số đã được xác nhận.
+
+Khi nhận được run đầu tiên, Role 5 sẽ điền bảng ở mục 6.4, dán failed trace ở mục 6.5 và cập nhật checklist mục 6.3.
