@@ -92,14 +92,63 @@ Mọi thông tin cụ thể về mã căn, giá, tiện ích và lịch xem tron
 
 ## 6. TRACE VÀ ĐÁNH GIÁ MỐC 2, MỐC 3
 
-Phần này chỉ được điền sau khi Baseline và ReAct core chạy được đủ năm test case.
+### 6.1. Mốc 2 - Baseline Chatbot
 
-Các bằng chứng cần bổ sung:
+**Trạng thái Role 4:** Hoàn thành phần lắp ráp baseline.
 
-- Raw output của Chatbot Baseline cho từng case.
-- Phân loại `correct`, `safe fallback` hoặc `hallucinated`.
-- Trace `Thought -> Action -> Observation -> Final Answer`.
-- Số lần gọi LLM, số lần gọi tool và số vòng lặp.
-- Một failed trace và Root Cause Analysis.
-- Trace sau khi sửa Agent V2.
-- Điểm factual correctness, grounding, tool selection và termination cho từng case.
+`src/app.py` đã bỏ import tool thời tiết cũ và chạy baseline trên toàn bộ năm test case.
+Mỗi case chỉ thực hiện một lần gọi provider với `CHATBOT_BASELINE_PROMPT`.
+Baseline không gọi tool và không đọc `data/listings.json`.
+
+Lệnh chạy evidence:
+
+```bash
+LLM_PROVIDER=mock .venv/bin/python -m unittest discover -s tests -v
+LLM_PROVIDER=mock .venv/bin/python - <<'PY'
+import json
+import sys
+sys.path.insert(0, "src")
+from app import run_baseline_suite
+from providers import get_llm_provider
+
+print(json.dumps(
+    run_baseline_suite(get_llm_provider("mock"), emit=False),
+    ensure_ascii=False,
+    indent=2,
+))
+PY
+```
+
+Kết quả kiểm tra tích hợp:
+
+- `2` test tự động passed.
+- `5/5` test case được load và chạy.
+- `5` lượt gọi LLM, tương đương một lượt cho mỗi case.
+- `0` lượt gọi tool.
+- ReAct chưa chạy trong Mốc 2; trace Thought → Action → Observation sẽ bổ sung ở Mốc 3.
+
+### 6.2. Raw output và phân loại baseline
+
+MockProvider hiện là provider offline tối giản, nên raw output giống nhau ở cả năm case.
+Các kết quả dưới đây là bằng chứng baseline kỹ thuật, không phải đánh giá chất lượng của một model production.
+
+| Case | Raw output | Phân loại | Nhận xét |
+| :---: | :--- | :--- | :--- |
+| **1** | `🤖 [Mock Provider]: Phản hồi giả lập offline cho bài test.` | `safe fallback` | Không bịa dữ liệu nhưng chưa trả lời checklist nghiệp vụ. |
+| **2** | `🤖 [Mock Provider]: Phản hồi giả lập offline cho bài test.` | `safe fallback` | Không bịa điều khoản hoặc số tiền đặt cọc nhưng chưa trả lời câu hỏi. |
+| **3** | `🤖 [Mock Provider]: Phản hồi giả lập offline cho bài test.` | `safe fallback` | Không bịa mã tin hoặc giá nhưng không thể tìm tin nếu không có tool. |
+| **4** | `🤖 [Mock Provider]: Phản hồi giả lập offline cho bài test.` | `safe fallback` | Không bịa kết quả so sánh hoặc lịch xem nhưng không hoàn thành multi-step. |
+| **5** | `🤖 [Mock Provider]: Phản hồi giả lập offline cho bài test.` | `safe fallback` | Không đặt lịch trái phép và không tuyên bố thành công. |
+
+Không có case nào được đánh dấu `hallucinated` vì MockProvider không đưa ra mã tin, giá, lịch hoặc trạng thái giả.
+Các case 1-4 vẫn chưa đạt mục tiêu nghiệp vụ do câu trả lời fallback không cung cấp nội dung hữu ích.
+
+### 6.3. Phần còn lại của Mốc 2 và Mốc 3
+
+- [x] Role 4: nối baseline với provider và chạy đủ năm test case.
+- [x] Role 5: lưu raw output, số lượt gọi và phân loại baseline.
+- [ ] Role 4: lắp ReAct loop theo contract tool RentMate.
+- [ ] Role 5: ghi trace `Thought -> Action -> Observation -> Final Answer`.
+- [ ] Role 5: ghi một failed trace và Root Cause Analysis.
+- [ ] Role 1: kiểm tra Agent có vượt qua edge case xác nhận booking hay không.
+- [ ] Role 5: chấm factual correctness, grounding, tool selection và termination cho Agent.
