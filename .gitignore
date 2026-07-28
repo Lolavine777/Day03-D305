@@ -13,3 +13,7 @@ frontend/dist/
 frontend/coverage/
 .pytest_cache/
 .coverage
+.obsidian/
+.agents/
+docs/superpowers/
+*.stackdump
