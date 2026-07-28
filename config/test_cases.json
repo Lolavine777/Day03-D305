@@ -15,13 +15,13 @@
     "id": 3,
     "category": "🟡 Multi-step (Cần Tool)",
     "question": "Tìm giúp tôi phòng tại Cầu Giấy, Hà Nội dưới 5 triệu đồng mỗi tháng, có điều hòa và chỗ để xe máy.",
-    "expected_behavior": "Agent gọi search_properties, dùng Observation từ data/listings.json và chỉ đề xuất các căn thỏa mãn đầy đủ điều kiện; dữ liệu hiện có gồm HN-CG-004 và HN-CG-005."
+    "expected_behavior": "Agent gọi search_listings, dùng Observation từ data/listings.json và chỉ đề xuất các căn thỏa mãn đầy đủ điều kiện; dữ liệu hiện có gồm HN-CG-004 và HN-CG-005."
   },
   {
     "id": 4,
     "category": "🟠 Multi-step (Cần nhiều Tools)",
     "question": "Tìm các căn tại Bình Thạnh, TP.HCM dưới 12 triệu đồng mỗi tháng, diện tích từ 25 m². Hãy so sánh các lựa chọn phù hợp và kiểm tra lịch xem còn trống.",
-    "expected_behavior": "Agent thực hiện search_properties, compare_properties hoặc get_property_details, rồi get_available_viewing_slots; dữ liệu hiện có gồm SG-BT-002 và SG-BT-003."
+    "expected_behavior": "Agent gọi search_listings, dùng get_listing để lấy chi tiết SG-BT-002 và SG-BT-003, rồi gọi list_viewing_slots để kiểm tra lịch xem còn trống."
   },
   {
     "id": 5,
