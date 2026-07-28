@@ -119,6 +119,12 @@ Các recovery khác có regression tests: unknown tool, malformed JSON/args,
 repeated Action, timeout/tool exception, Final Answer thiếu Observation, token
 giả/sai target/tái sử dụng, thiếu confirmation và đặt trùng slot.
 
+### Bằng chứng Tool Error
+
+Tool layer trả lỗi nghiệp vụ dưới dạng Observation có cấu trúc thay vì làm chương trình crash.
+Ví dụ, yêu cầu lịch xem với ngày `32/13/2026` trả `ok=false`, `code=INVALID_ARGUMENT` và thông báo yêu cầu ngày hợp lệ.
+Regression test: `tests/test_storage_tools.py::test_invalid_inputs_return_safe_error_envelopes`.
+
 ## 6. Kết quả định lượng
 
 Thang điểm mỗi case: Correctness, Grounding, Tool selection, Termination; mỗi
@@ -172,8 +178,9 @@ export phone: 0912***678
 | Dữ liệu ghi sai | Không; booking 0 → 0 |
 | Khuyến nghị | Giữ application guardrail độc lập với prompt |
 
-**Cross-audit liên nhóm:** cần thực hiện trực tiếp trong buổi học khi giảng viên
-chỉ định nhóm đối tác. Không ghi tên/kết quả liên nhóm giả vào báo cáo.
+**Cross-audit liên nhóm:** cần thực hiện trực tiếp trong buổi học khi giảng viên chỉ định nhóm đối tác.
+Không ghi tên/kết quả liên nhóm giả vào báo cáo.
+Bộ câu hỏi và phiếu thu bằng chứng đã chuẩn bị tại [`docs/cross_audit.md`](cross_audit.md).
 
 ## 9. Checklist nghiệm thu
 
