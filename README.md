@@ -61,7 +61,11 @@ Sau `npm run build`, FastAPI phục vụ bản React đã build tại
 - `book_viewing`: đặt lịch sau khi người dùng xác nhận trên giao diện.
 
 Booking được lưu trong `data/rentmate.db`; database, file `.env` và dữ liệu
-export không được commit. JSON export và trace luôn che số điện thoại.
+export không được commit. Mỗi slot do API trả về có một confirmation token
+ngắn hạn, gắn đúng session/căn/khung giờ và chỉ dùng một lần sau khi booking
+thành công. Tên và số điện thoại được executor đưa thẳng vào tool từ context
+đã xác nhận, không gửi qua LLM; JSON export, memory và trace đều che số điện
+thoại. Level 4 chỉ lập kế hoạch/tìm/so sánh/tra lịch và luôn dừng trước booking.
 
 ---
 
@@ -91,6 +95,8 @@ Bài Lab giúp bạn hiểu rõ sự tiến hóa qua 4 cấp độ của hệ th
 ├── 📁 src/
 │   ├── 📁 ai_levels/             <-- Demo bốn cấp độ AI
 │   ├── 📄 app.py                 <-- AgentEngine, parser, executor, CLI
+│   ├── 📄 artifacts.py           <-- Project tool output thành UI artifacts
+│   ├── 📄 privacy.py             <-- Chính sách che số điện thoại dùng chung
 │   ├── 📄 prompts.py             <-- Baseline/ReAct/Autonomous prompts
 │   ├── 📄 providers.py           <-- Mock + các LLM provider tùy chọn
 │   ├── 📄 storage.py             <-- SQLite inventory, slots và booking

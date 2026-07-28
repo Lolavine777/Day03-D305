@@ -8,8 +8,10 @@ from datetime import datetime
 from typing import Any, Callable, TypedDict
 
 try:
+    from .privacy import mask_phone_number
     from .storage import RentalStore, RentalStoreError
 except ImportError:  # Supports ``python src/app.py``.
+    from privacy import mask_phone_number
     from storage import RentalStore, RentalStoreError
 
 
@@ -57,10 +59,6 @@ def _normalize_vietnam_phone(value: str) -> str | None:
     if not re.fullmatch(r"0[35789]\d{8}", digits):
         return None
     return digits
-
-
-def _mask_phone(value: str) -> str:
-    return f"{value[:4]}***{value[-3:]}"
 
 
 _CITY_ALIASES = {
@@ -113,6 +111,14 @@ class RentalTools:
 
         Side effects:
             None.
+
+        Example:
+            ``tools.search_properties("Hà Nội", district="Cầu Giấy",
+            max_price_vnd=5_000_000)``.
+
+        Safety:
+            Read-only. Results come only from available inventory records and
+            no missing property attribute is inferred.
         """
         if not isinstance(city, str) or not city.strip():
             return _result(False, "INVALID_ARGUMENT", "Thành phố không được để trống.")
@@ -249,6 +255,13 @@ class RentalTools:
 
         Side effects:
             None.
+
+        Example:
+            ``tools.get_property_details("HN-CG-001")``.
+
+        Safety:
+            Read-only. The response is grounded in the current inventory and
+            returns ``NOT_FOUND`` instead of fabricating an unknown property.
         """
         if not isinstance(property_id, str) or not property_id.strip():
             return _result(
@@ -288,6 +301,13 @@ class RentalTools:
 
         Side effects:
             None.
+
+        Example:
+            ``tools.compare_properties(["HN-CG-001", "HN-CG-002"])``.
+
+        Safety:
+            Read-only. All calculations are deterministic and unknown ids stop
+            the comparison instead of producing partial, misleading results.
         """
         if (
             not isinstance(property_ids, list)
@@ -378,6 +398,14 @@ class RentalTools:
 
         Side effects:
             None.
+
+        Example:
+            ``tools.get_available_viewing_slots("HN-CG-001",
+            date="2026-08-01", time_of_day="chiều")``.
+
+        Safety:
+            Read-only. Only future, currently unbooked slots are returned; an
+            empty or invalid request cannot create a reservation.
         """
         if not isinstance(property_id, str) or not property_id.strip():
             return _result(
@@ -524,6 +552,15 @@ class RentalTools:
         Side effects:
             On success, atomically inserts one SQLite booking. Failed calls do
             not change the database.
+
+        Example:
+            ``tools.book_viewing("HN-CG-001", "<slot-id>", "Nguyễn An",
+            "<trusted phone>", session_id="<trusted session>")``.
+
+        Safety:
+            Call only after the application executor verifies a server-issued
+            confirmation. The transaction prevents duplicate slots, and the
+            returned phone number is always masked.
         """
         if not isinstance(session_id, str) or not session_id.strip():
             return _result(
@@ -578,7 +615,7 @@ class RentalTools:
             return _result(False, exc.code, exc.message, exc.data)
 
         safe_booking = dict(booking)
-        safe_booking["viewer_phone"] = _mask_phone(booking["viewer_phone"])
+        safe_booking["viewer_phone"] = mask_phone_number(booking["viewer_phone"])
         return _result(
             True,
             "OK",

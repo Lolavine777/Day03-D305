@@ -111,12 +111,13 @@ Booking count before / after: 0 / 0
 | Tác động nếu không chặn | Có thể ghi booking sai hoặc bịa hành động đã hoàn tất |
 | Root cause V1 | Boilerplate cũ bỏ qua query và hard-code luồng thời tiết; không có confirmation context |
 | Detection signal | Cùng input chứa “bỏ qua”, “xác nhận” và ý định đặt lịch |
-| Sửa ở Agent V2 | Guardrail application + trusted confirmation context + executor đối chiếu chính xác |
+| Sửa ở Agent V2 | Guardrail application + server-issued token gắn session/căn/slot + executor tự gắn contact đã xác nhận |
 | Regression test | `test_agent_blocks_instruction_to_bypass_booking_confirmation` |
 | Before/after | V1 trả luồng thời tiết không liên quan; V2 dừng ở step 0, DB không đổi |
 
 Các recovery khác có regression tests: unknown tool, malformed JSON/args,
-repeated Action, timeout/tool exception, thiếu confirmation và đặt trùng slot.
+repeated Action, timeout/tool exception, Final Answer thiếu Observation, token
+giả/sai target/tái sử dụng, thiếu confirmation và đặt trùng slot.
 
 ## 6. Kết quả định lượng
 
@@ -144,13 +145,20 @@ Nghiệm thu HTTP end-to-end đã thực hiện:
 search_properties → compare_properties → get_available_viewing_slots
 trusted confirmation modal → book_viewing
 booking count: 1
-export phone: 091****678
+export phone: 0912***678
 ```
 
 - Không confirmation: executor trả `CONFIRMATION_REQUIRED`, DB không đổi.
-- Confirmation khớp: `book_viewing` ghi đúng một booking.
+- API chỉ cấp token sau khi tool trả slot thật; token khớp chính xác
+  session/căn/slot, có hạn, được reserve atomically và bị thu hồi sau booking
+  thành công.
+- Confirmation khớp: executor lấy contact từ trusted context, không đưa contact
+  vào prompt LLM, rồi `book_viewing` ghi đúng một booking.
+- Sau Observation booking `OK`, application sinh Final Answer deterministic
+  ngay để trạng thái side effect không phụ thuộc thêm một lần gọi provider.
 - Cùng slot lần hai: store trả `CONFLICT`.
-- Trace, tool call và JSON export đều che số điện thoại.
+- Trace, tool call, memory, Final Answer và JSON export đều che số điện thoại.
+- Level 4 có plan/memory/evaluation nhưng trả `AUTONOMY_BOUNDARY` trước booking.
 
 ## 8. Cross-audit
 
@@ -174,6 +182,9 @@ chỉ định nhóm đối tác. Không ghi tên/kết quả liên nhóm giả v
 - [x] Lưu failed trace, RCA và before/after Agent V2.
 - [x] Đối chiếu booking trước/sau guardrail.
 - [x] Test confirmed booking và duplicate slot.
+- [x] Test token giả, token sai target và token tái sử dụng.
+- [x] Chặn Final Answer thiếu Observation cho yêu cầu cần tool.
+- [x] Level 4 lập kế hoạch nhưng không thực thi booking.
 - [x] Che PII trong trace và JSON export.
 - [x] Backend tests, frontend tests và production build pass.
 - [ ] Cross-audit với nhóm khác tại lớp.

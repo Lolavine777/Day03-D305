@@ -1,8 +1,9 @@
 import json
-from datetime import datetime
+from datetime import date, datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+from src.privacy import mask_phone_number, redact_pii
 from src.storage import RentalStore
 from src.tools import AVAILABLE_TOOLS, RentalTools, create_tool_registry
 
@@ -20,6 +21,93 @@ def make_tools(_tmp_path):
     )
     store.initialize()
     return store, RentalTools(store)
+
+
+def test_recursive_pii_redaction_masks_phone_numbers_in_keys_and_free_text():
+    payload = {
+        "viewer_phone": "+84 912 345 678",
+        "message": "Gọi tôi qua 0987.654.321 hoặc 090-123-4567.",
+        "nested": [
+            {"note": 'Observation: {"viewer_phone":"0912345678"}'},
+            "Số dự phòng 037 456 7890",
+            (
+                "Ba định dạng khác: 0912/345/678, (0987) 654 321 "
+                "và (0901234567)"
+            ),
+        ],
+        "property_id": "HN-CG-001-20260729-1400",
+    }
+
+    redacted = redact_pii(payload)
+    serialized = json.dumps(redacted, ensure_ascii=False)
+
+    assert mask_phone_number("+84 912 345 678") == "0912***678"
+    assert redacted["viewer_phone"] == "0912***678"
+    assert redacted["message"] == (
+        "Gọi tôi qua 0987***321 hoặc 0901***567."
+    )
+    assert redacted["nested"] == [
+        {"note": 'Observation: {"viewer_phone":"0912***678"}'},
+        "Số dự phòng 0374***890",
+        "Ba định dạng khác: 0912***678, 0987***321 và 0901***567",
+    ]
+    assert redacted["property_id"] == "HN-CG-001-20260729-1400"
+    for raw_phone in (
+        "84912345678",
+        "0912345678",
+        "0987654321",
+        "0901234567",
+        "0374567890",
+        "0912345678",
+        "0987654321",
+    ):
+        assert raw_phone not in "".join(character for character in serialized if character.isdigit())
+
+
+def test_store_uses_app_timezone_environment_for_local_dates_and_slots(
+    tmp_path,
+    monkeypatch,
+):
+    monkeypatch.setenv("APP_TIMEZONE", "UTC")
+    vietnam_boundary_time = datetime(
+        2026,
+        7,
+        28,
+        1,
+        0,
+        tzinfo=ZoneInfo("Asia/Ho_Chi_Minh"),
+    )
+    store = RentalStore(
+        db_path=":memory:",
+        inventory_path=INVENTORY_PATH,
+        now_factory=lambda: vietnam_boundary_time,
+    )
+    store.initialize()
+
+    slots = store.list_available_slots("HN-CG-001")
+
+    assert store.local_today() == date(2026, 7, 27)
+    assert slots[0]["starts_at"] == "2026-07-28T09:00:00+00:00"
+    store.close()
+
+
+def test_store_falls_back_to_vietnam_timezone_when_environment_is_invalid(
+    tmp_path,
+    monkeypatch,
+):
+    monkeypatch.setenv("APP_TIMEZONE", "Mars/Olympus")
+    store = RentalStore(
+        db_path=":memory:",
+        inventory_path=INVENTORY_PATH,
+        now_factory=lambda: datetime(2026, 7, 28, 10, 0),
+    )
+
+    store.initialize()
+    slots = store.list_available_slots("HN-CG-001")
+
+    assert store.local_today() == date(2026, 7, 28)
+    assert slots[0]["starts_at"] == "2026-07-29T09:00:00+07:00"
+    store.close()
 
 
 def test_user_can_find_accent_insensitive_matching_properties(tmp_path):
@@ -264,3 +352,18 @@ def test_registry_exposes_exactly_five_bound_tools_without_global_store(tmp_path
     assert set(AVAILABLE_TOOLS) == expected_names
     assert all(callable(tool) for tool in registry.values())
     store.close()
+
+
+def test_every_public_tool_documents_an_example_and_safety_boundary():
+    tool_methods = (
+        RentalTools.search_properties,
+        RentalTools.get_property_details,
+        RentalTools.compare_properties,
+        RentalTools.get_available_viewing_slots,
+        RentalTools.book_viewing,
+    )
+
+    for tool_method in tool_methods:
+        documentation = tool_method.__doc__ or ""
+        assert "Example:" in documentation, tool_method.__name__
+        assert "Safety:" in documentation, tool_method.__name__

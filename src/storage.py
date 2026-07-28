@@ -3,17 +3,32 @@
 from __future__ import annotations
 
 import json
+import os
 import sqlite3
 import threading
 import uuid
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any, Callable
-from zoneinfo import ZoneInfo
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
+
+try:
+    from .privacy import mask_phone_number
+except ImportError:  # Supports ``python src/app.py``.
+    from privacy import mask_phone_number
 
 
-APP_TIMEZONE = ZoneInfo("Asia/Ho_Chi_Minh")
+DEFAULT_APP_TIMEZONE = "Asia/Ho_Chi_Minh"
+APP_TIMEZONE = ZoneInfo(DEFAULT_APP_TIMEZONE)
 DEFAULT_SLOT_TIMES = ("09:00", "14:00", "18:30")
+
+
+def _configured_timezone() -> ZoneInfo:
+    timezone_name = os.getenv("APP_TIMEZONE", "").strip() or DEFAULT_APP_TIMEZONE
+    try:
+        return ZoneInfo(timezone_name)
+    except (ValueError, ZoneInfoNotFoundError):
+        return APP_TIMEZONE
 
 
 class RentalStoreError(RuntimeError):
@@ -51,7 +66,8 @@ class RentalStore:
             if inventory_path is not None
             else Path(__file__).resolve().parents[1] / "config" / "rental_inventory.json"
         )
-        self._now_factory = now_factory or (lambda: datetime.now(APP_TIMEZONE))
+        self._timezone = _configured_timezone()
+        self._now_factory = now_factory or (lambda: datetime.now(self._timezone))
         self._connection_instance: sqlite3.Connection | None = None
         self._lock = threading.RLock()
 
@@ -291,7 +307,7 @@ class RentalStore:
                 "slot_id": row["slot_id"],
                 "starts_at": row["starts_at"],
                 "viewer_name": row["viewer_name"],
-                "viewer_phone": self._mask_phone(row["viewer_phone"]),
+                "viewer_phone": mask_phone_number(row["viewer_phone"]),
                 "status": row["status"],
                 "created_at": row["created_at"],
             }
@@ -394,7 +410,7 @@ class RentalStore:
             for time_text in DEFAULT_SLOT_TIMES:
                 starts_at = datetime.fromisoformat(
                     f"{slot_date.isoformat()}T{time_text}:00"
-                ).replace(tzinfo=APP_TIMEZONE)
+                ).replace(tzinfo=self._timezone)
                 for property_id in available_ids:
                     slot_id = (
                         f"{property_id}-{slot_date.strftime('%Y%m%d')}-"
@@ -412,8 +428,8 @@ class RentalStore:
     def _local_now(self) -> datetime:
         value = self._now_factory()
         if value.tzinfo is None:
-            return value.replace(tzinfo=APP_TIMEZONE)
-        return value.astimezone(APP_TIMEZONE)
+            return value.replace(tzinfo=self._timezone)
+        return value.astimezone(self._timezone)
 
     @staticmethod
     def _property_from_row(row: sqlite3.Row) -> dict[str, Any]:
@@ -432,11 +448,6 @@ class RentalStore:
             "available": bool(row["available"]),
             "description": row["description"],
         }
-
-    @staticmethod
-    def _mask_phone(value: str) -> str:
-        return f"{value[:4]}***{value[-3:]}"
-
 
 # Backward-compatible implementation name used by the composition root.
 SQLiteRentalStore = RentalStore

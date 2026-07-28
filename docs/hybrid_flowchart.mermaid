@@ -23,10 +23,14 @@ flowchart TD
     V -->|"Có"| B{"Action là book_viewing?"}
 
     B -->|"Không"| E["Tool Executor"]
-    B -->|"Có"| C{"Confirmation context<br/>khớp căn + slot + người xem?"}
-    C -->|"Không"| Q["Yêu cầu người dùng xác nhận<br/>trên modal"]
+    B -->|"Có"| A4{"Đang ở Level 4?"}
+    A4 -->|"Có"| AB["Autonomy boundary:<br/>dừng trước side effect"]
+    AB --> Q
+    A4 -->|"Không"| C{"Server token còn hạn và khớp<br/>session + căn + slot?"}
+    C -->|"Không"| Q["Yêu cầu tra lịch/chọn lại<br/>và xác nhận trên modal"]
     Q --> A
-    C -->|"Có"| E
+    C -->|"Có"| TC["Gắn tên + điện thoại từ<br/>trusted context, không qua LLM"]
+    TC --> E
 
     E --> O["Observation thật"]
     O --> S{"Đủ bằng chứng?"}
@@ -50,5 +54,5 @@ flowchart TD
     class U user;
     class M,R,D,S route;
     class L3,L4,P,T,X,E,O,F agent;
-    class V,B,C,G,I,Q,SF guard;
+    class V,B,A4,AB,C,G,I,Q,SF guard;
     class L1,L2,A,Z output;
