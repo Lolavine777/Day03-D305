@@ -22,7 +22,13 @@ openrouter` và điền API key tương ứng. Ví dụ:
 LLM_PROVIDER=openai
 OPENAI_API_KEY=your_real_api_key
 LLM_MODEL=gpt-4o-mini
+LLM_BASE_URL=
 ```
+
+Nếu API key thuộc một dịch vụ tương thích OpenAI, hãy đặt endpoint của dịch vụ
+đó vào `LLM_BASE_URL`, ví dụ `https://provider.example/v1`. Để trống biến này
+để dùng endpoint chính thức của OpenAI. `OPENAI_BASE_URL` cũng được hỗ trợ như
+một tên biến tương thích.
 
 Runtime bắt buộc dùng provider thật từ `.env`; thiếu provider, API key không
 hợp lệ, giá trị `mock` hoặc provider không hỗ trợ đều bị từ chối thay vì âm
